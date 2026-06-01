@@ -24,8 +24,8 @@ urlpatterns = [
 
     # path("admin/", admin.site.urls),
     path('student-management/', include('student_management.urls')),
+    path('student/', include('student_portal.urls')),
     path('', include('edusetin_app.urls')),
-    
 ]
 # This is important for serving static files during development
 if settings.DEBUG:

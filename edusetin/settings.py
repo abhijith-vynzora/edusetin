@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "edusetin_app",
     "student_management",
+    "student_portal",
 ]
 
 MIDDLEWARE = [
@@ -139,5 +140,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'theofaber26@gmail.com'
+EMAIL_HOST_PASSWORD = 'esjidmnzthbfcycx'  
+DEFAULT_FROM_EMAIL = 'EduSetin <theofaber26@gmail.com>'
 
 

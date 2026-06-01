@@ -1397,7 +1397,7 @@ def admin_login(request):
             login(request, user)
             messages.success(request, f"Welcome {user.username}!")
             print("login sucesfull")
-            return redirect("admin-dashboard")  # change this to your dashboard URL
+            return redirect("student_management:dashboard")  # change this to your dashboard URL
         else:
             messages.error(request, "Invalid credentials or not an admin.")
 

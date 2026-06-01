@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | EdusetIn</title>
+    <!-- Use existing Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'admin-static/assets/css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .dashboard-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    {% if student %}
+        <h1>Welcome, {{ student.full_name }}!</h1>
+    {% else %}
+        <h1>Welcome, {{ request.user.email }}!</h1>
+    {% endif %}
+    <p class="text-muted mt-3">This is your student portal dashboard placeholder.</p>
+    <div class="mt-4">
+        <a href="{% url 'student_portal:logout' %}" class="btn btn-outline-danger">Logout</a>
+    </div>
+</div>
+
+<script src="{% static 'admin-static/assets/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
