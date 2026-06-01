@@ -1,0 +1,175 @@
+{% extends "student_management/base.html" %}
+
+{% block title %}Edit Question #{{ question.id }} | Student Management{% endblock %}
+
+{% block content %}
+<div class="dashboard__form__wraper">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'student_management:dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'student_management:question_list' %}">Questions</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'student_management:question_detail' question.id %}">Question #{{ question.id }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        </ol>
+    </nav>
+
+    <div class="create__course__title mb-4">
+        <h4 class="mb-0">Edit Question #{{ question.id }}</h4>
+    </div>
+
+    <form method="post" action="{% url 'student_management:question_edit' question.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row g-4">
+            <!-- Left column -->
+            <div class="col-12 col-lg-8">
+
+                <!-- Subject -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-white border-bottom pt-3 pb-2">
+                        <h6 class="mb-0 fw-semibold">Subject</h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <label for="id_subject" class="form-label fw-semibold">Select Subject <span class="text-danger">*</span></label>
+                        <select id="id_subject" name="subject" class="form-select" required>
+                            <option value="">-- Select Subject --</option>
+                            {% for subject in subjects %}
+                            <option value="{{ subject.id }}"
+                                {% if subject.id == question.subject.id %}selected{% endif %}>
+                                {{ subject.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Question Text -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-white border-bottom pt-3 pb-2">
+                        <h6 class="mb-0 fw-semibold">Question</h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <label for="id_question_text" class="form-label fw-semibold">Question Text <span class="text-danger">*</span></label>
+                            <textarea id="id_question_text" name="question_text" class="form-control" rows="4" required>{{ question.question_text }}</textarea>
+                        </div>
+
+                        <div class="mb-0">
+                            <label class="form-label fw-semibold">Question Image</label>
+                            {% if question.question_image %}
+                            <div class="mb-2 p-2 border rounded bg-light d-flex align-items-center gap-3">
+                                <img src="{{ question.question_image.url }}" alt="Current image"
+                                     style="max-height:80px;max-width:120px;object-fit:cover;border-radius:4px;">
+                                <div>
+                                    <p class="mb-1 small text-muted">Current image</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="id_clear_image" name="clear_image">
+                                        <label class="form-check-label text-danger small" for="id_clear_image">Remove image</label>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <input type="file" id="id_question_image" name="question_image" class="form-control" accept="image/*">
+                            <div class="text-muted small mt-1">Leave empty to keep the existing image.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Options -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-white border-bottom pt-3 pb-2">
+                        <h6 class="mb-0 fw-semibold">Answer Options</h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <label for="id_option_a" class="form-label fw-semibold">Option A <span class="text-danger">*</span></label>
+                            <input type="text" id="id_option_a" name="option_a" class="form-control" value="{{ question.option_a }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_option_b" class="form-label fw-semibold">Option B <span class="text-danger">*</span></label>
+                            <input type="text" id="id_option_b" name="option_b" class="form-control" value="{{ question.option_b }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_option_c" class="form-label fw-semibold">Option C <span class="text-danger">*</span></label>
+                            <input type="text" id="id_option_c" name="option_c" class="form-control" value="{{ question.option_c }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_option_d" class="form-label fw-semibold">Option D <span class="text-danger">*</span></label>
+                            <input type="text" id="id_option_d" name="option_d" class="form-control" value="{{ question.option_d }}" required>
+                        </div>
+                        <div class="mb-0">
+                            <label for="id_option_e" class="form-label fw-semibold">Option E <span class="text-muted small">(optional)</span></label>
+                            <input type="text" id="id_option_e" name="option_e" class="form-control" value="{{ question.option_e|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explanation -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-white border-bottom pt-3 pb-2">
+                        <h6 class="mb-0 fw-semibold">Explanation <span class="text-muted small">(optional)</span></h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <textarea id="id_explanation" name="explanation" class="form-control" rows="3"
+                                  placeholder="Explain the correct answer...">{{ question.explanation|default:'' }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right column -->
+            <div class="col-12 col-lg-4">
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-white border-bottom pt-3 pb-2">
+                        <h6 class="mb-0 fw-semibold">Answer & Settings</h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <label for="id_correct_answer" class="form-label fw-semibold">Correct Answer <span class="text-danger">*</span></label>
+                            <select id="id_correct_answer" name="correct_answer" class="form-select" required>
+                                <option value="">-- Select --</option>
+                                <option value="A" {% if question.correct_answer == 'A' %}selected{% endif %}>A</option>
+                                <option value="B" {% if question.correct_answer == 'B' %}selected{% endif %}>B</option>
+                                <option value="C" {% if question.correct_answer == 'C' %}selected{% endif %}>C</option>
+                                <option value="D" {% if question.correct_answer == 'D' %}selected{% endif %}>D</option>
+                                <option value="E" {% if question.correct_answer == 'E' %}selected{% endif %}>E</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_source" class="form-label fw-semibold">Source <span class="text-muted small">(optional)</span></label>
+                            <select id="id_source" name="source" class="form-select">
+                                <option value="">-- None --</option>
+                                <option value="PYQ" {% if question.source == 'PYQ' %}selected{% endif %}>PYQ</option>
+                                <option value="EDUSETIN" {% if question.source == 'EDUSETIN' %}selected{% endif %}>EDUSETIN</option>
+                                <option value="IMPORTED" {% if question.source == 'IMPORTED' %}selected{% endif %}>IMPORTED</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_year" class="form-label fw-semibold">Year <span class="text-muted small">(optional)</span></label>
+                            <input type="number" id="id_year" name="year" class="form-control"
+                                   placeholder="e.g. 2023" min="1900" max="2100"
+                                   value="{{ question.year|default:'' }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="id_is_active" name="is_active"
+                                       {% if question.is_active %}checked{% endif %}>
+                                <label class="form-check-label fw-semibold" for="id_is_active">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> Save Changes
+                    </button>
+                    <a href="{% url 'student_management:question_detail' question.id %}" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

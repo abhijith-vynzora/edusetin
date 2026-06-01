@@ -10,126 +10,90 @@
 {% block content %}
     <!-- Stats Grid -->
     <div class="stats-grid">
-        <!-- Students -->
         <div class="stat-card">
             <div class="stat-header">
                 <div class="stat-title">Students</div>
-                <div class="stat-icon icon-blue">
-                    <i class="icon">👥</i>
-                </div>
+                <div class="stat-icon icon-blue"><i class="icon">👥</i></div>
             </div>
             <div class="stat-value">{{ total_students }}</div>
-            <div class="stat-change">
-                <span class="text-muted">Total students registered</span>
-            </div>
+            <div class="stat-change"><span class="text-muted">Total registered students</span></div>
         </div>
 
-        <!-- Categories -->
         <div class="stat-card">
             <div class="stat-header">
-                <div class="stat-title">Categories</div>
-                <div class="stat-icon icon-green">
-                    <i class="icon">📁</i>
-                </div>
+                <div class="stat-title">Subjects</div>
+                <div class="stat-icon icon-green"><i class="icon">📚</i></div>
             </div>
-            <div class="stat-value">12</div>
-            <div class="stat-change">
-                <span class="text-muted">Test categories</span>
-            </div>
+            <div class="stat-value">{{ total_subjects }}</div>
+            <div class="stat-change"><span class="text-muted">Question bank subjects</span></div>
         </div>
 
-        <!-- Topics -->
-        <div class="stat-card">
-            <div class="stat-header">
-                <div class="stat-title">Topics</div>
-                <div class="stat-icon icon-purple">
-                    <i class="icon">📑</i>
-                </div>
-            </div>
-            <div class="stat-value">48</div>
-            <div class="stat-change">
-                <span class="text-muted">Subject topics</span>
-            </div>
-        </div>
-
-        <!-- Questions -->
         <div class="stat-card">
             <div class="stat-header">
                 <div class="stat-title">Questions</div>
-                <div class="stat-icon icon-orange">
-                    <i class="icon">❓</i>
-                </div>
+                <div class="stat-icon icon-purple"><i class="icon">❓</i></div>
             </div>
-            <div class="stat-value">1,250</div>
-            <div class="stat-change">
-                <span class="text-muted">Question bank size</span>
-            </div>
+            <div class="stat-value">{{ total_questions }}</div>
+            <div class="stat-change"><span class="text-muted">Total questions</span></div>
         </div>
 
-        <!-- Mock Tests -->
         <div class="stat-card">
             <div class="stat-header">
-                <div class="stat-title">Mock Tests</div>
-                <div class="stat-icon icon-blue">
-                    <i class="icon">📝</i>
-                </div>
+                <div class="stat-title">PYQs</div>
+                <div class="stat-icon icon-orange"><i class="icon">📝</i></div>
             </div>
-            <div class="stat-value">25</div>
-            <div class="stat-change">
-                <span class="text-muted">Active mock tests</span>
-            </div>
+            <div class="stat-value">{{ total_pyqs }}</div>
+            <div class="stat-change"><span class="text-muted">Previous year questions</span></div>
         </div>
 
-        <!-- Results -->
         <div class="stat-card">
             <div class="stat-header">
-                <div class="stat-title">Results</div>
-                <div class="stat-icon icon-green">
-                    <i class="icon">📊</i>
-                </div>
+                <div class="stat-title">Active Questions</div>
+                <div class="stat-icon icon-green"><i class="icon">✅</i></div>
             </div>
-            <div class="stat-value">845</div>
-            <div class="stat-change">
-                <span class="text-muted">Test attempts</span>
+            <div class="stat-value">{{ active_questions }}</div>
+            <div class="stat-change"><span class="text-muted">Currently active</span></div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-title">Inactive Questions</div>
+                <div class="stat-icon icon-blue"><i class="icon">⏸️</i></div>
             </div>
+            <div class="stat-value">{{ inactive_questions }}</div>
+            <div class="stat-change"><span class="text-muted">Currently inactive</span></div>
         </div>
     </div>
 
     <!-- Charts -->
     <div class="charts-container">
-        <!-- Student Registrations -->
         <div class="chart-card">
             <div class="chart-header">
                 <div class="chart-title">Student Registrations</div>
-                <div class="chart-actions">
-                </div>
             </div>
             <div class="chart-container">
                 <canvas id="registrationsChart"></canvas>
             </div>
         </div>
 
-        <!-- Mock Test Activity -->
         <div class="chart-card">
             <div class="chart-header">
-                <div class="chart-title">Mock Test Activity</div>
-                <div class="chart-actions">
-                </div>
+                <div class="chart-title">Question Bank Overview</div>
             </div>
             <div class="chart-container">
-                <canvas id="activityChart"></canvas>
+                <canvas id="questionBankChart"></canvas>
             </div>
         </div>
     </div>
 
-    <!-- Data Grids -->
+    <!-- Recent Data Grids -->
     <div class="data-grid">
         <!-- Recent Students -->
         <div class="data-card">
             <div class="data-header">
                 <div class="data-title">Recent Students</div>
+                <a href="{% url 'student_management:student_list' %}" class="card-action" style="font-size:13px;">View All</a>
             </div>
-            
             <ul class="data-list">
                 {% for student in recent_students %}
                 <li class="data-item">
@@ -144,81 +108,60 @@
                 </li>
                 {% empty %}
                 <li class="data-item">
-                    <div class="data-content">
-                        <p class="text-muted">No recent students.</p>
-                    </div>
+                    <div class="data-content"><p class="text-muted">No students yet.</p></div>
                 </li>
                 {% endfor %}
             </ul>
         </div>
-        
-        <!-- Latest Mock Tests -->
+
+        <!-- Recent Subjects -->
         <div class="data-card">
             <div class="data-header">
-                <div class="data-title">Latest Mock Tests</div>
+                <div class="data-title">Recent Subjects</div>
+                <a href="{% url 'student_management:subject_list' %}" class="card-action" style="font-size:13px;">View All</a>
             </div>
-            
             <ul class="data-list">
+                {% for subject in recent_subjects %}
                 <li class="data-item">
-                    <div class="data-icon">📝</div>
+                    <div class="data-icon">📚</div>
                     <div class="data-content">
-                        <p><strong>IELTS Academic Mock 1</strong> - Published</p>
-                        <div class="data-time">3 days ago</div>
+                        <p><strong>{{ subject.name }}</strong></p>
+                        <div class="data-time">{{ subject.created_at|timesince }} ago</div>
                     </div>
+                    {% if subject.is_active %}
+                    <span class="badge" style="background:#10b981;color:#fff;font-size:11px;padding:3px 8px;border-radius:12px;">Active</span>
+                    {% else %}
+                    <span class="badge" style="background:#ef4444;color:#fff;font-size:11px;padding:3px 8px;border-radius:12px;">Inactive</span>
+                    {% endif %}
                 </li>
+                {% empty %}
                 <li class="data-item">
-                    <div class="data-icon">📝</div>
-                    <div class="data-content">
-                        <p><strong>PTE Core Practice 4</strong> - Published</p>
-                        <div class="data-time">1 week ago</div>
-                    </div>
+                    <div class="data-content"><p class="text-muted">No subjects yet.</p></div>
                 </li>
+                {% endfor %}
             </ul>
         </div>
-        
-        <!-- Top Performers -->
+
+        <!-- Recent Questions -->
         <div class="data-card">
             <div class="data-header">
-                <div class="data-title">Top Performers</div>
+                <div class="data-title">Recent Questions</div>
+                <a href="{% url 'student_management:question_list' %}" class="card-action" style="font-size:13px;">View All</a>
             </div>
-            
             <ul class="data-list">
+                {% for question in recent_questions %}
                 <li class="data-item">
-                    <div class="data-icon">🏆</div>
+                    <div class="data-icon">❓</div>
                     <div class="data-content">
-                        <p><strong>Michael Brown</strong></p>
-                        <div class="data-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 95%"></div>
-                            </div>
-                            <span>95%</span>
-                        </div>
+                        <p><strong>{{ question.subject.name }}</strong> — {{ question.question_text|truncatechars:50 }}</p>
+                        <div class="data-time">{{ question.created_at|timesince }} ago{% if question.source %} · {{ question.source }}{% endif %}</div>
                     </div>
                 </li>
+                {% empty %}
                 <li class="data-item">
-                    <div class="data-icon">🥈</div>
-                    <div class="data-content">
-                        <p><strong>Emily Davis</strong></p>
-                        <div class="data-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 92%"></div>
-                            </div>
-                            <span>92%</span>
-                        </div>
-                    </div>
+                    <div class="data-content"><p class="text-muted">No questions yet.</p></div>
                 </li>
-                <li class="data-item">
-                    <div class="data-icon">🥉</div>
-                    <div class="data-content">
-                        <p><strong>Robert Wilson</strong></p>
-                        <div class="data-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 88%"></div>
-                            </div>
-                            <span>88%</span>
-                        </div>
-                    </div>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
@@ -227,7 +170,6 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Student Registrations Chart
     var ctx1 = document.getElementById('registrationsChart');
     if (ctx1) {
         new Chart(ctx1.getContext('2d'), {
@@ -243,36 +185,28 @@
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                responsive: true, maintainAspectRatio: false,
                 plugins: { legend: { display: true } },
                 scales: { y: { beginAtZero: true } }
             }
         });
     }
 
-    // Mock Test Activity Chart
-    var ctx2 = document.getElementById('activityChart');
+    var ctx2 = document.getElementById('questionBankChart');
     if (ctx2) {
         new Chart(ctx2.getContext('2d'), {
-            type: 'line',
+            type: 'doughnut',
             data: {
-                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                labels: ['Active', 'Inactive'],
                 datasets: [{
-                    label: 'Test Attempts',
-                    data: [45, 52, 38, 65],
-                    backgroundColor: 'rgba(46, 204, 113, 0.2)',
-                    borderColor: 'rgba(46, 204, 113, 1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.3
+                    data: [{{ active_questions }}, {{ inactive_questions }}],
+                    backgroundColor: ['rgba(46, 204, 113, 0.8)', 'rgba(239, 68, 68, 0.8)'],
+                    borderWidth: 2
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: true } },
-                scales: { y: { beginAtZero: true } }
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: true, position: 'bottom' } }
             }
         });
     }

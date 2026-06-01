@@ -1,0 +1,59 @@
+{% extends "student_management/base.html" %}
+
+{% block title %}Edit Subject | Student Management{% endblock %}
+
+{% block content %}
+<div class="dashboard__form__wraper">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'student_management:dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'student_management:subject_list' %}">Subjects</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        </ol>
+    </nav>
+
+    <div class="create__course__title mb-4">
+        <h4 class="mb-0">Edit Subject: {{ subject.name }}</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <form method="post" action="{% url 'student_management:subject_edit' subject.id %}">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label fw-semibold">Subject Name <span class="text-danger">*</span></label>
+                            <input type="text" id="id_name" name="name" class="form-control"
+                                   placeholder="e.g. Mathematics" value="{{ subject.name }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_description" class="form-label fw-semibold">Description</label>
+                            <textarea id="id_description" name="description" class="form-control" rows="4"
+                                      placeholder="Brief description (optional)">{{ subject.description|default:'' }}</textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="id_is_active" name="is_active"
+                                       {% if subject.is_active %}checked{% endif %}>
+                                <label class="form-check-label fw-semibold" for="id_is_active">Active</label>
+                                <div class="text-muted small">Inactive subjects will not be visible to students.</div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Save Changes
+                            </button>
+                            <a href="{% url 'student_management:subject_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

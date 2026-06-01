@@ -1032,37 +1032,40 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'student_management:student_list' %}" class="{% if request.path == '/student-management/students/' %}active{% endif %}">
+                        <a href="{% url 'student_management:student_list' %}" class="{% if '/student-management/students/' in request.path %}active{% endif %}">
                             <i class="icofont-users-alt-3"></i>
                             Students
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="">
-                            <i class="icofont-folder"></i>
-                            Categories
+
+                    <!-- Question Bank Dropdown -->
+                    <li class="has-dropdown {% if '/student-management/subjects/' in request.path or '/student-management/questions/' in request.path %}open{% endif %}">
+                        <a href="#">
+                            <i class="icofont-book-alt"></i>
+                            Question Bank
                         </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="{% url 'student_management:subject_list' %}" class="{% if '/student-management/subjects/' in request.path %}active{% endif %}">
+                                    <i class="icofont-list"></i> Subjects
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'student_management:question_list' %}" class="{% if '/student-management/questions/' in request.path %}active{% endif %}">
+                                    <i class="icofont-question-circle"></i> Questions
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li>
-                        <a href="#" class="">
-                            <i class="icofont-list"></i>
-                            Topics
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="">
-                            <i class="icofont-question-circle"></i>
-                            Questions
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="">
+                        <a href="#">
                             <i class="icofont-paper"></i>
                             Mock Tests
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="#">
                             <i class="icofont-chart-bar-graph"></i>
                             Results
                         </a>
