@@ -1,0 +1,1115 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+  <style>
+    /* Force bullets and numbers to show in category description */
+    .description-content ul,
+    .description-content ol {
+      list-style-position: outside !important;
+      margin: 15px 0 15px 25px !important;
+      padding-left: 30px !important;
+      display: block !important;
+    }
+    
+    .description-content ul {
+      list-style-type: disc !important;
+    }
+    
+    .description-content ol {
+      list-style-type: decimal !important;
+    }
+    
+    .description-content li {
+      display: list-item !important;
+      margin-bottom: 8px !important;
+      margin-left: 0 !important;
+      line-height: 1.6 !important;
+      color: #555 !important;
+      list-style: inherit !important;
+    }
+    
+    /* Ensure list markers are visible */
+    .description-content ul li::marker,
+    .description-content ol li::marker {
+      display: inline-block !important;
+      unicode-bidi: isolate !important;
+    }
+    
+    /* Nested lists */
+    .description-content ul ul {
+      list-style-type: circle !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .description-content ul ul ul {
+      list-style-type: square !important;
+    }
+    
+    .description-content ol ol {
+      list-style-type: lower-alpha !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .description-content ol ol ol {
+      list-style-type: lower-roman !important;
+    }
+    
+    /* Blockquote styling */
+    .description-content blockquote {
+      display: block !important;
+      margin: 20px 0 20px 25px !important;
+      padding: 15px 20px !important;
+      border-left: 4px solid #0066f5 !important;
+      background-color: #f8f9fa !important;
+      font-style: italic !important;
+      color: #555 !important;
+      border-radius: 4px !important;
+    }
+    
+    .description-content blockquote p {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .description-content blockquote p:not(:last-child) {
+      margin-bottom: 10px !important;
+    }
+    
+    /* Table Styling */
+    .description-content table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin: 20px 0 !important;
+      background-color: #fff !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+      border-radius: 8px !important;
+      overflow: hidden !important;
+      display: table !important;
+    }
+    
+    .description-content thead {
+      background-color: #0066f5 !important;
+      color: white !important;
+    }
+    
+    .description-content thead tr {
+      background-color: #0066f5 !important;
+    }
+    
+    .description-content thead th {
+      padding: 12px 15px !important;
+      text-align: left !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      color: white !important;
+      border: 1px solid #0052cc !important;
+      display: table-cell !important;
+    }
+    
+    .description-content tbody tr {
+      border-bottom: 1px solid #ddd !important;
+      transition: background-color 0.3s ease !important;
+    }
+    
+    .description-content tbody tr:hover {
+      background-color: #f8f9fa !important;
+    }
+    
+    .description-content tbody tr:nth-child(even) {
+      background-color: #f9f9f9 !important;
+    }
+    
+    .description-content tbody tr:last-child {
+      border-bottom: none !important;
+    }
+    
+    .description-content td {
+      padding: 12px 15px !important;
+      text-align: left !important;
+      font-size: 14px !important;
+      color: #555 !important;
+      border: 1px solid #ddd !important;
+      display: table-cell !important;
+    }
+    
+    .description-content th {
+      display: table-cell !important;
+    }
+    
+    .description-content caption {
+      padding: 10px !important;
+      caption-side: top !important;
+      font-weight: 600 !important;
+      font-size: 16px !important;
+      color: #333 !important;
+      text-align: left !important;
+    }
+    
+    /* Strong and emphasis */
+    .description-content li strong,
+    .description-content blockquote strong,
+    .description-content td strong {
+      font-weight: 600 !important;
+      color: #333 !important;
+    }
+    
+    .description-content li em,
+    .description-content blockquote em,
+    .description-content td em {
+      font-style: italic !important;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .description-content ul,
+      .description-content ol {
+        margin-left: 15px !important;
+        padding-left: 20px !important;
+      }
+    
+      .description-content blockquote {
+        margin-left: 10px !important;
+        padding: 10px 15px !important;
+        font-size: 14px !important;
+      }
+    
+      .description-content table {
+        font-size: 12px !important;
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+      }
+    
+      .description-content thead th,
+      .description-content td {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .description-content ul,
+      .description-content ol {
+        margin-left: 10px !important;
+        padding-left: 15px !important;
+      }
+    
+      .description-content blockquote {
+        margin-left: 5px !important;
+        padding: 8px 12px !important;
+        font-size: 13px !important;
+      }
+    
+      .description-content table {
+        font-size: 11px !important;
+      }
+    
+      .description-content thead th,
+      .description-content td {
+        padding: 6px 8px !important;
+        font-size: 11px !important;
+      }
+    }
+  </style>
+
+  <style>
+    /* Pagination Styles */
+    .pagi-area {
+      margin-top: 30px;
+    }
+    
+    .pagination {
+      margin-bottom: 15px;
+    }
+    
+    .page-item .page-link {
+      color: #0066f5;
+      border: 1px solid #dee2e6;
+      padding: 0.5rem 0.75rem;
+      margin: 0 2px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .page-item.active .page-link {
+      background-color: #0066f5;
+      border-color: #0066f5;
+      color: white;
+    }
+    
+    .page-item .page-link:hover {
+      background-color: #e9ecef;
+      border-color: #dee2e6;
+      color: #0056b3;
+    }
+    
+    .page-item.disabled .page-link {
+      color: #6c757d;
+      pointer-events: none;
+      background-color: #fff;
+      border-color: #dee2e6;
+    }
+    
+    .page-info {
+      font-size: 14px;
+    }
+    
+    /* Responsive pagination */
+    @media (max-width: 576px) {
+      .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    
+      .page-item {
+        margin-bottom: 5px;
+      }
+    }
+  </style>
+
+  <style>
+    .contact-popup {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .contact-popup-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      max-width: 90%;
+      position: relative;
+    }
+    .contact-close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 25px;
+      cursor: pointer;
+    }
+    .contact-popup .form-group {
+      margin-bottom: 15px;
+    }
+    .contact-popup .form-control {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+  </style>
+
+  <style>
+    .home-blog-style-one {
+      border-radius: 12px; /* curve the whole card */
+      overflow: hidden; /* ensures image respects radius */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* optional for better look */
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    .home-blog-style-one:hover {
+      transform: translateY(-4px);
+    }
+    
+    .home-blog-style-one .thumb img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0; /* only top edges rounded */
+    }
+  </style>
+
+  <style>
+    /* Modern Course Card Styles */
+    .modern-course-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .modern-course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Image Section */
+    .course-image-wrapper {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .course-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    
+    .modern-course-card:hover .course-image {
+      transform: scale(1.1);
+    }
+    
+    .course-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modern-course-card:hover .course-overlay {
+      opacity: 1;
+    }
+    
+    .course-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(238, 90, 36, 0.3);
+    }
+    
+    /* Content Section */
+    .course-content {
+      padding: 30px 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    {% comment %} .course-header {
+      margin-bottom: 20px;
+    } {% endcomment %}
+    
+    .course-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .course-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .course-meta span {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #7f8c8d;
+      gap: 6px;
+    }
+    
+    .course-meta i {
+      font-size: 12px;
+      color: #3498db;
+    }
+    
+    /* Description */
+    .course-description {
+      flex: 1;
+      margin-bottom: 25px;
+    }
+    
+    .course-description p {
+      color: #5a6c7d;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    /* Footer */
+    .course-footer {
+      display: flex;
+      justify-content: flex-start;  /* my own adjustment */
+      align-items: center;
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    
+    .course-features {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #27ae60;
+      font-weight: 500;
+      gap: 5px;
+    }
+    
+    .feature i {
+      font-size: 12px;
+    }
+    
+    /* Modern Button */
+    .modern-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: #0066f5;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .modern-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .modern-btn:hover::before {
+      left: 100%;
+    }
+    
+    .modern-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .modern-btn i {
+      transition: transform 0.3s ease;
+    }
+    
+    .modern-btn:hover i {
+      transform: translateX(3px);
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: #7f8c8d;
+    }
+    
+    .empty-icon {
+      font-size: 80px;
+      margin-bottom: 30px;
+      color: #bdc3c7;
+    }
+    
+    .empty-state h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+    
+    .empty-state p {
+      font-size: 16px;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .course-content {
+        padding: 25px 20px;
+      }
+    
+      .course-title {
+        font-size: 20px;
+      }
+    
+      .course-image-wrapper {
+        height: 240px;
+      }
+    
+      .course-footer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+    
+      .modern-btn {
+        align-self: stretch;
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .course-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+    
+      .course-features {
+        flex-direction: column;
+        gap: 8px;
+      }
+    
+      .course-image-wrapper {
+        height: 200px;
+      }
+    }
+    
+    /* Animation for loading */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .wow.fadeInUp {
+      animation: fadeInUp 0.8s ease-out;
+    }
+  </style>
+  <style>
+    /* Country Detail Page - Content Styling */
+    .content-wrapper {
+      width: 100%;
+    }
+    
+    .description-content {
+      width: 100%;
+      text-align: justify;
+      line-height: 1.6;
+    }
+    
+    .description-content p {
+      margin-bottom: 15px;
+      word-wrap: break-word;
+      hyphens: auto;
+      font-size: 16px;
+      color: #555;
+    }
+    
+    .country-banner {
+      margin-bottom: 30px;
+      width: 100%;
+      max-height: 446px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .country-banner img.country-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    
+    h2.mb-20 {
+      color: #222;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .pl-50,
+      .pl-md-15,
+      .pl-xs-15 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    
+      .description-content {
+        text-align: left;
+      }
+    
+      .country-banner {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .country-banner {
+        max-height: 250px;
+      }
+    }
+  </style>
+
+  <style>
+    /* Country Detail Page - Content Styling */
+    .content-wrapper {
+      width: 100%;
+      overflow: hidden; /* Prevent content from overflowing */
+    }
+    
+    .description-content {
+      width: 100%;
+      text-align: justify;
+      line-height: 1.6;
+      word-wrap: break-word; /* Ensure long words break */
+      overflow-wrap: break-word; /* Modern version of word-wrap */
+    }
+    
+    .description-content p {
+      margin-bottom: 15px;
+      hyphens: auto;
+      font-size: 16px;
+      color: #555;
+      /* Add these properties to prevent overflow */
+      max-width: 100%;
+      overflow: hidden;
+    }
+    
+    .country-banner {
+      margin-bottom: 30px;
+      width: 100%;
+      max-height: 446px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .country-banner img.country-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    
+    h2.mb-20 {
+      color: #222;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .pl-50,
+      .pl-md-15,
+      .pl-xs-15 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    
+      .description-content {
+        text-align: left;
+        /* Mobile-specific fixes */
+        hyphens: auto;
+        word-break: break-word;
+      }
+    
+      .description-content p {
+        font-size: 15px; /* Slightly smaller font on mobile */
+        line-height: 1.5;
+      }
+    
+      .country-banner {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .country-banner {
+        max-height: 250px;
+      }
+    
+      .description-content p {
+        font-size: 14px; /* Even smaller font on very small screens */
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <!--   Start Breadcrumb 
+    =============================================   -->
+  <div class="breadcrumb-area with-banner bg-cover text-center bg-dark text-light" style="background-image: url('{{ category.image.url }}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>{{ category.name }}</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="active">{{ category.name }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Breadcrumb -->
+
+  <!--   Star Services Details Area
+    =============================================   -->
+  <div class="services-details-area overflow-hidden default-padding">
+    <div class="container">
+      <div class="services-details-items">
+        <div class="row">
+          <div class="col-xl-8 col-lg-7 order-lg-last pl-50 pl-md-15 pl-xs-15">
+            <div class="country-banner mb-30">
+              {% if category.image %}
+                <img src="{{ category.image.url }}" alt="{{ category.name }}" class="country-image" />
+              {% else %}
+                <img src="{% static 'assets/img/banner/default.jpg' %}" alt="{{ country.name }}" class="country-image" />
+              {% endif %}
+            </div>
+            <div class="content-wrapper">
+              <h2 class="mb-20">Explore {{ category.name }} </h2>
+              <div class="description-content">
+                {% if category.description %}
+                  <p>{{ category.description|safe }}</p>
+                {% else %}
+                  <p>No description available for {{ category.name }}.</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-5 mt-md-120 mt-xs-50 services-sidebar">
+            <div class="single-widget services-list-widget">
+              <h4>Course Categories</h4>
+              <div class="content" style="max-height: 300px; overflow-y: auto;">
+                <ul>
+                  {% for c in other_course_categories %}
+                    <li class="{% if c.pk == category.pk %}current-item{% endif %}">
+                      <a href="{% url 'course_category_detail' c.slug %}">{{ c.name }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="single-widget course-info-widget" style="background-image: url(assets/img/shape/wooden.png);">
+              <h4 class="widget-title">Course Benifits</h4>
+              <ul class="course-info-list">
+                <li>
+                  <i class="fas fa-user"></i> Certified Tutors
+                </li>
+                <li>
+                  <i class="fas fa-book"></i> Doubt Solving Sessions
+                </li>
+                <li>
+                  <i class="fas fa-graduation-cap"></i> Flexible & Regular Batches
+                </li>
+                <li>
+                  <i class="fas fa-briefcase"></i> Free study materials
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Courses Section - Fixed padding -->
+        <div class="top-courses-section" style="padding-top: 60px; padding-bottom: 0;">
+          <div class="container">
+            <!-- Add the headline here -->
+            {% if page_obj and page_obj.paginator.count > 0 %}
+              <div class="row">
+                <div class="col-12">
+                  <div class="section-heading text-center mb-50">
+                    <h2 class="mb-20">Top Courses under {{ category.name }}</h2>
+                    <p>Explore our carefully curated courses in this category</p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            <div class="blog-item-box">
+              <div class="row gutter-lg">
+                {% for course in page_obj %}
+                  <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="modern-course-card wow fadeInUp">
+                      <div class="course-image-wrapper">
+                        <img src="{{ course.image.url }}" alt="{{ course.title }}" class="course-image" />
+                        <div class="course-overlay"></div>
+                      </div>
+                      <div class="course-content">
+                        <div class="course-header">
+                          <h3 class="course-title">{{ course.title }}</h3>
+                          <div class="course-meta">
+                            <span class="duration"><i class="far fa-clock"></i> {{ course.duration }}</span>
+                          </div>
+                        </div>
+                        <div class="course-description">
+                          <p>{{ course.description|truncatechars:150|safe }}</p>
+                        </div>
+                        <div class="course-footer">
+                          <a class="modern-btn know-more-btn" href="#" data-course="{{ course.title }}">
+                            <span>Know More</span>
+                            <i class="fas fa-arrow-right"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% empty %}
+                  <div class="col-12">
+                    <div class="empty-state">
+                      <div class="empty-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                      </div>
+                      <h3>No courses found</h3>
+                      <p>No courses are currently available in {{ category.name }}. Please check back later.</p>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <!-- Pagination - Only show if multiple pages exist -->
+            {% if page_obj and page_obj.paginator.count > 0 and page_obj.paginator.num_pages > 1 %}
+              <div class="pagi-area text-center mt-4" style="margin-bottom: 0;">
+                <nav aria-label="Course pagination">
+                  <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First"><i class="fas fa-angle-double-left"></i></a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><i class="fas fa-angle-left"></i></a>
+                      </li>
+                    {% else %}
+                      <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-angle-double-left"></i></span>
+                      </li>
+                      <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-angle-left"></i></span>
+                      </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                      {% if page_obj.number == num %}
+                        <li class="page-item active">
+                          <span class="page-link">{{ num }}</span>
+                        </li>
+                      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next"><i class="fas fa-angle-right"></i></a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last"><i class="fas fa-angle-double-right"></i></a>
+                      </li>
+                    {% else %}
+                      <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-angle-right"></i></span>
+                      </li>
+                      <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-angle-double-right"></i></span>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+
+                <!-- Page info -->
+                <div class="page-info mt-2">
+                  <p class="text-muted">Showing courses {{ page_obj.start_index }} - {{ page_obj.end_index }} of {{ page_obj.paginator.count }}</p>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Contact Popup Modal -->
+
+  <div id="contactPopup" class="contact-popup">
+    <div class="contact-popup-content">
+      <span class="contact-close">&times;</span>
+      <h3>Contact Us</h3>
+      <form method="post" action="{% url 'contact_submit' %}">
+        {% csrf_token %}
+
+        <!-- Hidden field (for saving to DB) -->
+        <input type="hidden" name="course_subject" id="courseSubject" value="" />
+
+        <!-- Visible readonly course field -->
+        <div class="form-group">
+          <input type="text" id="courseDisplay" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required class="form-control" />
+        </div>
+        <div class="form-group">
+          <input type="text" name="phone" placeholder="Contact Number" required class="form-control" />
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Email ID" required class="form-control" />
+        </div>
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" required class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Open popup with course info
+      document.querySelectorAll('.know-more-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault()
+          var courseName = btn.getAttribute('data-course')
+          document.getElementById('courseSubject').value = courseName + ' Inquiry'
+          document.getElementById('courseDisplay').value = courseName
+          document.getElementById('contactPopup').style.display = 'flex'
+        })
+      })
+    
+      // Close popup
+      document.querySelector('.contact-close').addEventListener('click', function () {
+        document.getElementById('contactPopup').style.display = 'none'
+      })
+      window.addEventListener('click', function (event) {
+        if (event.target == document.getElementById('contactPopup')) {
+          document.getElementById('contactPopup').style.display = 'none'
+        }
+      })
+    
+      // Contact form validation
+      const contactForm = document.querySelector('#contactPopup form')
+      const inputs = {
+        name: contactForm.querySelector('input[name="name"]'),
+        phone: contactForm.querySelector('input[name="phone"]'),
+        email: contactForm.querySelector('input[name="email"]'),
+        message: contactForm.querySelector('textarea[name="message"]')
+      }
+    
+      function showError(input, message) {
+        clearError(input)
+        const errorElem = document.createElement('div')
+        errorElem.className = 'error-message'
+        errorElem.style.color = 'red'
+        errorElem.style.fontSize = '13px'
+        errorElem.style.marginTop = '5px'
+        errorElem.textContent = message
+        input.classList.add('input-error')
+        input.parentNode.appendChild(errorElem)
+      }
+    
+      function clearError(input) {
+        const next = input.parentNode.querySelector('.error-message')
+        if (next) next.remove()
+        input.classList.remove('input-error')
+      }
+    
+      function validateName() {
+        const value = inputs.name.value.trim()
+        const regex = /^[A-Za-z\s]+$/
+        if (!value) return showError(inputs.name, 'Name is required'), false
+        if (!regex.test(value)) return showError(inputs.name, 'Enter a valid name'), false
+        clearError(inputs.name)
+        return true
+      }
+    
+      function validatePhone() {
+        const value = inputs.phone.value.trim()
+        const regex = /^[0-9]{10,11}$/
+        if (!value) return showError(inputs.phone, 'Phone is required'), false
+        if (!regex.test(value)) return showError(inputs.phone, 'Enter a valid phone number'), false
+        clearError(inputs.phone)
+        return true
+      }
+    
+      function validateEmail() {
+        const value = inputs.email.value.trim()
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!value) return showError(inputs.email, 'Email is required'), false
+        if (!regex.test(value)) return showError(inputs.email, 'Enter a valid email address'), false
+        clearError(inputs.email)
+        return true
+      }
+    
+      function validateMessage() {
+        const value = inputs.message.value.trim()
+        if (!value) return showError(inputs.message, 'Message is required'), false
+        if (value.length <= 0) return showError(inputs.message, 'Message is required'), false
+        clearError(inputs.message)
+        return true
+      }
+    
+      // Live validation
+      Object.values(inputs).forEach((input) => {
+        input.addEventListener('input', () => {
+          if (input.name === 'name') validateName()
+          if (input.name === 'phone') validatePhone()
+          if (input.name === 'email') validateEmail()
+          if (input.name === 'message') validateMessage()
+        })
+      })
+    
+      // Form submit
+      contactForm.addEventListener('submit', function (e) {
+        let valid = true
+        if (!validateName()) valid = false
+        if (!validatePhone()) valid = false
+        if (!validateEmail()) valid = false
+        if (!validateMessage()) valid = false
+        if (!valid) e.preventDefault()
+      })
+    })
+  </script>
+{% endblock %}

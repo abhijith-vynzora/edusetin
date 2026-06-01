@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <style>
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-item img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="breadcrumb-area with-banner bg-cover text-center bg-dark text-light" style="background-image: url('{% static 'assets/img/banner/7.png' %}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>Gallery</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="active">Gallery</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-area bg-gray default-padding">
+    <div class="container">
+      <!-- Tabs -->
+      <ul class="nav nav-pills justify-content-center mb-4" id="galleryTabs" role="tablist">
+        <li class="nav-item">
+          <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#all">All</button>
+        </li>
+        {% for category in categories %}
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#cat-{{ category.id }}">{{ category.name }}</button>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <!-- Tab Content -->
+      <div class="tab-content" id="galleryTabsContent">
+        <!-- All Images Tab -->
+        <div class="tab-pane fade show active" id="all">
+          <div class="row g-4">
+            {% for img in images_all %}
+              <div class="col-lg-4 col-md-6">
+                <div class="gallery-item">
+                  <img src="{{ img.image.url }}" class="img-fluid rounded shadow" alt="{{ img.title }}" />
+                </div>
+              </div>
+            {% empty %}
+              <p class="text-center">No images available.</p>
+            {% endfor %}
+          </div>
+
+          {% if images_all.paginator.num_pages > 1 %}
+            <div class="row mt-3">
+              <div class="col-md-12 text-center">
+                <nav>
+                  <ul class="pagination justify-content-center">
+                    {% if images_all.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ images_all.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+                      </li>
+                    {% else %}
+                      <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-angle-double-left"></i></span>
+                      </li>
+                      <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-angle-left"></i></span>
+                      </li>
+                    {% endif %}
+
+                    {% for num in images_all.paginator.page_range %}
+                      {% if images_all.number == num %}
+                        <li class="page-item active">
+                          <span class="page-link">{{ num }}</span>
+                        </li>
+                      {% elif num > images_all.number|add:'-3' and num < images_all.number|add:'3' %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if images_all.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ images_all.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ images_all.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
+                      </li>
+                    {% else %}
+                      <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-angle-right"></i></span>
+                      </li>
+                      <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-angle-double-right"></i></span>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Category Tabs -->
+        {% for category, cat_images in category_images_list %}
+          <div class="tab-pane fade" id="cat-{{ category.id }}">
+            <div class="row g-4">
+              {% for img in cat_images %}
+                <div class="col-lg-4 col-md-6">
+                  <div class="gallery-item">
+                    <img src="{{ img.image.url }}" class="img-fluid rounded shadow" alt="{{ img.title }}" />
+                  </div>
+                </div>
+              {% empty %}
+                <p class="text-center">No images in {{ category.name }}.</p>
+              {% endfor %}
+            </div>
+
+            {% if cat_images.paginator.num_pages > 1 %}
+              <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                  <nav>
+                    <ul class="pagination justify-content-center">
+                      {% if cat_images.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page_{{ category.id }}=1"><i class="fas fa-angle-double-left"></i></a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?page_{{ category.id }}={{ cat_images.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+                        </li>
+                      {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link"><i class="fas fa-angle-double-left"></i></span>
+                        </li>
+                        <li class="page-item disabled">
+                          <span class="page-link"><i class="fas fa-angle-left"></i></span>
+                        </li>
+                      {% endif %}
+
+                      {% for num in cat_images.paginator.page_range %}
+                        {% if cat_images.number == num %}
+                          <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                          </li>
+                        {% elif num > cat_images.number|add:'-3' and num < cat_images.number|add:'3' %}
+                          <li class="page-item">
+                            <a class="page-link" href="?page_{{ category.id }}={{ num }}">{{ num }}</a>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+
+                      {% if cat_images.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page_{{ category.id }}={{ cat_images.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?page_{{ category.id }}={{ cat_images.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
+                        </li>
+                      {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link"><i class="fas fa-angle-right"></i></span>
+                        </li>
+                        <li class="page-item disabled">
+                          <span class="page-link"><i class="fas fa-angle-double-right"></i></span>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

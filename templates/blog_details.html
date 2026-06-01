@@ -1,0 +1,497 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+  <!-- Responsive enhancements -->
+  <style>
+    /* Responsive improvements */
+    @media (max-width: 991px) {
+      .pr-35,
+      .pl-35 {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+      }
+    
+      .sidebar {
+        margin-top: 40px !important;
+      }
+    
+      .related-post-item {
+        margin-bottom: 25px;
+      }
+    
+      .post-tags.share {
+        flex-direction: column;
+        gap: 20px;
+      }
+    
+      .blog-content {
+        font-size: 16px; /* Better readability on mobile */
+        line-height: 1.7;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .top-bar-area .info,
+      .top-bar-area .text-end {
+        text-align: center !important;
+      }
+    
+      .top-bar-area .item-flex {
+        justify-content: center;
+      }
+    
+      .breadcrumb-area h1 {
+        font-size: 24px;
+      }
+    
+      .blog-item-box h2 {
+        font-size: 22px;
+      }
+    
+      .country-banner {
+        max-height: 250px !important;
+      }
+    
+      .post-tags.share .social ul {
+        justify-content: flex-start !important;
+        margin-top: 10px;
+      }
+    
+      .related-posts .row {
+        margin: 0 -10px;
+      }
+    
+      .related-posts .col-md-4 {
+        padding: 0 10px;
+      }
+    
+      .sidebar-item {
+        margin-bottom: 30px;
+      }
+    }
+    
+    @media (max-width: 575px) {
+      .breadcrumb-area {
+        padding: 40px 0;
+      }
+    
+      .blog-content {
+        font-size: 15px;
+      }
+    
+      .related-posts h3 {
+        font-size: 20px;
+      }
+    
+      .footer-bottom p {
+        text-align: center !important;
+      }
+    
+      /* Improve touch targets for mobile */
+      .sidebar-info ul li a,
+      .tags a,
+      .social a,
+      .breadcrumb a {
+        padding: 8px 0;
+        display: inline-block;
+      }
+    }
+    
+    /* Make sure images are responsive */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Improve cursor visibility on mobile */
+    @media (hover: none) and (pointer: coarse) {
+      .cursor-dot,
+      .cursor-circle {
+        display: none;
+      }
+    
+      body {
+        cursor: auto;
+      }
+    }
+  </style>
+
+  <!-- End Footer -->
+  <style>
+    .country-banner {
+      width: 100%; /* fills container width */
+      height: 100%; /* fills container height */
+      max-height: 446px; /* optional max height */
+      overflow: hidden;
+      border-radius: 8px; /* match screenshot rounded corners */
+      margin-bottom: 30px; /* add some space below the banner */
+    }
+    
+    .country-banner img.country-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* ensures the image fills the container */
+      display: block;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .country-banner {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .country-banner {
+        max-height: 250px;
+      }
+    }
+  </style>
+
+  <style>
+    /* Force bullets and numbers to show in blog content */
+    .blog-content ul,
+    .blog-content ol {
+      list-style-position: outside !important;
+      margin: 15px 0 15px 25px !important;
+      padding-left: 30px !important;
+      display: block !important;
+    }
+    
+    .blog-content ul {
+      list-style-type: disc !important;
+    }
+    
+    .blog-content ol {
+      list-style-type: decimal !important;
+    }
+    
+    .blog-content li {
+      display: list-item !important;
+      margin-bottom: 8px !important;
+      margin-left: 0 !important;
+      line-height: 1.6 !important;
+      color: #555 !important;
+      list-style: inherit !important;
+    }
+    
+    /* Ensure list markers are visible */
+    .blog-content ul li::marker,
+    .blog-content ol li::marker {
+      display: inline-block !important;
+      unicode-bidi: isolate !important;
+    }
+    
+    /* Nested lists */
+    .blog-content ul ul {
+      list-style-type: circle !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .blog-content ul ul ul {
+      list-style-type: square !important;
+    }
+    
+    .blog-content ol ol {
+      list-style-type: lower-alpha !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .blog-content ol ol ol {
+      list-style-type: lower-roman !important;
+    }
+    
+    /* Blockquote styling */
+    .blog-content blockquote {
+      display: block !important;
+      margin: 20px 0 20px 25px !important;
+      padding: 15px 20px !important;
+      border-left: 4px solid #0066f5 !important;
+      background-color: #f8f9fa !important;
+      font-style: italic !important;
+      color: #555 !important;
+      border-radius: 4px !important;
+    }
+    
+    .blog-content blockquote p {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .blog-content blockquote p:not(:last-child) {
+      margin-bottom: 10px !important;
+    }
+    
+    /* Table Styling */
+    .blog-content table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin: 20px 0 !important;
+      background-color: #fff !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+      border-radius: 8px !important;
+      overflow: hidden !important;
+      display: table !important;
+    }
+    
+    .blog-content thead {
+      background-color: #0066f5 !important;
+      color: white !important;
+    }
+    
+    .blog-content thead tr {
+      background-color: #0066f5 !important;
+    }
+    
+    .blog-content thead th {
+      padding: 12px 15px !important;
+      text-align: left !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      color: white !important;
+      border: 1px solid #0052cc !important;
+      display: table-cell !important;
+    }
+    
+    .blog-content tbody tr {
+      border-bottom: 1px solid #ddd !important;
+      transition: background-color 0.3s ease !important;
+    }
+    
+    .blog-content tbody tr:hover {
+      background-color: #f8f9fa !important;
+    }
+    
+    .blog-content tbody tr:nth-child(even) {
+      background-color: #f9f9f9 !important;
+    }
+    
+    .blog-content tbody tr:last-child {
+      border-bottom: none !important;
+    }
+    
+    .blog-content td {
+      padding: 12px 15px !important;
+      text-align: left !important;
+      font-size: 14px !important;
+      color: #555 !important;
+      border: 1px solid #ddd !important;
+      display: table-cell !important;
+    }
+    
+    .blog-content th {
+      display: table-cell !important;
+    }
+    
+    .blog-content caption {
+      padding: 10px !important;
+      caption-side: top !important;
+      font-weight: 600 !important;
+      font-size: 16px !important;
+      color: #333 !important;
+      text-align: left !important;
+    }
+    
+    /* Strong and emphasis */
+    .blog-content li strong,
+    .blog-content blockquote strong,
+    .blog-content td strong {
+      font-weight: 600 !important;
+      color: #333 !important;
+    }
+    
+    .blog-content li em,
+    .blog-content blockquote em,
+    .blog-content td em {
+      font-style: italic !important;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .blog-content ul,
+      .blog-content ol {
+        margin-left: 15px !important;
+        padding-left: 20px !important;
+      }
+    
+      .blog-content blockquote {
+        margin-left: 10px !important;
+        padding: 10px 15px !important;
+        font-size: 14px !important;
+      }
+    
+      .blog-content table {
+        font-size: 12px !important;
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+      }
+    
+      .blog-content thead th,
+      .blog-content td {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .blog-content ul,
+      .blog-content ol {
+        margin-left: 10px !important;
+        padding-left: 15px !important;
+      }
+    
+      .blog-content blockquote {
+        margin-left: 5px !important;
+        padding: 8px 12px !important;
+        font-size: 13px !important;
+      }
+    
+      .blog-content table {
+        font-size: 11px !important;
+      }
+    
+      .blog-content thead th,
+      .blog-content td {
+        padding: 6px 8px !important;
+        font-size: 11px !important;
+      }
+    }
+  </style>
+  <style>
+    /* Improved text alignment for blog content */
+    .blog-content {
+      text-align: justify;
+      line-height: 1.7;
+      max-width: 100%;
+      overflow: hidden;
+      word-wrap: break-word;
+    }
+    
+    .blog-content p {
+      margin-bottom: 1.5em;
+    }
+    
+    .blog-item-box .info {
+      width: 100%;
+      padding: 20px 0;
+    }
+    
+    .country-banner {
+      width: 100%;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .country-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* Ensure proper text flow on all devices */
+    @media (max-width: 768px) {
+      .blog-content {
+        text-align: left;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+    
+      .pr-35,
+      .pl-35 {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <!-- Start Breadcrumb -->
+  <div class="breadcrumb-area with-banner bg-cover text-center bg-dark text-light" style="background-image: url('{{ blog.image.url }}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>{{ blog.title }}</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li>
+                <a href="{% url 'blog_list' %}">Blog</a>
+              </li>
+              <li class="active">{{ blog.title|truncatewords:5 }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Breadcrumb -->
+
+  <!-- Start Blog Detail -->
+  <div class="blog-area single full-blog right-sidebar full-blog default-padding">
+    <div class="container">
+      <div class="blog-items">
+        <div class="row">
+          <div class="blog-content col-xl-8 col-lg-7 col-md-12 pr-35 pr-md-15 pl-md-15 pr-xs-15 pl-xs-15">
+            <div class="blog-item-box">
+              <!-- Country-style banner image -->
+              <div class="country-banner">
+                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="country-image" />
+              </div>
+              <div class="info">
+                <div class="meta">
+                  <span><i class="fas fa-calendar-alt"></i> {{ blog.created_at|date:'F d, Y' }}</span>
+
+                  {% comment %} <li>
+                    <a href="#"><i class="fas fa-user-circle"></i> Admin</a>
+                  </li> {% endcomment %}
+                </div>
+                <h2>{{ blog.title }}</h2>
+                <div class="blog-content">{{ blog.description|safe|linebreaks }}</div>
+              </div>
+            </div>
+            <!-- End Related Posts -->
+          </div>
+
+          <!-- Start Sidebar -->
+          <div class="sidebar col-xl-4 col-lg-5 col-md-12 mt-md-50 mt-xs-50">
+            <aside>
+              <div class="sidebar-item recent-post">
+                <h4 class="title">Recent Posts</h4>
+                <ul>
+                  {% for recent_blog in recent_blogs %}
+                    <li>
+                      <div class="thumb">
+                        <a href="{% url 'blog_detail' recent_blog.slug %}"><img src="{{ recent_blog.image.url }}" alt="{{ recent_blog.title }}" style="width:80px; height:80px; object-fit:cover;" /></a>
+                      </div>
+                      <div class="info">
+                        <div class="meta-title">
+                          <span class="post-date">{{ recent_blog.created_at|date:'M d, Y' }}</span>
+                        </div>
+                        <a href="{% url 'blog_detail' recent_blog.slug %}">{{ recent_blog.title|truncatewords:5 }}</a>
+                      </div>
+                    </li>
+                  {% empty %}
+                    <li>No recent posts</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </aside>
+          </div>
+          <!-- End Start Sidebar -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Blog Detail -->
+{% endblock %}

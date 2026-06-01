@@ -1,0 +1,1703 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+  <!-- Popup Modal -->
+
+  
+  
+  <div id="ctaPopup" class="cta-popup">
+    <div class="cta-popup-content new-popup">
+      <span class="cta-close">&times;</span>
+      <div class="popup-inner d-flex align-items-center">
+        <!-- Left Image -->
+        <div class="popup-left">
+          <img src="{% static 'assets/img/illustration/6.png' %}" alt="Abroad Studies Illustration" />
+        </div>
+        <!-- Right Content -->
+        <div class="popup-right">
+          <h4 class="sub-title">Your Abroad Studies Journey</h4>
+          <h2 class="title">Explore Edusetin's Programs Worldwide</h2>
+          <p>Get expert guidance and support for your international education. Learn more about courses, scholarships, and admission procedures.</p>
+          <a href="{% url 'apply_form' %}" class="btn-style-one circle mt-3">Apply Now <span></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Start Banner Area 
+=============================================  -->
+  <div class="banner-area banner-style-three navigation-circle overflow-hidden text-light auto-height">
+    <!-- Slider main container -->
+    <div class="banner-fade">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Single Item (Study Abroad) -->
+        <div class="swiper-slide banner-style-three shadow-left">
+          <div class="item bg-cover" style="background: url('{% static 'assets/img/banner/2.png' %}');">
+            <div class="banner-syle-thee-shape">
+              <img src="{% static 'assets/img/shape/3.png' %}" alt="Image Not Found" />
+              <img src="{% static 'assets/img/shape/4.png' %}" alt="Image Not Found" />
+            </div>
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-xl-7">
+                  <div class="content">
+                    <h2>Study Abroad Consultants in Kerala</h2>
+                    <h3 class="tagline">Beyond Your Quest</h3>
+                    <p>Get expert guidance for studying in Germany, Italy, Singapore & Kyrgyzstan. Edusetin offers complete support for admissions, student visa, and scholarships.</p>
+                    <div class="button">
+                      <a href="{% url 'about' %}" class="btn-style-one circle">Discover More <span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Single Item -->
+
+        <!-- Single Item (MBBS) -->
+        <div class="swiper-slide banner-style-three shadow-left">
+          <div class="item bg-cover" style="background: url('{% static 'assets/img/banner/1.png' %}');">
+            <div class="banner-syle-thee-shape">
+              <img src="{% static 'assets/img/shape/3.png' %}" alt="Image Not Found" />
+              <img src="{% static 'assets/img/shape/4.png' %}" alt="Image Not Found" />
+            </div>
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-xl-7">
+                  <div class="content">
+                    <h2>Affordable MBBS & Study Abroad Guidance</h2>
+                    <h3 class="tagline">Beyond Your Quest</h3>
+                    <p>Secure your seat for MBBS or master’s programs abroad with Edusetin. Trusted for low tuition universities, admission help, and fast visa processing.</p>
+                    <div class="button">
+                      <a href="{% url 'apply_form' %}" class="btn-style-one circle">Apply Now<span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Single Item -->
+
+        <!-- Single Item (Job Visa) -->
+        <div class="swiper-slide banner-style-three shadow-left">
+          <div class="item bg-cover" style="background: url('{% static 'assets/img/banner/job-visa.jpg' %}');">
+            <div class="banner-syle-thee-shape">
+              <img src="{% static 'assets/img/shape/3.png' %}" alt="Image Not Found" />
+              <img src="{% static 'assets/img/shape/4.png' %}" alt="Image Not Found" />
+            </div>
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-xl-7">
+                  <div class="content">
+                    <h2>Job Visa Assistance & Overseas Careers</h2>
+                    <h3 class="tagline">Beyond Your Quest</h3>
+                    <p>Get expert help in securing international job visas. We guide you through visa applications, documentation, and smooth processing for your dream career abroad.</p>
+                    <div class="button">
+                      <a href="https://edusetinglobalcareers.com/" target="_blank" rel="noopener noreferrer" class="btn-style-one circle">Apply for Job Visa<span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Single Item -->
+      </div>
+
+      <!-- Navigation -->
+      <div class="banner-prev-nav">
+        <svg width="27" height="10" viewBox="0 0 27 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M27 9H3L9.9 1" stroke="#ffffff" stroke-width="2"></path>
+        </svg>
+      </div>
+      <div class="banner-next-nav">
+        <svg width="27" height="10" viewBox="0 0 27 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 9H24L17.1 1" stroke="#ffffff" stroke-width="2"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <!-- End Banner -->
+
+  <!--  Start About 
+    =============================================  -->
+  <div id="about" class="about-style-three-area default-padding">
+    <div class="container">
+      <div class="about-style-three-items">
+        <div class="row">
+          <div class="col-xl-6 col-lg-6">
+            <div class="about-style-three-info">
+              <div class="experience-style-one mb-50">
+                <h2 style="background-image: url('{% static 'assets/img/about/5.png' %}');">10</h2>
+                <h4>Years of Trusted Study Abroad & Visa Support Services</h4>
+              </div>
+              <h4 class="sub-title">About Edusetin Study Abroad</h4>
+              <h2 class="title split-text">Trusted Experts in Student Visa & Overseas Education</h2>
+
+              <p class="wow fadeInUp">Edusetin offers expert guidance for students planning to study abroad. From university selection to visa processing, we ensure a smooth journey to top destinations like Germany, Italy, Singapore, and Kyrgyzstan.</p>
+              <ul class="list-card wow fadeInUp" data-wow-delay="100ms">
+                <li>
+                  <div class="top">
+                    <img src="{% static 'assets/img/icon/16.png' %}" alt="Best Consultancy for Study Abroad" />
+                    <h4>Top-Rated Study Abroad Consultancy</h4>
+                  </div>
+                  <p>Edusetin is trusted by students across Kerala for expert guidance on overseas education, including MBBS, bachelor's, and master's programs in top countries.</p>
+                </li>
+                <li>
+                  <div class="top">
+                    <img src="{% static 'assets/img/icon/17.png' %}" alt="Visa Assistance Services" />
+                    <h4>Comprehensive Visa Support</h4>
+                  </div>
+                  <p>We assist students with return visa applications, interview preparation, and complete documentation support to ensure smooth international travel.</p>
+                </li>
+              </ul>
+              <a href="{% url 'about' %}" class="btn-style-one circle mt-30 wow fadeInUp" data-wow-delay="200ms">Discover More <span></span></a>
+            </div>
+          </div>
+          <div class="col-xl-5 offset-xl-1 col-lg-6">
+            <div class="about-three-thumb">
+              <img class="wow fadeInUp" src="{% static 'assets/img/thumb/6.png' %}" alt="Image Not Found" />
+              <div class="success-rate wow fadeInDown" data-wow-delay="100ms">
+                <div class="circle-progress">
+                  <div class="progressbar">
+                    <h4>Success Rate</h4>
+                    <div class="circle" data-percent="92">
+                      <strong></strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End About -->
+
+
+<style>
+/* === Scoped only to Services Section === */
+#services .visa-cat-style-one {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#services .swiper-slide {
+  display: flex;
+  height: auto;
+}
+
+#services .visa-cat-style-one .info h4 {
+  line-height: 24px;
+  min-height: 48px; /* ensures layout stability for 2 lines */
+  margin-bottom: 8px; /* tighten spacing */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#services .visa-cat-style-one .info .service-desc {
+  flex-grow: 1;
+  margin-bottom: 0;
+  min-height: auto;
+  overflow: hidden;
+}
+
+#services .visa-cat-style-one .info,
+#services .visa-cat-style-one .button {
+  margin-top: auto;
+}
+
+#services .swiper-wrapper {
+  align-items: stretch;
+}
+
+#services .visa-cat-style-one img {
+  display: block;
+}
+</style>
+
+
+  <!--  Start Services Category 
+=============================================  -->
+  <div id="services" class="visa-category-area default-padding text-center bg-cover" style="background-image: url(assets/img/shape/20.png);">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+          <div class="site-heading text-center">
+            <h4 class="sub-title">Our Services</h4>
+            <h2 class="title split-text">We guide you at every step of your study abroad journey</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="visa-category-items wow fadeInUp" data-wow-delay="200ms">
+            <div class="visa-category-carousel swiper">
+              <div class="swiper-wrapper">
+                {% for service in services %}
+                  <div class="swiper-slide">
+                    <div class="visa-cat-style-one">
+                      <div class="thumb">
+                        <img src="{{ service.image.url }}" alt="{{ service.title }}" style="width: 100%; height: 250px; object-fit: cover; object-position: center;" />
+                        <div class="shape">
+                          <img src="{% static 'assets/img/shape/39.png' %}" alt="Shape" />
+                        </div>
+                        <div class="icon">
+                          <img src="{% static 'assets/img/icon/business-visa.png' %}" alt="Icon" />
+                        </div>
+                      </div>
+                      <div class="info">
+                        <h4><a href="{% url 'service_detail' service.slug %}">{{ service.title }}</a></h4>
+                        <p class="service-desc">{{ service.description|truncatechars:155|safe }}</p>
+                      </div>
+                      <div class="button">
+                        <a href="{% url 'service_detail' service.slug %}">
+                          <i class="fas fa-angle-right"></i>
+                          <span>Know More</span>
+                          <div class="shape">
+                            <img src="{% static 'assets/img/shape/40.png' %}" alt="Shape" />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+
+              <!-- Optional navigation buttons -->
+              {% comment %} <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div> {% endcomment %}
+
+              <!-- Optional pagination -->
+              {% comment %} <div class="swiper-pagination"></div> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Services Category -->
+
+  <!--  Start Visa Country 
+=============================================  -->
+  <div class="visa-country-area default-padding bg-dark text-light bg-cover" style="background-image: url({% static 'assets/img/shape/21.png' %});">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+          <div class="site-heading text-center">
+            <h4 class="sub-title">Explore Our Covered</h4>
+            <h2 class="title split-text">Start your journey & pick <br /> your ideal country</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="visa-offer-country-items" id="accordion">
+            {% for country in countriess %}
+              <li>
+                <div class="visa-offer-country-item">
+                  <div class="country">
+                    <div class="icon">
+                      <img src="{{ country.flag.url }}" alt="{{ country.name }}" />
+                    </div>
+                    <div class="content">
+                      <h5>{{ country.name }}</h5>
+                      <span>{{ country.city }}</span>
+                    </div>
+                  </div>
+                  <div class="bottom">
+                    <ul class="list-style-one">
+                      <li>Student Visa & Admission</li>
+                      <li>5 Years Business Visa</li>
+                      <li>Apply Visa Online</li>
+                    </ul>
+                    <a href="{% url 'country_detail' country.slug %}" class="btn-style-one circle mt-30">Discover More <span></span></a>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Visa Country -->
+
+  <!--  Start Team 
+    =============================================  -->
+    <div id="team" class="team-style-one-area default-padding bottom-less bg-gray">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+          <div class="site-heading text-center">
+            <h4 class="sub-title">Our Team</h4>
+            <h2 class="title split-text">Meet Our Experts</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      {% comment %} <div class="row">
+        {% endcomment %}
+
+        <!-- Single Item -->
+        <div class="row">
+          <!-- Django template loop starts here -->
+          {% for member in team_members %}
+            <!-- Single Item -->
+            <div class="col-lg-4 col-md-6 mb-30">
+              <div class="team-style-one-item wow fadeInUp" data-wow-delay="{{ forloop.counter0|add:1 }}00ms">
+                <div class="thumb">
+                  {% if member.image %}
+                    <img src="{{ member.image.url }}" alt="{{ member.name }}" style="height: 500px; object-fit: cover;" />
+                  {% else %}
+                    <img src="{% static 'assets/img/team/placeholder.jpg' %}" alt="{{ member.name }}" style="height: 500px; object-fit: cover;" />
+                  {% endif %}
+                  <img src="{% static 'assets/img/shape/31.png' %}" alt="Image Not Found" />
+                  <div class="social-info">
+                    <div class="social-overlay">
+                      <ul>
+                        {% if member.linkedin %}
+                          <li>
+                            <a href="{{ member.linkedin }}"><i class="fab fa-linkedin-in"></i></a>
+                          </li>
+                        {% endif %}
+                        {% if member.github %}
+                          <li>
+                            <a href="{{ member.github }}"><i class="fab fa-github"></i></a>
+                          </li>
+                        {% endif %}
+                        {% if member.twitter %}
+                          <li>
+                            <a href="{{ member.twitter }}"><i class="fab fa-twitter"></i></a>
+                          </li>
+                        {% endif %}
+                      </ul>
+                      <div class="icon">
+                        <i class="fas fa-plus"></i>
+                      </div>
+                    </div>
+                    <a href="#"><i class="fas fa-comments-alt"></i></a>
+                  </div>
+                </div>
+                <div class="info">
+                  <h4><a href="#">{{ member.name }}</a></h4>
+                  <span>{{ member.profession }}</span>
+                </div>
+              </div>
+            </div>
+            <!-- End Single Item -->
+          {% endfor %}
+          <!-- Django template loop ends here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Team -->
+
+  <!--  Start FAQ 
+=============================================  -->
+  <div class="faq-style-one-area default-padding bg-cover bg-gray" style="background-image: url('{% static 'assets/img/shape/22.png' %}');">
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-xl-6 offset-xl-1 order-lg-last">
+          <div class="faq-style-one-items">
+            <h4 class="sub-title">Frequently Asked Questions</h4>
+            <h2 class="title wow fadeInUp">Quick Answers About Studying Abroad with Edusetin</h2>
+            <div class="accordion wow fadeInUp" data-wow-delay="100ms" id="faqAccordion">
+              <!-- Single Item -->
+              <div class="accordion-item accordion-style-one">
+                <h2 class="accordion-header" id="heading_1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">Which countries can I apply to through Edusetin?</button></h2>
+                <div id="collapse_1" class="accordion-collapse collapse show" aria-labelledby="heading_1" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p>
+                      Edusetin currently offers study opportunities in <strong>Italy, Germany, Singapore, and Kyrgyzstan</strong>. From MBBS programs to bachelor’s and master’s degrees, we guide you in selecting the best-fit country and university based on your career goals.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- End Single Item -->
+
+              <!-- Single Item -->
+              <div class="accordion-item accordion-style-one">
+                <h2 class="accordion-header" id="heading_2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_2" aria-expanded="false" aria-controls="collapse_2">What services does Edusetin provide?</button></h2>
+                <div id="collapse_2" class="accordion-collapse collapse" aria-labelledby="heading_2" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p>
+                      We provide complete <strong>end-to-end support</strong>, including counseling, university selection, admission process, documentation, visa application assistance, and pre-departure guidance. Our goal is to make your study abroad journey smooth and stress-free.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- End Single Item -->
+
+              <!-- Single Item -->
+              <div class="accordion-item accordion-style-one">
+                <h2 class="accordion-header" id="heading_3"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_3" aria-expanded="false" aria-controls="collapse_3">Do I need to know the local language to study abroad?</button></h2>
+                <div id="collapse_3" class="accordion-collapse collapse" aria-labelledby="heading_3" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p>
+                      Many programs, especially in <strong>Italy and Germany</strong>, are taught in English. However, learning the local language is recommended for daily life and part-time job opportunities. Edusetin provides guidance and resources for language preparation as well.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- End Single Item -->
+
+              <!-- Single Item -->
+              <div class="accordion-item accordion-style-one">
+                <h2 class="accordion-header" id="heading_4"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_4" aria-expanded="false" aria-controls="collapse_4">What are the costs involved in studying abroad?</button></h2>
+                <div id="collapse_4" class="accordion-collapse collapse" aria-labelledby="heading_4" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p>
+                      Costs vary depending on the country and program. For example, MBBS in Kyrgyzstan is affordable compared to Western Europe, while Italy and Germany often provide <strong>low tuition fees and scholarships</strong>. Our team will give you a detailed financial breakdown during counseling.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- End Single Item -->
+
+              <!-- Single Item -->
+              <div class="accordion-item accordion-style-one">
+                <h2 class="accordion-header" id="heading_5"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_5" aria-expanded="false" aria-controls="collapse_5">How can I get started with Edusetin?</button></h2>
+                <div id="collapse_5" class="accordion-collapse collapse" aria-labelledby="heading_5" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <p>
+                      Simply reach out to us through our <strong>website, Instagram page, or YouTube channel</strong>. Book a counseling session, share your academic background, and we’ll help you choose the right program and start your application process step by step.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- End Single Item -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-5">
+          <div class="faq-style-one-thumb">
+            <img src="{% static 'assets/img/illustration/5.png' %}" alt="Study Abroad Support Illustration" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End FAQ -->
+
+
+
+
+  <!--  Start Universities 
+    =============================================  -->
+  <div id="universities" class="course-style-one-area default-padding-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+          <div class="site-heading text-center">
+            <h4 class="sub-title">Top Partner Universities</h4>
+            <h2 class="title split-text">Explore Our Global University Network</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="course-style-one-items" >
+      <div class="container">
+        <!-- Navigation -->
+        <div class="course-style-one-nav">
+          <div class="course-carousel-prev">
+            <i class="fas fa-long-arrow-left"></i>
+          </div>
+          <div class="course-carousel-next">
+            <i class="fas fa-long-arrow-right"></i>
+          </div>
+        </div>
+        <!-- Slider main container -->
+        <div class="course-style-one-carousel swiper">
+          <div class="swiper-wrapper">
+            {% for university in universities %}
+              <div class="swiper-slide" >
+                <div class="course-style-one-item" >
+                  <img src="{{ university.image.url }}" alt="{{ university.name }}" class="university-img" />
+
+                  <div class="overlay-title">
+                    <h4><a href="{% url 'uni_detail' university.slug %}">{{ university.name }}</a></h4>
+                    <div class="icon">
+                      <img src="{% static 'assets/img/icon/5.png' %}" alt="Icon" />
+                    </div>
+                  </div>
+
+                  <div class="overlay">
+                    <div class="icon">
+                      <img src="{% static 'assets/img/icon/5.png' %}" alt="Icon" />
+                    </div>
+                    <h4><a href="{% url 'uni_detail' university.slug %}">{{ university.name }}</a></h4>
+                    <p>{{ university.description|truncatewords:14|safe }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Universities -->
+
+  
+  {% comment %} my own adjustment fix >>>>>>>>>>>> {% endcomment %}
+
+  <style>
+    .course-style-one-items{
+       height: 600px; 
+       margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+  .university-img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+  @media (max-width: 575px) {
+
+  .university-img {
+    width: 100%;
+    height: 50px !important;
+    object-fit: cover;
+  }
+  .course-style-one-items{
+       height: 600px; 
+       margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+}
+
+@media (max-width: 991px) {
+  .university-img {
+    width: 100%;
+    height: 300px !important; 
+  }
+   .course-style-one-items{
+       height: 700px; 
+       margin-bottom: 0;
+      padding-bottom: 0;
+    }
+}
+
+  </style>  
+
+  
+  
+  <!--  Start Testimonial 
+============================================= -->
+
+<div class="testimonial-style-three-area default-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <!-- Section Header - FIRST ON MOBILE, HIDDEN ON DESKTOP -->
+            <div class="col-12 d-lg-none mb-4">
+                <div class="section-header text-center">
+                    <h4 class="sub-title fw-bold">Student Success Stories</h4>
+                    <h2 class="title fw-bold">What Our Students Say About Edusetin</h2>
+                    <p class="section-description"> Don't just take our word for it – hear from students who’ve achieved their dreams 
+            with the help of Edusetin’s expert guidance and support.</p>
+                </div>
+            </div>
+
+            <!-- Left Image Section - SECOND ON MOBILE, FIRST ON DESKTOP -->
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <div class="testimonial-image-section text-center">
+                    <div class="main-testimonial-image-container">
+                        <div class="image-wrapper">
+                            {% if testimonials and testimonials.0.image %}
+                                <img src="{{ testimonials.0.image.url }}" 
+                                     alt="{{ testimonials.0.name }}" 
+                                     class="testimonial-portrait active-testimonial-image">
+                            {% else %}
+                                <img src="{% static 'assets/img/testimonial-default.jpg' %}" 
+                                     alt="Our Happy Students" 
+                                     class="testimonial-portrait active-testimonial-image">
+                            {% endif %}
+                        </div>
+                        <!-- Decorative Elements -->
+                        <div class="floating-shape shape-1">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="floating-shape shape-2">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="floating-shape shape-3">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                    </div>
+                    <div class="image-caption mt-4">
+                        <h5 class="fw-bold">Real Students, Real Stories</h5>
+                        <p class="text-muted">Hear from our successful Edusetin applicants</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Testimonial Slider - THIRD ON MOBILE, SECOND ON DESKTOP -->
+            <div class="col-lg-7">
+                <!-- Section Header - FOR DESKTOP ONLY -->
+                <div class="section-header mb-5 d-none d-lg-block">
+                    <h4 class="sub-title fw-bold">Student Success Stories</h4>
+                    <h2 class="title fw-bold">What Our Students Say About Edusetin</h2>
+                    <p class="section-description"> Don't just take our word for it – hear from students who’ve achieved their dreams 
+            with the help of Edusetin’s expert guidance and support.</p>
+                </div>
+
+                <!-- Testimonial Slider -->
+                <div class="testimonial-slider-container position-relative">
+                    <div class="swiper testimonialSwiper">
+                        <div class="swiper-wrapper">
+                            {% for testimonial in testimonials %}
+                            <div class="swiper-slide" 
+                                 data-image="{% if testimonial.image %}{{ testimonial.image.url }}{% else %}{% static 'assets/img/team/default.jpg' %}{% endif %}"
+                                 data-name="{{ testimonial.name }}">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-content">
+                                        <!-- Rating Stars -->
+                                        <div class="rating-stars mb-3">
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= testimonial.rating %}
+                                                    <i class="fas fa-star text-warning"></i>
+                                                {% else %}
+                                                    <i class="far fa-star text-warning"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <span class="rating-text ms-2">Rated {{ testimonial.rating }}/5</span>
+                                        </div>
+                                        
+                                        <!-- Testimonial Text - FIXED SPACING -->
+                                        <div class="testimonial-text">
+                                            <p>"{{ testimonial.review|safe }}"</p>
+                                        </div>
+                                        
+                                        <!-- Student Info -->
+                                        <div class="student-info d-flex align-items-center">
+                                            <div class="student-avatar me-3">
+                                                {% if testimonial.image %}
+                                                    <img src="{{ testimonial.image.url }}" 
+                                                         alt="{{ testimonial.name }}" 
+                                                         class="student-thumbnail">
+                                                {% else %}
+                                                    <div class="avatar-placeholder">
+                                                        <i class="fas fa-user-graduate"></i>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="student-details">
+                                                <h6 class="student-name mb-1 fw-bold">{{ testimonial.name }}</h6>
+                                                <p class="student-course mb-0 text-muted small">
+                                                    {% if testimonial.course %}
+                                                        {{ testimonial.course }}
+                                                    {% else %}
+                                                        Edusetin Student
+                                                    {% endif %}
+                                                </p>
+                                                {% if testimonial.country %}
+                                                    <p class="student-country mb-0 text-muted small">
+                                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                                        {{ testimonial.country }}
+                                                    </p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="swiper-slide">
+                                <div class="testimonial-card text-center">
+                                    <div class="testimonial-content">
+                                        <div class="no-testimonials py-5">
+                                            <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                                            <h5 class="text-muted">No Testimonials Yet</h5>
+                                            <p class="text-muted">Be the first to share your study abroad experience!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Pagination -->
+                        {% comment %} <div class="swiper-pagination mt-4"></div> {% endcomment %}
+                    </div>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="trust-indicators mt-5 pt-3 border-top">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="trust-item">
+                                <h4 class="fw-bold mb-1">92%</h4>
+                                <p class="small mb-0">Success Rate</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="trust-item">
+                                <h4 class="fw-bold mb-1">500+</h4>
+                                <p class="small mb-0">Students Helped</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="trust-item">
+                                <h4 class="fw-bold mb-1">4.8/5</h4>
+                                <p class="small mb-0">Average Rating</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+.testimonial-style-three-area {
+    background-color: #f9fafb!important;
+}
+
+/* Also target any child containers that might have white background */
+.testimonial-style-three-area .container,
+.testimonial-style-three-area .row {
+    background-color: transparent !important;
+}
+
+/* IMPROVED IMAGE CONTAINER */
+.main-testimonial-image-container {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border: 5px solid white;
+}
+
+/* PERFECT PORTRAIT CROPPING */
+.testimonial-portrait {
+    width: 320px;
+    height: 400px;
+    object-fit: cover;
+    object-position: top center; /* Ensures head is always visible */
+    transition: all 0.5s ease-in-out;
+    display: block;
+}
+
+.student-thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+}
+
+/* Floating decorative elements */
+.floating-shape {
+    position: absolute;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-shape.shape-1 {
+    width: 60px;
+    height: 60px;
+    top: -20px;
+    left: -20px;
+    font-size: 1.5rem;
+    animation-delay: 0s;
+}
+
+.floating-shape.shape-2 {
+    width: 45px;
+    height: 45px;
+    bottom: 30px;
+    right: -15px;
+    font-size: 1.2rem;
+    animation-delay: 1s;
+}
+
+.floating-shape.shape-3 {
+    width: 35px;
+    height: 35px;
+    top: 50%;
+    left: -15px;
+    font-size: 1rem;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Avatar placeholder for missing images */
+.avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    border: 3px solid #007bff;
+}
+
+
+.testimonial-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: auto;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.testimonial-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+}
+
+/* FIXED SPACING - REMOVED UNNECESSARY MARGINS */
+.testimonial-text {
+    flex: 1;
+    margin-bottom: 0; /* Remove bottom margin */
+}
+
+.testimonial-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 0; /* Remove bottom margin from paragraph */
+}
+
+.rating-stars {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.student-info {
+    margin-top: 20px; /* Consistent spacing above student info */
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0; /* Visual separation */
+}
+
+.rating-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.trust-item {
+    padding: 10px;
+}
+
+.trust-item h4 {
+    font-weight: 700;
+}
+
+.section-description {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+/* Smart Image Transition */
+.image-transition-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.image-transition-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* MOBILE RESPONSIVE DESIGN - FIXED ORDER */
+@media (max-width: 768px) {
+    /* Mobile layout: heading first, then image, then cards */
+    .row.align-items-center {
+        flex-direction: column;
+    }
+    
+    /* Ensure proper order on mobile */
+    .col-12.d-lg-none {
+        order: 1; /* Heading first */
+    }
+    
+    .col-lg-5.mb-4.mb-lg-0 {
+        order: 2; /* Image second */
+        margin-top: 0;
+        margin-bottom: 2rem !important;
+    }
+    
+    .col-lg-7 {
+        order: 3; /* Cards third */
+    }
+    
+    .testimonial-card {
+        padding: 20px;
+        min-height: 250px;
+    }
+    
+    .testimonial-text p {
+        font-size: 1rem;
+    }
+    
+    .testimonial-portrait {
+        width: 280px;
+        height: 350px;
+        margin: 0 auto;
+    }
+    
+    .floating-shape {
+        display: none; /* Hide on mobile for better performance */
+    }
+    
+    .main-testimonial-image-container {
+        margin-bottom: 1rem;
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .section-header .title {
+        font-size: 1.8rem;
+    }
+    
+    .trust-indicators {
+        margin-top: 2rem;
+    }
+    
+    .student-info {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .testimonial-portrait {
+        width: 250px;
+        height: 300px;
+    }
+    
+    .image-wrapper {
+        border-width: 3px;
+    }
+    
+    .section-header .title {
+        font-size: 1.6rem;
+    }
+    
+    .trust-item h4 {
+        font-size: 1.2rem;
+    }
+    
+    .testimonial-card {
+        min-height: 220px;
+    }
+}
+
+/* Animation for smooth transitions */
+@keyframes smoothFade {
+    from { 
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.smooth-fade {
+    animation: smoothFade 0.6s ease-out;
+}
+
+/* Ensure consistent card heights in slider */
+.swiper-slide {
+    height: auto;
+}
+
+.testimonialSwiper .swiper-wrapper {
+    align-items: stretch;
+}
+
+.testimonialSwiper .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+.testimonialSwiper .testimonial-card {
+    width: 100%;
+}
+</style>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mainImage = document.querySelector('.active-testimonial-image');
+    const imageWrapper = document.querySelector('.image-wrapper');
+    
+    const testimonialSwiper = new Swiper('.testimonialSwiper', {
+        loop: true,
+        spaceBetween: 30,
+        autoplay: {
+            delay: 7000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
+        effect: 'slide',
+        speed: 800,
+        on: {
+            slideChangeTransitionStart: function () {
+                const activeSlide = this.slides[this.activeIndex];
+                const newImage = activeSlide.getAttribute('data-image');
+                const studentName = activeSlide.getAttribute('data-name');
+                
+                if (newImage && mainImage) {
+                    // Add smooth transition effect
+                    imageWrapper.classList.add('image-transition-enter');
+                    
+                    setTimeout(() => {
+                        // Preload image to avoid flickering
+                        const img = new Image();
+                        img.src = newImage;
+                        img.onload = function() {
+                            mainImage.src = newImage;
+                            mainImage.alt = studentName + ' - Edusetin Student';
+                            imageWrapper.classList.remove('image-transition-enter');
+                            imageWrapper.classList.add('image-transition-enter-active');
+                            
+                            setTimeout(() => {
+                                imageWrapper.classList.remove('image-transition-enter-active');
+                            }, 500);
+                        };
+                    }, 300);
+                }
+            },
+        },
+    });
+
+    // Pause autoplay on hover for better UX
+    const swiperContainer = document.querySelector('.testimonialSwiper');
+    if (swiperContainer) {
+        swiperContainer.addEventListener('mouseenter', function() {
+            testimonialSwiper.autoplay.stop();
+        });
+        
+        swiperContainer.addEventListener('mouseleave', function() {
+            testimonialSwiper.autoplay.start();
+        });
+    }
+
+    // Add loading state for images
+    if (mainImage) {
+        mainImage.addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
+        
+        mainImage.addEventListener('error', function() {
+            // If image fails to load, use default
+            this.src = "{% static 'assets/img/testimonial-default.jpg' %}";
+        });
+    }
+});
+</script>
+
+
+  <!-- End Testimonial -->
+
+  <!--  Start Call to action 
+    =============================================  -->
+  <div class="call-to-action-area">
+    <div class="container">
+      <div class="call-to-action-style-one bg-dark text-light">
+        <div class="shape">
+          <img src="{% static 'assets/img/shape/24.png' %}" alt="Image Not Found" />
+        </div>
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="thumb bg-theme-secondary">
+              <img class="wow fadeInUp" src="{% static 'assets/img/illustration/6.png' %}" alt="Image Not Found" />
+              <div class="shape">
+                <img src="{% static 'assets/img/illustration/7.png' %}" alt="Image Not Found" />
+                <img src="{% static 'assets/img/shape/23.png' %}" alt="Image Not Found" />
+                <img src="{% static 'assets/img/shape/25.png' %}" alt="Image Not Found" />
+                <img src="{% static 'assets/img/shape/26.png' %}" alt="Image Not Found" />
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="call-action-info">
+              <h4 class="sub-title">Get free online visa</h4>
+              <h2 class="title split-text">Reliable visa & immigration experts</h2>
+              <a href="https://edusetinglobalcareers.com/" target="_blank" rel="noopener noreferrer" class="btn-style-one circle mt-10 wow fadeInUp" data-wow-delay="100ms">Apply for visa <span></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Call to action -->
+   
+
+
+  
+
+  <!--  Start Blog 
+=============================================  -->
+{% comment %} <div id="blog" class="home-blog-area default-padding bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="site-heading text-center">
+          <h4 class="sub-title">Study Abroad Insights</h4>
+          <h2 class="title split-text">
+            Latest articles & guides <br /> for international students
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      {% for blog in blogs %}
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="home-blog-style-one wow fadeInUp" style="height: 600px; display: flex; flex-direction: column;">
+          <!-- Blog Image -->
+          <div class="thumb">
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}" style="width:100%; height:350px; object-fit:cover;" />
+          </div>
+
+          <!-- Blog Info -->
+          <div class="info" style="flex: 1; padding: 20px;">
+            <div class="inner" style="display: flex; gap: 15px; align-items: flex-start;">
+
+              <!-- Date Box -->
+              <div class="date">
+                      <strong>{{ blog.created_at|date:'d' }}</strong>
+                      {{ blog.created_at|date:'M' }}
+                    </div>
+
+              <!-- Fixed-Width Content -->
+              <div class="content" style="flex:1; min-width:0; max-width:calc(100% - 80px); display:flex; flex-direction:column;">
+                <ul class="blog-meta" style="margin-bottom:8px; padding:0; list-style:none; font-size:14px; color:#777;">
+                  <li>
+                    <a href="#" style="color:#777; text-decoration:none;">
+                      <i class="far fa-user-circle"></i> Edusetin Editorials
+                    </a>
+                  </li>
+                </ul>
+
+                <h3 style="min-height: 70px; margin-bottom:10px; word-break:break-word;">
+                  <a href="{% url 'blog_detail' blog.slug %}" style="color:#232323; text-decoration:none;">
+                    {{ blog.title }}
+                  </a>
+                </h3>
+
+                <a href="{% url 'blog_detail' blog.slug %}" class="btn-regular" style="margin-top:auto; align-self:flex-start;">
+                  Read More
+                  <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 17L17 1H7.8" stroke="#232323" stroke-width="2"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No blogs available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+ {% endcomment %}
+ 
+ <!--  Start Blog 
+=============================================  -->
+<div id="blog" class="home-blog-area default-padding bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="site-heading text-center">
+          <h4 class="sub-title">Study Abroad Insights</h4>
+          <h2 class="title split-text">
+            Latest articles & guides <br /> for international students
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      {% for blog in blogs %}
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="home-blog-style-one wow fadeInUp">
+          <!-- Blog Image -->
+          <div class="thumb">
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}" />
+            <div class="date">
+              <strong>{{ blog.created_at|date:'d' }}</strong>
+              <span>{{ blog.created_at|date:'M' }}</span>
+            </div>
+          </div>
+
+          <!-- Blog Info -->
+          <div class="info">
+            <ul class="blog-meta">
+              <li>
+                <a href="#">
+                  <i class="far fa-user-circle"></i> Edusetin Editorials
+                </a>
+              </li>
+            </ul>
+
+            <h3>
+              <a href="{% url 'blog_detail' blog.slug %}">
+                {{ blog.title }}
+              </a>
+            </h3>
+
+            <a href="{% url 'blog_detail' blog.slug %}" class="btn-regular">
+              READ MORE
+              <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 17L17 1H7.8" stroke="currentColor" stroke-width="2"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No blogs available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Blog card base - rounded corners */
+  .home-blog-style-one {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .home-blog-style-one:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+  }
+
+  /* Image container */
+  .home-blog-style-one .thumb {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .home-blog-style-one .thumb img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Date box — positioned with space from top-left corner */
+  .home-blog-style-one .thumb .date {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background: #0056d2;
+    color: #fff;
+    padding: 18px 24px;
+    line-height: 1;
+    z-index: 2;
+    text-align: center;
+    min-width: 90px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,86,210,0.3);
+  }
+
+  .home-blog-style-one .thumb .date strong {
+    display: block;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .home-blog-style-one .thumb .date span {
+    display: block;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* Blog info under image - proper spacing */
+  .home-blog-style-one .info {
+    padding: 25px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .home-blog-style-one .blog-meta {
+    margin: 0 0 12px 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .home-blog-style-one .blog-meta li {
+    display: inline-block;
+  }
+
+  .home-blog-style-one .blog-meta a {
+    color: #777;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .home-blog-style-one .blog-meta a:hover {
+    color: #0056d2;
+  }
+
+  .home-blog-style-one .blog-meta i {
+    margin-right: 6px;
+  }
+
+  .home-blog-style-one .info h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #232323;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+    text-transform: lowercase;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .home-blog-style-one .info h3 a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .home-blog-style-one .info h3 a:hover {
+    color: #0056d2;
+  }
+
+  .home-blog-style-one .btn-regular {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #001f4d;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    align-self: flex-start;
+    transition: gap 0.3s ease, color 0.3s ease;
+    flex-shrink: 0;
+    width: auto;
+    margin-top: 0;
+  }
+
+  .home-blog-style-one .btn-regular:hover {
+    gap: 12px;
+    color: #003d99;
+  }
+
+  .home-blog-style-one .btn-regular svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .home-blog-style-one .btn-regular:hover svg {
+    transform: translate(3px, -3px);
+  }
+
+  /* Large Desktop (1200px and up) */
+  @media (min-width: 1200px) {
+    .home-blog-style-one .thumb img {
+      height: 380px;
+    }
+
+    .home-blog-style-one .thumb .date {
+      left: 25px;
+      top: 25px;
+      padding: 20px 26px;
+      min-width: 95px;
+    }
+
+    .home-blog-style-one .thumb .date strong {
+      font-size: 38px;
+    }
+
+    .home-blog-style-one .info {
+      padding: 30px;
+    }
+
+    .home-blog-style-one .info h3 {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+  }
+
+  /* Desktop/Laptop (992px to 1199px) */
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .home-blog-style-one .thumb img {
+      height: 320px;
+    }
+
+    .home-blog-style-one .thumb .date {
+      left: 20px;
+      top: 20px;
+      padding: 18px 24px;
+      min-width: 90px;
+    }
+
+    .home-blog-style-one .thumb .date strong {
+      font-size: 36px;
+    }
+
+    .home-blog-style-one .info {
+      padding: 25px;
+    }
+
+    .home-blog-style-one .info h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+  }
+
+  /* Tablet (768px to 991px) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .home-blog-style-one .thumb img {
+      height: 300px;
+    }
+
+    .home-blog-style-one .thumb .date {
+      left: 18px;
+      top: 18px;
+      padding: 16px 22px;
+      min-width: 85px;
+    }
+
+    .home-blog-style-one .thumb .date strong {
+      font-size: 34px;
+    }
+
+    .home-blog-style-one .info {
+      padding: 22px;
+    }
+
+    .home-blog-style-one .info h3 {
+      font-size: 21px;
+      margin-bottom: 14px;
+    }
+
+    .home-blog-style-one .btn-regular {
+      font-size: 13px;
+    }
+  }
+
+  /* Mobile Landscape (576px to 767px) */
+  @media (min-width: 576px) and (max-width: 767px) {
+    .home-blog-style-one {
+      border-radius: 10px;
+    }
+
+    .home-blog-style-one .thumb img {
+      height: 280px;
+    }
+
+    .home-blog-style-one .thumb .date {
+      left: 15px;
+      top: 15px;
+      padding: 14px 20px;
+      min-width: 80px;
+      border-radius: 6px;
+    }
+
+    .home-blog-style-one .thumb .date strong {
+      font-size: 32px;
+    }
+
+    .home-blog-style-one .thumb .date span {
+      font-size: 14px;
+    }
+
+    .home-blog-style-one .info {
+      padding: 20px;
+    }
+
+    .home-blog-style-one .info h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .home-blog-style-one .btn-regular {
+      font-size: 13px;
+    }
+  }
+
+  /* Mobile Portrait (up to 575px) */
+  @media (max-width: 575px) {
+    .home-blog-style-one {
+      border-radius: 10px;
+    }
+
+    .home-blog-style-one .thumb img {
+      height: 240px;
+    }
+
+    .home-blog-style-one .thumb .date {
+      left: 15px;
+      top: 15px;
+      padding: 12px 18px;
+      min-width: 75px;
+      border-radius: 6px;
+    }
+
+    .home-blog-style-one .thumb .date strong {
+      font-size: 28px;
+    }
+
+    .home-blog-style-one .thumb .date span {
+      font-size: 13px;
+    }
+
+    .home-blog-style-one .info {
+      padding: 18px;
+    }
+
+    .home-blog-style-one .info h3 {
+      font-size: 19px;
+      margin-bottom: 12px;
+      -webkit-line-clamp: 3;
+    }
+
+    .home-blog-style-one .blog-meta {
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .home-blog-style-one .btn-regular {
+      font-size: 12px;
+    }
+  }
+
+  /* Extra Small Mobile (up to 400px) */
+  @media (max-width: 400px) {
+    .home-blog-style-one {
+      border-radius: 8px;
+    }
+
+    .home-blog-style-one .thumb img {
+      height: 220px;
+    }
+
+    .home-blog-style-one .thumb .date {
+      left: 12px;
+      top: 12px;
+      padding: 10px 16px;
+      min-width: 70px;
+      border-radius: 6px;
+    }
+
+    .home-blog-style-one .thumb .date strong {
+      font-size: 26px;
+    }
+
+    .home-blog-style-one .thumb .date span {
+      font-size: 12px;
+    }
+
+    .home-blog-style-one .info {
+      padding: 16px;
+    }
+
+    .home-blog-style-one .info h3 {
+      font-size: 18px;
+    }
+  }
+</style>
+ 
+  <!-- End Blog -->
+{% endblock %}

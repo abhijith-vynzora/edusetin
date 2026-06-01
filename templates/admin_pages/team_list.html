@@ -1,0 +1,568 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block title %}Team Members List | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard__form__wraper">
+    
+
+     <div class="create__course__title mb-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <h4 class="mb-0">Team Members List</h4>
+        
+        <div class="d-flex align-items-center gap-2 ms-auto">
+            <div class="search-box">
+                <input type="text" id="blogSearchInput" class="form-control form-control-sm" placeholder="Search...">
+            </div>
+           
+        </div>
+         <a href="{% url 'team_add' %}" class="btn btn-success btn-sm">Add New Team</a> 
+    </div>
+
+
+    <div class="custom-table-container">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Profile Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Profession</th>
+                    <th scope="col">Social Links</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in team_members %}
+                <tr>
+                    <td>
+                        {% if member.image %}
+                            <img src="{{ member.image.url }}" alt="{{ member.name }}" class="img-fluid rounded team-member-thumb">
+                        {% else %}
+                            <div class="no-image-thumb">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        {% endif %}
+                    </td>
+                    <td>{{ member.name }}</td>
+                    <td>{{ member.profession }}</td>
+                    <td>
+                        <div class="social-links">
+                            {% if member.linkedin %}
+                            <a href="{{ member.linkedin }}" target="_blank" class="social-link linkedin me-1">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            {% endif %}
+                            {% if member.github %}
+                            <a href="{{ member.github }}" target="_blank" class="social-link github me-1">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            {% endif %}
+                            {% if member.twitter %}
+                            <a href="{{ member.twitter }}" target="_blank" class="social-link twitter me-1">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            <!-- Update Modal Trigger -->
+                            <button type="button" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#updateTeamMemberModal{{ member.id }}">
+                                Update
+                            </button>
+                            <!-- Delete Modal Trigger -->
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTeamMemberModal{{ member.id }}">
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Update Team Member Modal -->
+<div class="modal fade" id="updateTeamMemberModal{{ member.id }}" tabindex="-1" aria-labelledby="updateTeamMemberModalLabel{{ member.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form method="post" enctype="multipart/form-data" action="{% url 'edit_team_member' member.id %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateTeamMemberModalLabel{{ member.id }}">Update {{ member.name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Name -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Name <span class="text-danger">*</span></label>
+                            <input type="text" name="name" class="form-control" value="{{ member.name }}" required>
+                        </div>
+                        <!-- Profession -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Profession <span class="text-danger">*</span></label>
+                            <input type="text" name="profession" class="form-control" value="{{ member.profession }}" required>
+                        </div>
+
+                        <!-- Profile Image -->
+                        <div class="col-12 mb-3">
+                            <label class="form-label">Profile Image</label>
+                            <input type="file" name="image" class="form-control" accept="image/*" onchange="previewMemberImage(event, {{ member.id }})">
+                            <div class="mt-2">
+                                <img id="memberImagePreview{{ member.id }}" src="{% if member.image %}{{ member.image.url }}{% else %}https://via.placeholder.com/150{% endif %}" alt="Profile Preview" class="img-fluid rounded" width="120">
+                            </div>
+                            {% if member.image %}
+                                
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" name="image-clear" id="image-clear{{ member.id }}">
+                                    <label class="form-check-label" for="image-clear{{ member.id }}">Remove current image</label>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">LinkedIn URL</label>
+                            <input type="url" name="linkedin" class="form-control" value="{{ member.linkedin|default:'' }}" placeholder="https://linkedin.com/in/username">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">GitHub URL</label>
+                            <input type="url" name="github" class="form-control" value="{{ member.github|default:'' }}" placeholder="https://github.com/username">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label">Twitter URL</label>
+                            <input type="url" name="twitter" class="form-control" value="{{ member.twitter|default:'' }}" placeholder="https://twitter.com/username">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+                <!-- Delete Team Member Modal -->
+                <div class="modal fade" id="deleteTeamMemberModal{{ member.id }}" tabindex="-1" aria-labelledby="deleteTeamMemberModalLabel{{ member.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="post" action="{% url 'delete_team_member' member.id %}">
+                                {% csrf_token %}
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteTeamMemberModalLabel{{ member.id }}">Delete Team Member</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete <strong>{{ member.name }}</strong>?
+                                    <div class="mt-3 text-center">
+                                        {% if member.image %}
+                                        <img src="{{ member.image.url }}" alt="{{ member.name }}" class="img-fluid rounded team-member-modal-thumb">
+                                        {% endif %}
+                                        <p class="mt-2 mb-0">{{ member.profession }}</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-4">
+                        <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No team members added yet.</p>
+                       
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    {% comment %} {% if team_members.has_other_pages %}
+    <nav aria-label="Team members pagination">
+        <ul class="pagination justify-content-center mt-4">
+            {% if team_members.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ team_members.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&laquo;&laquo;</span>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">&laquo;</span>
+            </li>
+            {% endif %}
+            
+            {% for i in team_members.paginator.page_range %}
+                {% if team_members.number == i %}
+                <li class="page-item active">
+                    <span class="page-link">{{ i }}</span>
+                </li>
+                {% elif i > team_members.number|add:'-3' and i < team_members.number|add:'3' %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if team_members.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ team_members.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ team_members.paginator.num_pages }}" aria-label="Last">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&raquo;</span>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">&raquo;&raquo;</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %} {% endcomment %}
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("blogSearchInput");
+    const tableBody = document.querySelector(".custom-table-container tbody");
+
+    if (!searchInput || !tableBody) return;
+
+    const rows = Array.from(tableBody.querySelectorAll("tr")).filter(
+        row => !row.classList.contains("no-result-row")
+    );
+
+    // Store original text to restore later
+    rows.forEach(row => {
+        row.querySelectorAll("td:nth-child(2), td:nth-child(3)").forEach(cell => {
+            cell.dataset.originalText = cell.textContent;
+        });
+    });
+
+    function debounce(fn, delay) {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => fn.apply(this, args), delay);
+        };
+    }
+
+    function highlightText(text, search) {
+        if (!search) return text;
+        const regex = new RegExp(`(${search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, "gi");
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    function performSearch() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            const nameCell = row.querySelector("td:nth-child(2)");
+            const professionCell = row.querySelector("td:nth-child(3)");
+
+            const nameOriginal = nameCell.dataset.originalText;
+            const professionOriginal = professionCell.dataset.originalText;
+
+            const name = nameOriginal.toLowerCase();
+            const profession = professionOriginal.toLowerCase();
+
+            if (searchText === "" || name.includes(searchText) || profession.includes(searchText)) {
+                row.style.display = "";
+                visibleCount++;
+
+                // Highlight matching text
+                nameCell.innerHTML = highlightText(nameOriginal, searchText);
+                professionCell.innerHTML = highlightText(professionOriginal, searchText);
+            } else {
+                row.style.display = "none";
+            }
+        });
+
+        // Handle "No results found"
+        let noResultRow = document.getElementById("noResultRow");
+        if (visibleCount === 0 && searchText !== "") {
+            if (!noResultRow) {
+                noResultRow = document.createElement("tr");
+                noResultRow.id = "noResultRow";
+                noResultRow.classList.add("no-result-row");
+                tableBody.appendChild(noResultRow);
+            }
+            const colCount = tableBody.rows[0]?.cells.length || 5;
+            noResultRow.innerHTML = `
+                <td colspan="${colCount}" class="text-center py-4 text-muted">
+                    <i class="fas fa-users fa-2x mb-2"></i><br>
+                    No results found for "<strong>${searchText}</strong>"
+                </td>`;
+        } else if (noResultRow) {
+            noResultRow.style.display = "none";
+        }
+
+        // Remove highlight if search is empty
+        if (searchText === "") {
+            rows.forEach(row => {
+                const nameCell = row.querySelector("td:nth-child(2)");
+                const professionCell = row.querySelector("td:nth-child(3)");
+                nameCell.innerHTML = nameCell.dataset.originalText;
+                professionCell.innerHTML = professionCell.dataset.originalText;
+            });
+        }
+    }
+
+    searchInput.addEventListener("input", debounce(performSearch, 150));
+});
+</script>
+
+
+<script>
+// Image preview for team member
+function previewMemberImage(event, id) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        document.getElementById('memberImagePreview' + id).src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+
+
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.team-member-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.team-member-modal-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.no-image-thumb {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+}
+
+.social-links {
+    display: flex;
+    gap: 5px;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.social-link:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.social-link.linkedin {
+    background-color: #0A66C2;
+}
+
+.social-link.github {
+    background-color: #333;
+}
+
+.social-link.twitter {
+    background-color: #1DA1F2;
+}
+
+
+
+@media (max-width: 576px) {
+    
+    .social-links {
+        flex-direction: column;
+        gap: 3px;
+    }
+    
+    .social-link {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+}
+</style>
+
+<style>
+/* Override content-grid styles for this page */
+.content-grid {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+    overflow: visible !important;
+}
+
+/* Custom table container for horizontal scrolling */
+.custom-table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background: white;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+/* Remove vertical scrollbar */
+.custom-table-container {
+    overflow-y: hidden;
+}
+
+/* Make sure table has minimum width */
+.custom-table-container table {
+    min-width: 800px;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+/* Fix description overflow */
+.description-cell {
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Visual indicator for horizontal scrolling on mobile */
+@media (max-width: 768px) {
+    .custom-table-container:after {
+        content: '← Scroll →';
+        position: sticky;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%);
+        color: #6c757d;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: bold;
+        pointer-events: none;
+        z-index: 5;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { opacity: 0.6; }
+    }
+}
+
+/* Table styling adjustments */
+.custom-table-container .table th,
+.custom-table-container .table td {
+    vertical-align: middle;
+    padding: 0.75rem;
+}
+
+/* Make sure the table header stays visible during horizontal scroll */
+.custom-table-container thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+    box-shadow: 0 1px 0 #dee2e6;
+}
+
+/* Responsive button adjustments */
+@media (max-width: 768px) {
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 576px) {
+    .create__course__title h4 {
+        font-size: 1.25rem;
+    }
+    
+    .custom-table-container .table th, 
+    .custom-table-container .table td {
+        padding: 0.5rem;
+    }
+    
+    /* Make images smaller on very small screens */
+    .custom-table-container .table img {
+        max-width: 40px;
+    }
+    
+    /* Adjust description cell for mobile */
+    .description-cell {
+        max-width: 150px;
+    }
+}
+
+/* Scrollbar styling for better visibility */
+.custom-table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.custom-table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.custom-table-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.custom-table-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+</style>
+{% endblock %}

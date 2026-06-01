@@ -1,0 +1,2857 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Edusetin Study Abroad (EDUSETIN LLP), located in Areakode, Malappuram, Kerala, offers expert guidance for studying in Italy, Germany, Singapore & Kyrgyzstan. Services include MBBS, bachelor’s & master’s admissions, visa assistance, scholarships & test prep.
+" />
+
+    <!-- ========== Page Title ========== -->
+    <title>Edusetin Study Abroad – Trusted Overseas Education Consultants in Kerala</title>
+
+    <!-- ========== Favicon Icon ========== -->
+    <link rel="shortcut icon" href="{% static 'assets/img/favicon.ico' %}" type="image/x-icon" />
+
+    <!-- Swiper CSS -->
+
+
+
+    <!-- ========== Start Stylesheet ========== -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/visaco-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/magnific-popup.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/swiper-bundle.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/animate.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/validnavs.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/helper.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/unit-test.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'style.css' %}" rel="stylesheet" />
+
+
+      <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+
+    {% block extra_css %}
+    {% endblock %}
+  </head>
+
+  <body>
+
+    <style>
+      /* Hide default cursor */
+      body {
+        cursor: none;
+      }
+      
+      /* Dot cursor */
+      .cursor-dot,
+      .cursor-circle {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+      }
+      
+      /* Small dot */
+      .cursor-dot {
+        width: 13px;
+        height: 13px;
+        background-color: #4faaff; /* Your brand color */
+        border-radius: 70%;
+      }
+      
+      /* Circular outline */
+      .cursor-circle {
+        width: 40px;
+        height: 40px;
+        border: 2px solid #4faaff; /* Your brand color */
+        border-radius: 50%;
+        opacity: 0.6;
+        transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+      }
+    </style>
+    <script>
+      // Create cursor elements
+      const cursorDot = document.createElement('div')
+      const cursorCircle = document.createElement('div')
+      
+      cursorDot.classList.add('cursor-dot')
+      cursorCircle.classList.add('cursor-circle')
+      
+      document.body.appendChild(cursorDot)
+      document.body.appendChild(cursorCircle)
+      
+      let mouseX = 0,
+        mouseY = 0
+      let circleX = 0,
+        circleY = 0
+      
+      // Update mouse position on move
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX
+        mouseY = e.clientY
+      
+        cursorDot.style.top = `${mouseY}px`
+        cursorDot.style.left = `${mouseX}px`
+      })
+      
+      // Animate circle following dot smoothly
+      function animate() {
+        circleX += (mouseX - circleX) * 0.1 // 0.1 = smoothness factor
+        circleY += (mouseY - circleY) * 0.1
+      
+        cursorCircle.style.top = `${circleY}px`
+        cursorCircle.style.left = `${circleX}px`
+      
+        requestAnimationFrame(animate)
+      }
+      
+      animate()
+    </script>
+
+    <style>
+      #preloader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: #fff; /* Adjust to var(--white) if using variables */
+        z-index: 999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .loader > div {
+        display: inline-flex;
+        width: 25px;
+        height: 25px;
+        margin: 0 5px;
+        border-radius: 50%;
+        background: #0066f5; /* Your $secondary color */
+        animation: bounce 1.48s ease-in-out infinite both;
+      }
+      
+      .loader > div:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+      
+      .loader > div:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+      
+      @keyframes bounce {
+        0%,
+        80%,
+        100% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(1);
+        }
+      }
+    </style>
+
+   <style>
+    /* Mobile Logo & Hamburger Fix - Professional */
+@media (max-width: 991px) {
+  .navbar-header {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0 0 15px 15px;
+    padding: 12px 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-header .navbar-brand {
+    display: block !important;
+    flex: 0 0 auto;
+  }
+
+  /* Increased logo size */
+  .navbar-header .logo {
+    display: block !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    width: auto;
+    filter: brightness(0) saturate(100%) invert(27%) sepia(91%) saturate(7495%) hue-rotate(209deg) brightness(98%) contrast(105%);
+  }
+  
+  /* Professional hamburger button */
+  .navbar-header .navbar-toggle {
+    margin: 0 !important;
+    padding: 8px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 6px !important;
+    background-color: transparent !important;
+    position: relative;
+    top: 0;
+    right: 0;
+    float: none !important;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .navbar-header .navbar-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  .navbar-header .navbar-toggle i {
+    font-size: 18px !important;
+    color: #333 !important;
+  }
+  
+  /* Fix for inside menu close button - make it visible and properly styled */
+  #navbar-menu .navbar-toggle {
+    margin: 15px !important;
+    padding: 8px !important;
+    border: 2px solid #333 !important;
+    border-radius: 8px !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    width: 44px;
+    height: 44px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1001;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  #navbar-menu .navbar-toggle i {
+    font-size: 20px !important;
+    color: #333 !important;
+    font-weight: bold;
+  }
+  
+  #navbar-menu .navbar-toggle:hover {
+    background-color: #f8f9fa !important;
+    border-color: #007bff !important;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+  }
+  
+  #navbar-menu .navbar-toggle:hover i {
+    color: #007bff !important;
+  }
+  
+  /* Ensure the close button is always visible in mobile menu */
+  .collapse.navbar-collapse.in .navbar-toggle {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+   </style>    
+
+
+    <!--  Start Preloader 
+    =============================================  -->
+    <div id="preloader">
+      <div class="vynzora-loader-inner">
+        <div class="loader">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- preloader end -->
+
+    <!--  Start Header Top 
+    =============================================  -->
+    <div class="top-bar-area bg-dark text-light">
+      <div class="container-full">
+        <div class="row align-center">
+          <div class="col-xl-9 col-lg-9 info">
+            <div class="address-info">
+              <ul class="item-flex">
+                <li>
+                  <i class="fas fa-envelope-open-text"></i> Info@edusetin.com
+                </li>
+                <li>
+                  <i class="fas fa-clock"></i> Working Hours: 09:00 AM – 06:00 PM
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 text-end">
+            <div class="social">
+              <ul class="item-flex">
+                <li>
+                  <a href="https://wa.me/+919048452454/?text=Hi" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </li>
+                <li>
+                  <a href="https://www.facebook.com/share/187qTETU3J/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li>
+                  <a href="https://x.com/edusetin_"><img src="{% static 'assets/img/icon/twitter-x.png' %}" alt="Image Not Found" /></a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/edusetinstudyabroad?igsh=MW1jMGMxZ3hsc3F1bw=="><i class="fab fa-instagram"></i></a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/company/109037429/admin/page-posts/published/"><i class="fab fa-linkedin-in"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Header Top -->
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- CSS -->
+
+    <style>
+      /* Fix Logo Size */
+      .chatbot-header img {
+        max-height: 35px; /* Adjust height */
+        width: auto; /* Maintain aspect ratio */
+        object-fit: contain;
+      }
+      
+      /* Close button alignment */
+      .chatbot-close {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: #333;
+      }
+      :root {
+        --primary-color: #1e3a8a; /* Deep Blue */
+        --secondary-color: #2563eb; /* Vibrant Blue */
+        --accent-color: #60a5fa; /* Light Blue */
+        --primary-dark: #172554;
+        --text-dark: #1f2937;
+        --light-bg: #f9fafb;
+      }
+      
+      body {
+        font-family: 'Poppins', sans-serif;
+        color: var(--text-dark);
+        margin: 0;
+        background: var(--light-bg);
+      }
+      
+      /* --- Chatbot Container --- */
+      .chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+      
+      /* --- Floating Button --- */
+      .chatbot-button {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        animation: vibratePulse 2s infinite;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+      
+      @media (min-width: 480px) {
+        .chatbot-button {
+          width: 65px;
+          height: 65px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-button {
+          width: 70px;
+          height: 70px;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .chatbot-button {
+          width: 75px;
+          height: 75px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+      }
+      
+      .chatbot-button:hover {
+        transform: scale(1.15);
+        background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      }
+      
+      .chatbot-button i {
+        color: white;
+        font-size: 24px;
+      }
+      
+      @media (min-width: 480px) {
+        .chatbot-button i {
+          font-size: 26px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-button i {
+          font-size: 28px;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .chatbot-button i {
+          font-size: 30px;
+        }
+      }
+      
+      /* --- Chatbot Box --- */
+      .chatbot-box {
+        width: 90vw;
+        height: 70vh;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px);
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        bottom: 75px;
+        right: 0;
+        opacity: 0;
+        transform: scale(0.7) translateY(40px);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      
+      @media (min-width: 480px) {
+        .chatbot-box {
+          width: 85vw;
+          height: 65vh;
+          border-radius: 18px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-box {
+          width: 380px;
+          height: 500px;
+          border-radius: 20px;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .chatbot-box {
+          width: 420px;
+          height: 550px;
+          border-radius: 24px;
+          box-shadow: 0 12px 50px rgba(0, 0, 0, 0.3);
+        }
+      }
+      
+      @media (min-width: 1200px) {
+        .chatbot-box {
+          width: 450px;
+          height: 580px;
+        }
+      }
+      
+      .chatbot-box.active {
+        display: flex;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        animation: popup-bounce 0.5s ease forwards;
+      }
+      
+      /* Full screen for very small devices */
+      @media (max-width: 360px) and (max-height: 640px) {
+        .chatbot-box {
+          width: 100vw;
+          height: 100vh;
+          bottom: 0;
+          right: 0;
+          border-radius: 0;
+        }
+      
+        .chatbot-container {
+          bottom: 10px;
+          right: 10px;
+        }
+      }
+      
+      /* --- Header --- */
+      .chatbot-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-header {
+          padding: 18px;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .chatbot-header {
+          padding: 20px;
+        }
+      }
+      
+      .chatbot-header h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #ffffff !important;
+      }
+      
+      @media (min-width: 480px) {
+        .chatbot-header h3 {
+          font-size: 19px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-header h3 {
+          font-size: 20px;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .chatbot-header h3 {
+          font-size: 22px;
+        }
+      }
+      
+      .chatbot-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-close {
+          font-size: 24px;
+        }
+      }
+      
+      /* --- Messages Area --- */
+      .chatbot-messages {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      @media (min-width: 480px) {
+        .chatbot-messages {
+          padding: 18px;
+          gap: 11px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-messages {
+          padding: 20px;
+          gap: 12px;
+        }
+      }
+      
+      .message {
+        max-width: 80%;
+        padding: 10px 14px;
+        border-radius: 18px;
+        line-height: 1.4;
+        font-size: 14px;
+        position: relative;
+        animation: fadeInUp 0.3s ease;
+        word-wrap: break-word;
+      }
+      
+      @media (min-width: 480px) {
+        .message {
+          padding: 11px 15px;
+          border-radius: 20px;
+          font-size: 14.5px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .message {
+          padding: 12px 16px;
+          border-radius: 22px;
+          font-size: 15px;
+          line-height: 1.5;
+        }
+      }
+      
+      .bot-message {
+        background: var(--accent-color);
+        color: white;
+        align-self: flex-start;
+        border-bottom-left-radius: 6px;
+      }
+      
+      .user-message {
+        background: var(--primary-color);
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 6px;
+      }
+      
+      /* --- Input Area --- */
+      .chatbot-input {
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.9);
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-input {
+          padding: 12px;
+        }
+      }
+      
+      .chatbot-input input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid #ddd;
+        border-radius: 24px;
+        outline: none;
+        font-size: 14px;
+        font-family: 'Poppins', sans-serif;
+      }
+      
+      @media (min-width: 480px) {
+        .chatbot-input input {
+          padding: 11px 15px;
+          font-size: 14.5px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-input input {
+          padding: 12px 16px;
+          font-size: 15px;
+          border-radius: 26px;
+        }
+      }
+      
+      .chatbot-input button {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+        margin-left: 8px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      
+      @media (min-width: 480px) {
+        .chatbot-input button {
+          width: 44px;
+          height: 44px;
+          margin-left: 9px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .chatbot-input button {
+          width: 46px;
+          height: 46px;
+          margin-left: 10px;
+        }
+      }
+      
+      .chatbot-input button i {
+        font-size: 16px;
+      }
+      
+      @media (min-width: 480px) {
+        .chatbot-input button i {
+          font-size: 17px;
+        }
+      }
+      
+      /* --- Option Boxes --- */
+      .options-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+      
+      .option-box {
+        background: var(--secondary-color);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 16px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .option-box:hover {
+        background: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+      
+      /* --- Animations --- */
+      @keyframes vibratePulse {
+        0%,
+        100% {
+          transform: scale(1) translate(0);
+        }
+        10% {
+          transform: scale(1.05) translate(-1px, 1px);
+        }
+        20% {
+          transform: scale(1) translate(-1px, -1px);
+        }
+        30% {
+          transform: scale(1.08) translate(1px, 1px);
+        }
+        40% {
+          transform: scale(1) translate(1px, -1px);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        70% {
+          transform: scale(1);
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        @keyframes vibratePulse {
+          0%,
+          100% {
+            transform: scale(1) translate(0);
+          }
+          10% {
+            transform: scale(1.1) translate(-2px, 2px);
+          }
+          20% {
+            transform: scale(1) translate(-2px, -2px);
+          }
+          30% {
+            transform: scale(1.12) translate(2px, 2px);
+          }
+          40% {
+            transform: scale(1) translate(2px, -2px);
+          }
+          50% {
+            transform: scale(1.15);
+          }
+          70% {
+            transform: scale(1);
+          }
+        }
+      }
+      
+      @keyframes popup-bounce {
+        0% {
+          transform: scale(0.7) translateY(40px);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.05) translateY(-5px);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1) translateY(0);
+        }
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Improve scrolling on mobile */
+      .chatbot-messages {
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      /* Hide chatbot on print */
+      @media print {
+        .chatbot-container {
+          display: none;
+        }
+      }
+    </style>
+
+    <style>
+      /* Professional Chatbot Styles */
+      .options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 15px 0;
+        max-width: 100%;
+      }
+      
+      .option-box {
+        padding: 12px 16px;
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin: 2px 0;
+      }
+      
+      .option-box:hover {
+        background: #f8f9fa;
+        border-color: #007bff;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+      
+      .read-more-btn {
+        background: linear-gradient(135deg, #007bff, #0056b3) !important;
+        color: white !important;
+        text-align: center;
+        font-weight: 600;
+        border: none !important;
+        margin-top: 10px;
+      }
+      
+      .read-more-btn:hover {
+        background: linear-gradient(135deg, #0056b3, #004085) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3) !important;
+      }
+      
+      .explore-more {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .explore-option {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+      
+      .message {
+        margin: 12px 0;
+        padding: 12px 16px;
+        border-radius: 18px;
+        max-width: 85%;
+        word-wrap: break-word;
+        line-height: 1.4;
+        position: relative;
+        animation: fadeIn 0.3s ease;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .user-message {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        margin-left: auto;
+        border-bottom-right-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+      }
+      
+      .bot-message {
+        background: #f8f9fa;
+        color: #333;
+        margin-right: auto;
+        border-bottom-left-radius: 5px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+      
+      .bot-message strong {
+        color: #007bff;
+        font-weight: 600;
+      }
+      
+      /* Chat container improvements */
+      .chat-messages {
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 15px;
+      }
+      
+      .chat-input {
+        border-top: 1px solid #e0e0e0;
+        padding: 15px;
+        background: #f8f9fa;
+      }
+      
+      /* Scrollbar styling */
+      .chat-messages::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      .chat-messages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+      
+      .chat-messages::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+      }
+      
+      .chat-messages::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+      }
+      
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .options-container {
+          gap: 6px;
+        }
+      
+        .option-box {
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+      
+        .message {
+          max-width: 90%;
+          padding: 10px 14px;
+        }
+      
+        .explore-more {
+          flex-direction: column !important;
+        }
+      }
+    </style>
+
+    <style>
+      .cta-popup {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        pointer-events: all;
+      }
+      
+      .cta-popup-content.new-popup {
+        background: #fff;
+        border-radius: 20px;
+        max-width: 900px;
+        width: 90%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        position: relative;
+        animation: slideIn 0.6s ease forwards;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        pointer-events: auto;
+      }
+      
+      .popup-inner {
+        display: flex;
+        width: 100%;
+      }
+      
+      .popup-left {
+        flex: 1;
+        overflow: hidden;
+      }
+      
+      .popup-left img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .popup-right {
+        flex: 1;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      
+      .popup-right .sub-title {
+        color: #ff4d5a;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      
+      .popup-right .title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #222;
+      }
+      
+      .popup-right p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+      }
+      
+      .btn-style-one {
+        display: inline-block;
+        padding: 12px 25px;
+      
+        color: #fff;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+      
+      .cta-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 38px;
+        font-weight: bold;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.7);
+        width: 55px;
+        height: 55px;
+        text-align: center;
+        line-height: 55px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10001;
+        transition: all 0.3s ease;
+      }
+      
+      .cta-close:hover {
+        background: rgba(0, 0, 0, 0.9);
+        transform: scale(1.1);
+      }
+      
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .cta-popup-content.new-popup {
+          flex-direction: column;
+        }
+        .popup-left img {
+          height: 200px;
+        }
+      }
+      
+      .service-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      .read-more {
+        display: inline-block;
+        margin-top: 5px;
+        color: #007bff;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      
+      .read-more:hover {
+        text-decoration: underline;
+      }
+    </style>
+
+    <style>
+      /* Toast Styles */
+      .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+      
+      .toast {
+        background: #fff;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        min-width: 300px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        border-left: 4px solid #4caf50;
+      }
+      
+      .toast.success {
+        border-left-color: #4caf50;
+      }
+      
+      .toast.error {
+        border-left-color: #f44336;
+      }
+      
+      .toast.show {
+        transform: translateX(0);
+      }
+      
+      .toast-content {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+      }
+      
+      .toast-content i {
+        margin-right: 10px;
+        font-size: 20px;
+      }
+      
+      .toast.success .toast-content i {
+        color: #4caf50;
+      }
+      
+      .toast.error .toast-content i {
+        color: #f44336;
+      }
+      
+      .toast .message {
+        font-size: 14px;
+        color: #333;
+      }
+      
+      .toast .close {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        margin-left: 15px;
+        color: #999;
+      }
+      
+      .toast .progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.1);
+      }
+      
+      .toast .progress:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background: #4caf50;
+        animation: progress 3s linear forwards;
+      }
+      
+      .toast.success .progress:before {
+        background: #4caf50;
+      }
+      
+      .toast.error .progress:before {
+        background: #f44336;
+      }
+      
+      @keyframes progress {
+        100% {
+          right: 100%;
+        }
+      }
+    </style>
+
+    <style>
+      .testimonial-style-one-item {
+        max-width: 100%;
+        text-align: center;
+        margin: 0 auto;
+      }
+      
+      .testimonial-review {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0 auto 10px;
+        max-width: 100%;
+      }
+      
+      .testimonial-name {
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+      
+      .reviews i {
+        color: #ffd700; /* gold stars */
+        margin: 0 2px;
+      }
+      
+      @media (max-width: 768px) {
+        .testimonial-review {
+          font-size: 14px;
+        }
+        .testimonial-name {
+          font-size: 16px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .testimonial-review {
+          font-size: 13px;
+        }
+        .testimonial-name {
+          font-size: 15px;
+        }
+      }
+    </style>
+
+    <style>
+      /* Professional Chatbot Styles */
+      .options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 15px 0;
+        max-width: 100%;
+      }
+      
+      .option-box {
+        padding: 12px 16px;
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin: 2px 0;
+      }
+      
+      .option-box:hover {
+        background: #f8f9fa;
+        border-color: #007bff;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+      
+      .read-more-btn {
+        background: linear-gradient(135deg, #007bff, #0056b3) !important;
+        color: white !important;
+        text-align: center;
+        font-weight: 600;
+        border: none !important;
+        margin-top: 10px;
+      }
+      
+      .read-more-btn:hover {
+        background: linear-gradient(135deg, #0056b3, #004085) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3) !important;
+      }
+      
+      .explore-more {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .explore-option {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+      
+      .message {
+        margin: 12px 0;
+        padding: 12px 16px;
+        border-radius: 18px;
+        max-width: 85%;
+        word-wrap: break-word;
+        line-height: 1.4;
+        position: relative;
+        animation: fadeIn 0.3s ease;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .user-message {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        margin-left: auto;
+        border-bottom-right-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+      }
+      
+      .bot-message {
+        background: #f8f9fa;
+        color: #333;
+        margin-right: auto;
+        border-bottom-left-radius: 5px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+      
+      .bot-message strong {
+        color: #007bff;
+        font-weight: 600;
+      }
+      
+      /* Chat container improvements */
+      .chat-messages {
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 15px;
+      }
+      
+      .chat-input {
+        border-top: 1px solid #e0e0e0;
+        padding: 15px;
+        background: #f8f9fa;
+      }
+      
+      /* Scrollbar styling */
+      .chat-messages::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      .chat-messages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+      
+      .chat-messages::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+      }
+      
+      .chat-messages::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+      }
+      
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .options-container {
+          gap: 6px;
+        }
+      
+        .option-box {
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+      
+        .message {
+          max-width: 90%;
+          padding: 10px 14px;
+        }
+      
+        .explore-more {
+          flex-direction: column !important;
+        }
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let popup = document.getElementById('ctaPopup')
+        let closeBtn = document.querySelector('.cta-close')
+        let shownCount = 0 // track how many times popup is shown
+      
+        function showPopup() {
+          if (shownCount < 2) {
+            popup.style.display = 'flex'
+            shownCount++
+          }
+        }
+      
+        // Show popup first after 30s
+        setTimeout(showPopup, 30000) // 30 seconds
+        // Show popup again after 60s
+        setTimeout(showPopup, 60000) // 60 seconds
+      
+        // Close popup
+        closeBtn.onclick = function () {
+          popup.style.display = 'none'
+        }
+      
+        // Close when clicking outside content
+        popup.addEventListener('click', function (e) {
+          if (e.target === popup) {
+            popup.style.display = 'none'
+          }
+        })
+      })
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const chatbotButton = document.getElementById('chatbotButton')
+        const chatbotBox = document.getElementById('chatbotBox')
+        const chatbotClose = document.getElementById('chatbotClose')
+        const userInput = document.getElementById('userInput')
+        const sendMessage = document.getElementById('sendMessage')
+        const chatMessages = document.getElementById('chatMessages')
+      
+        let chatbotState = {
+          step: 'welcome',
+          userData: {
+            name: null,
+            phone: null,
+            qualification: null,
+            year_completed: null,
+            preferences: null // Store the clicked category name
+          },
+          pendingCategory: null,
+          hasProvidedInfo: false,
+          optionsData: null,
+          currentCategoryType: null,
+          currentCategoryTitle: null
+        }
+      
+        function createModal() {
+          const modalHTML = `
+                  <div id="itemModal" class="modal-overlay" style="display: none;">
+                      <div class="modal-content">
+                          <button id="modalClose" class="modal-close">×</button>
+                          <div class="modal-body">
+                              <div class="modal-header">
+                                  <h2 id="modalTitle" class="modal-title"></h2>
+                              </div>
+                              <div class="modal-details">
+                                  <p id="modalDescription" class="modal-description"></p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              `
+      
+          document.body.insertAdjacentHTML('beforeend', modalHTML)
+      
+          const modal = document.getElementById('itemModal')
+          const modalClose = document.getElementById('modalClose')
+      
+          modalClose.addEventListener('click', closeModal)
+          modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+              closeModal()
+            }
+          })
+      
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.style.display !== 'none') {
+              closeModal()
+            }
+          })
+        }
+      
+        function openModal(item) {
+          const modal = document.getElementById('itemModal')
+          const modalTitle = document.getElementById('modalTitle')
+          const modalDescription = document.getElementById('modalDescription')
+      
+          modalTitle.textContent = item.title || item.name || 'No Title'
+      
+          let modalContent = ''
+      
+          if (item.description) {
+            modalContent += `<div class="modal-description-full">${item.description}</div>`
+          }
+      
+          if (item.courses && item.courses.length > 0) {
+            modalContent += `<div class="courses-in-modal">
+                      <h4>Available Courses:</h4>
+                      <div class="courses-list-modal">`
+      
+            item.courses.forEach((course) => {
+              modalContent += `
+                          <div class="course-item-modal">
+                              <strong>${course.title}</strong>
+                              <div class="course-details">
+                                  <span>🏫 ${course.university__name || 'University not specified'}</span>
+                                  <span>⏱️ ${course.duration || 'Duration not specified'}</span>
+                              </div>
+                          </div>
+                      `
+            })
+      
+            modalContent += `</div></div>`
+          } else if (item.category === 'Course Category' || item.type === 'courses') {
+            modalContent += `<p class="no-courses">No specific courses available for this category at the moment.</p>`
+          }
+      
+          modalDescription.innerHTML = modalContent
+      
+          modal.style.display = 'flex'
+          document.body.style.overflow = 'hidden'
+        }
+      
+        function closeModal() {
+          const modal = document.getElementById('itemModal')
+          modal.style.display = 'none'
+          document.body.style.overflow = 'auto'
+        }
+      
+        // Get CSRF Token
+        function getCSRFToken() {
+          const cookieValue = document.cookie
+            .split('; ')
+            .find((row) => row.startsWith('csrftoken='))
+            ?.split('=')[1]
+          return cookieValue
+        }
+      
+        // Save user data to backend - UPDATED TO INCLUDE PREFERENCES
+        function saveUserData() {
+          const payload = {
+            name: chatbotState.userData.name,
+            phone: chatbotState.userData.phone,
+            qualification: chatbotState.userData.qualification,
+            year_completed: chatbotState.userData.year_completed,
+            preference: chatbotState.userData.preferences
+          }
+      
+          console.log('Saving user data with preferences:', payload)
+      
+          fetch('/save-chatbot-data/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': getCSRFToken()
+            },
+            body: JSON.stringify(payload)
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log('User data saved successfully:', data)
+            })
+            .catch((err) => console.error('Save error:', err))
+        }
+      
+        // Load chatbot options from backend
+        function loadChatbotOptions() {
+          return fetch('/get-chatbot-options/')
+            .then((res) => res.json())
+            .then((data) => {
+              chatbotState.optionsData = data
+              console.log('Options loaded from backend:', data)
+              return data
+            })
+            .catch((err) => {
+              console.error('Error loading options:', err)
+              chatbotState.optionsData = {
+                quick_menu: [],
+                services: [],
+                courses: [],
+                universities: [],
+                countries: []
+              }
+              return chatbotState.optionsData
+            })
+        }
+      
+        // Chat Functions
+        function addMessage(text, type) {
+          const div = document.createElement('div')
+          div.classList.add('message', type + '-message')
+      
+          if (type === 'bot' && text.includes('**')) {
+            const parts = text.split('**')
+            div.innerHTML = parts
+              .map((part, index) => (index % 2 === 1 ? `<strong>${part}</strong>` : part))
+              .join('')
+              .replace(/\n/g, '<br>')
+          } else {
+            div.innerHTML = text.replace(/\n/g, '<br>')
+          }
+      
+          chatMessages.appendChild(div)
+          chatMessages.scrollTop = chatMessages.scrollHeight
+        }
+      
+        function botReply(text) {
+          addMessage(text, 'bot')
+        }
+      
+        function clearOptions() {
+          const existingOptions = chatMessages.querySelectorAll('.options-container')
+          existingOptions.forEach((option) => option.remove())
+        }
+      
+        function createOptions(options, type = 'text') {
+          clearOptions()
+      
+          const container = document.createElement('div')
+          container.classList.add('options-container')
+      
+          options.forEach((option) => {
+            const optionBox = document.createElement('div')
+            optionBox.classList.add('option-box')
+      
+            if (type === 'object') {
+              optionBox.textContent = option.title || option.name
+              optionBox.dataset.id = option.id
+              optionBox.dataset.type = option.type || option.category
+            } else {
+              optionBox.textContent = option
+            }
+      
+            optionBox.addEventListener('click', () => {
+              if (type === 'object') {
+                if (optionBox.dataset.type) {
+                  handleQuickMenuSelection(optionBox.dataset.type, optionBox.dataset.id, optionBox.textContent)
+                } else {
+                  userInput.value = optionBox.textContent
+                  sendUserMessage()
+                }
+              } else {
+                userInput.value = option
+                sendUserMessage()
+              }
+            })
+            container.appendChild(optionBox)
+          })
+      
+          chatMessages.appendChild(container)
+          chatMessages.scrollTop = chatMessages.scrollHeight
+        }
+      
+        // Validation Functions
+        function validateName(name) {
+          const nameRegex = /^[a-zA-Z\s]{2,50}$/
+          return nameRegex.test(name.trim())
+        }
+      
+        function validatePhone(phone) {
+          const phoneRegex = /^[0-9]{10,15}$/
+          return phoneRegex.test(phone.trim())
+        }
+      
+        function validateQualification(qualification) {
+          return qualification.trim().length >= 2
+        }
+      
+        function validateYear(year) {
+          const yearRegex = /^(19|20)\d{2}$/
+          const currentYear = new Date().getFullYear()
+          return yearRegex.test(year) && parseInt(year) <= currentYear && parseInt(year) >= 1950
+        }
+      
+        // Truncate text to 50 words
+        function truncateText(text, wordLimit = 50) {
+          if (!text) return 'No description available.'
+      
+          const words = text.split(' ')
+          if (words.length <= wordLimit) {
+            return text
+          }
+      
+          return words.slice(0, wordLimit).join(' ') + '...'
+        }
+      
+        // Show welcome message
+        function showWelcome() {
+          botReply('Welcome to Edusetin! 🎓')
+          setTimeout(() => {
+            botReply("I'm here to assist you with your study abroad journey. Let me help you explore our services.")
+          }, 1000)
+      
+          setTimeout(() => {
+            showQuickMenu()
+          }, 2500)
+        }
+      
+        // Show quick menu
+        function showQuickMenu() {
+          clearOptions()
+          botReply("Please choose what you'd like to explore:")
+      
+          if (chatbotState.optionsData && chatbotState.optionsData.quick_menu && chatbotState.optionsData.quick_menu.length > 0) {
+            createOptions(chatbotState.optionsData.quick_menu, 'object')
+          } else {
+            botReply('Loading menu options...')
+            loadChatbotOptions().then(() => {
+              if (chatbotState.optionsData.quick_menu && chatbotState.optionsData.quick_menu.length > 0) {
+                createOptions(chatbotState.optionsData.quick_menu, 'object')
+              } else {
+                botReply('Sorry, menu options are not available at the moment.')
+              }
+            })
+          }
+      
+          chatbotState.step = 'quickMenu'
+        }
+      
+        // Handle quick menu selection - UPDATED TO SAVE PREFERENCES
+        function handleQuickMenuSelection(type, id, title) {
+          console.log('Quick menu selection:', type, title)
+      
+          chatbotState.userData.preferences = title
+          console.log('Saved preference:', chatbotState.userData.preferences)
+          // Save the clicked category name as preference
+      
+          // Store current category info
+          chatbotState.currentCategoryType = type
+          chatbotState.currentCategoryTitle = title
+      
+          // If user hasn't provided info yet, ask for details
+          if (!chatbotState.hasProvidedInfo) {
+            chatbotState.pendingCategory = { type, id, title }
+            botReply(`Great! You've selected ${title}. To provide you with personalized information, I need some basic details.`)
+            askForName()
+          } else {
+            // If user already provided info, show the category list directly
+            showCategoryList(type, title)
+          }
+        }
+      
+        // Show specific category list
+        function showCategoryList(categoryType, categoryTitle) {
+          console.log('Showing category list:', categoryType, categoryTitle)
+      
+          if (!chatbotState.optionsData) {
+            botReply('Loading options... Please wait a moment.')
+            loadChatbotOptions().then(() => {
+              showCategoryList(categoryType, categoryTitle)
+            })
+            return
+          }
+      
+          const categoryData = chatbotState.optionsData[categoryType]
+          console.log('Category data for', categoryType, ':', categoryData)
+      
+          if (!categoryData || categoryData.length === 0) {
+            botReply(`Sorry, no ${categoryTitle.toLowerCase()} are available at the moment. Please try again later.`)
+            setTimeout(() => showQuickMenu(), 2000)
+            return
+          }
+      
+          clearOptions()
+      
+          const categoryOptions = categoryData.map((item) => {
+            let title = ''
+            if (categoryType === 'services' || categoryType === 'courses') {
+              title = item.title || 'Unnamed Item'
+            } else if (categoryType === 'universities' || categoryType === 'countries') {
+              title = item.name || 'Unnamed Item'
+            }
+      
+            return {
+              title: title,
+              id: item.id,
+              type: categoryType
+            }
+          })
+      
+          createOptions(categoryOptions, 'object')
+          chatbotState.step = 'categoryList'
+        }
+      
+        // Information collection flow
+        function askForName() {
+          botReply("What's your full name?")
+          chatbotState.step = 'askName'
+        }
+      
+        function askForPhone() {
+          botReply("What's your phone number?")
+          chatbotState.step = 'askPhone'
+        }
+      
+        function askForQualification() {
+          botReply("What's your highest qualification? (e.g., High School, Bachelor's, Master's)")
+          chatbotState.step = 'askQualification'
+        }
+      
+        function askForYear() {
+          botReply('Which year did you complete your qualification? (e.g., 2020)')
+          chatbotState.step = 'askYear'
+        }
+      
+        // Show item details
+        function showItemDetails(type, id, title) {
+          console.log('Showing item details:', type, id, title)
+      
+          const categoryData = chatbotState.optionsData[type]
+      
+          if (!categoryData || categoryData.length === 0) {
+            botReply("Sorry, I couldn't find details for this item. The data might not be loaded yet.")
+            setTimeout(() => showQuickMenu(), 1500)
+            return
+          }
+      
+          const item = categoryData.find((item) => {
+            return item.id.toString() === id.toString()
+          })
+      
+          if (item) {
+            let description = ''
+      
+            switch (type) {
+              case 'services':
+                description = item.description || `Our ${title} service helps students achieve their study abroad dreams.`
+                break
+              case 'courses':
+                description = item.description || `${title} course${item.university__name ? ` offered at ${item.university__name}` : ''}.`
+                break
+              case 'universities':
+                description = item.description || `${title}${item.country__name ? ` located in ${item.country__name}` : ''}.`
+                break
+              case 'countries':
+                description = item.description || `Study in ${title} offers excellent opportunities for international students.`
+                break
+              default:
+                description = `Explore ${title} for your study abroad journey.`
+            }
+      
+            clearOptions()
+      
+            const truncatedDescription = truncateText(description, 50)
+            botReply(`**${title}**\n\n${truncatedDescription}`)
+      
+            setTimeout(() => {
+              const actionContainer = document.createElement('div')
+              actionContainer.classList.add('options-container', 'action-buttons')
+      
+              const detailsBtn = document.createElement('div')
+              detailsBtn.classList.add('option-box', 'action-btn', 'view-details')
+              detailsBtn.innerHTML = '🔍 View Full Details'
+              detailsBtn.addEventListener('click', () => {
+                const modalData = {
+                  title: title,
+                  description: description,
+                  category: chatbotState.currentCategoryTitle
+                }
+      
+                if (type === 'courses' && item.courses) {
+                  modalData.courses = item.courses
+                }
+      
+                openModal(modalData)
+              })
+              actionContainer.appendChild(detailsBtn)
+      
+              const expertBtn = document.createElement('div')
+              expertBtn.classList.add('option-box', 'action-btn', 'expert-connect')
+              expertBtn.innerHTML = '💬 Connect with Expert'
+              expertBtn.addEventListener('click', () => {
+                connectWithExpert(title)
+              })
+              actionContainer.appendChild(expertBtn)
+      
+              chatMessages.appendChild(actionContainer)
+              chatMessages.scrollTop = chatMessages.scrollHeight
+            }, 500)
+      
+            setTimeout(() => {
+              botReply('Would you like to explore more options?')
+      
+              const exploreMoreContainer = document.createElement('div')
+              exploreMoreContainer.classList.add('options-container', 'explore-more')
+      
+              const otherCategoriesBtn = document.createElement('div')
+              otherCategoriesBtn.classList.add('option-box', 'explore-option')
+              otherCategoriesBtn.textContent = 'Explore other categories'
+              otherCategoriesBtn.addEventListener('click', () => {
+                showQuickMenu()
+              })
+      
+              const doneBtn = document.createElement('div')
+              doneBtn.classList.add('option-box', 'explore-option')
+              doneBtn.textContent = "I'm done for now"
+              doneBtn.addEventListener('click', () => {
+                botReply('Thank you for using Edusetin chatbot! Feel free to come back anytime for more assistance. 🎓')
+              })
+      
+              exploreMoreContainer.appendChild(otherCategoriesBtn)
+              exploreMoreContainer.appendChild(doneBtn)
+              chatMessages.appendChild(exploreMoreContainer)
+              chatMessages.scrollTop = chatMessages.scrollHeight
+            }, 1500)
+          } else {
+            setTimeout(() => {
+              showCategoryList(chatbotState.currentCategoryType, chatbotState.currentCategoryTitle)
+            }, 500)
+          }
+        }
+      
+        // Connect with Expert via WhatsApp
+        function connectWithExpert(itemTitle) {
+          const userData = chatbotState.userData
+      
+          // Save the final selected item as preference when connecting with expert
+          chatbotState.userData.preferences = itemTitle
+          console.log('Final preference saved:', chatbotState.userData.preferences)
+      
+          // Update the database with the final preference
+          saveUserData()
+      
+          let message = `Hello! I'm interested in ${itemTitle}.`
+      
+          if (userData.name) {
+            message += ` My name is ${userData.name}.`
+          }
+          if (userData.qualification) {
+            message += ` I have a ${userData.qualification} qualification.`
+          }
+        
+      
+          const encodedMessage = encodeURIComponent(message)
+          const whatsappNumber = '9048452454'
+          const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+      
+          window.open(whatsappUrl, '_blank')
+      
+          botReply("✅ Opening WhatsApp to connect you with our expert. They'll assist you shortly!")
+        }
+      
+        // Process user input with validation
+        function processUserInput(input) {
+          switch (chatbotState.step) {
+            case 'askName':
+              if (!validateName(input)) {
+                botReply('Please enter a valid name.')
+                return
+              }
+              chatbotState.userData.name = input.trim()
+              askForPhone()
+              break
+      
+            case 'askPhone':
+              if (!validatePhone(input)) {
+                botReply('Please enter a valid phone number.')
+                return
+              }
+              chatbotState.userData.phone = input.trim()
+              askForQualification()
+              break
+      
+            case 'askQualification':
+              if (!validateQualification(input)) {
+                botReply('Please enter a valid qualification (at least 2 characters).')
+                return
+              }
+              chatbotState.userData.qualification = input.trim()
+              askForYear()
+              break
+      
+            case 'askYear':
+              if (!validateYear(input)) {
+                botReply('Please enter a valid year (e.g., 2020, between 1950 and current year).')
+                return
+              }
+              chatbotState.userData.year_completed = input.trim()
+              chatbotState.hasProvidedInfo = true
+      
+              // Save user data including preferences
+              saveUserData()
+      
+              botReply('✅ Thank you! Your information has been saved.')
+              setTimeout(() => {
+                if (chatbotState.pendingCategory) {
+                  showCategoryList(chatbotState.pendingCategory.type, chatbotState.pendingCategory.title)
+                  chatbotState.pendingCategory = null
+                } else {
+                  showQuickMenu()
+                }
+              }, 1000)
+              break
+      
+            case 'quickMenu':
+            case 'categoryList':
+              botReply('Please select from the options above using the buttons.')
+              break
+      
+            default:
+              botReply("I'm not sure how to help with that. Please select from the options.")
+          }
+        }
+      
+        // Send message function
+        function sendUserMessage() {
+          const message = userInput.value.trim()
+          if (!message) {
+            botReply('❌ Please enter a message.')
+            return
+          }
+      
+          addMessage(message, 'user')
+          userInput.value = ''
+          processUserInput(message)
+        }
+      
+        // Event listeners
+        sendMessage.addEventListener('click', sendUserMessage)
+      
+        userInput.addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') sendUserMessage()
+        })
+      
+        userInput.addEventListener('input', function () {
+          if (chatbotState.step === 'askPhone') {
+            this.value = this.value.replace(/[^0-9]/g, '')
+          }
+        })
+      
+        chatbotButton.addEventListener('click', () => {
+          chatbotBox.classList.toggle('active')
+          if (chatbotBox.classList.contains('active') && chatbotState.step === 'welcome') {
+            loadChatbotOptions().then(() => {
+              showWelcome()
+            })
+          }
+        })
+      
+        chatbotClose.addEventListener('click', () => {
+          chatbotBox.classList.remove('active')
+        })
+      
+        // Handle option clicks
+        chatMessages.addEventListener('click', function (e) {
+          const optionBox = e.target.closest('.option-box')
+          if (optionBox && optionBox.dataset.id) {
+            const type = optionBox.dataset.type
+            const id = optionBox.dataset.id
+            const title = optionBox.textContent
+      
+            if (type && id) {
+              if (chatbotState.step === 'quickMenu') {
+                handleQuickMenuSelection(type, id, title)
+              } else if (chatbotState.step === 'categoryList') {
+                showItemDetails(type, id, title)
+              }
+            }
+          }
+        })
+      
+        // Initialize
+        createModal()
+        loadChatbotOptions()
+      })
+    </script>
+
+    <script>
+      var swiper = new Swiper('.visa-category-carousel', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          992: { slidesPerView: 3 }
+        }
+      })
+    </script>
+
+    <script>
+// Check for Django messages and show toast notifications
+document.addEventListener('DOMContentLoaded', function() {
+    {% if messages %}
+        {% for message in messages %}
+            showToast("{{ message }}", "{{ message.tags }}");
+        {% endfor %}
+    {% endif %}
+});
+</script>
+
+<script>
+    // Toast notification function
+    function showToast(message, type = 'success') {
+        const toastContainer = document.getElementById('toastContainer');
+        
+        // Create toast element
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        toast.innerHTML = `
+            <div class="toast-content">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span class="message">${message}</span>
+            </div>
+            <div class="progress"></div>
+        `;
+        
+        // Add toast to container
+        toastContainer.appendChild(toast);
+        
+        // Trigger animation
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 100);
+        
+        // Remove toast after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toastContainer.removeChild(toast);
+            }, 300);
+        }, 3000);
+    }
+</script>
+
+<style>
+    
+/* Pagination Styles */
+.pagi-area {
+    margin-top: 50px;
+}
+
+.pagination {
+    gap: 8px;
+}
+
+.page-item .page-link {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    color: #6B7280;
+    transition: all 0.3s ease;
+}
+
+.page-item .page-link:hover {
+    background: #2563EB;
+    color: white;
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, #2563EB, #1E40AF);
+    color: white;
+    border: none;
+}
+
+.page-item.disabled .page-link {
+    background: #F3F4F6;
+    color: #9CA3AF;
+}
+
+</style>
+    <style>
+    /* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 15px;
+    animation: fadeIn 0.3s ease-out;
+    backdrop-filter: blur(4px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Modal Content */
+.modal-content {
+    background: #ffffff;
+    color: #1e293b;
+    border-radius: 14px;
+    max-width: 750px;   /* wider modal */
+    width: 100%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    animation: modalSlideIn 0.35s ease;
+    border: 1px solid #e2e8f0;
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #1e3a8a;
+    color: #fff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.25s;
+    z-index: 11000; /* keep it always on top */
+}
+.modal-close:hover {
+    background: #2563eb;
+    transform: scale(1.1);
+}
+
+/* Header */
+.modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+.modal-title {
+    font-size: 1.5em;
+    margin: 0;
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+/* Body */
+.modal-body {
+    padding: 20px 24px;
+    overflow-y: auto; /* scroll if content is long */
+    flex-grow: 1; /* body takes remaining space */
+}
+.modal-description {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: #475569;
+}
+
+/* Courses Section */
+.courses-in-modal {
+    margin-top: 20px;
+}
+.courses-in-modal h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.courses-in-modal h4::before {
+    content: '📚';
+}
+
+.courses-list-modal {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+.course-item-modal {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: 0.2s;
+    background: #ffffff;
+}
+.course-item-modal:hover {
+    background: #f1f5f9;
+    border-left: 4px solid #2563eb;
+}
+.course-item-modal strong {
+    color: #1e293b;
+    font-size: 0.95em;
+}
+
+/* Scrollbar */
+.courses-list-modal::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.courses-list-modal::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 3px;
+}
+.courses-list-modal::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .modal-content {
+        max-width: 95%;
+    }
+    .modal-title {
+        font-size: 1.2em;
+    }
+}
+
+</style>
+
+<style>
+  /* Dropdown scrollable if more than 7 items */
+.navbar-nav .dropdown-menu {
+    max-height: 350px; /* Increased height for better visibility */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Apply scroll only when needed - for countries, courses, services */
+.navbar-nav .dropdown:has(li:nth-child(8)) .dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto !important;
+}
+
+/* Alternative method using min-item count */
+.navbar-nav .dropdown-menu:has(> li:nth-child(8)) {
+    max-height: 300px;
+    overflow-y: auto !important;
+}
+
+/* Smooth scrollbar for modern browsers */
+.navbar-nav .dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.navbar-nav .dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.25);
+    border-radius: 3px;
+}
+
+.navbar-nav .dropdown-menu::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 3px;
+}
+
+/* Dropdown links - removed borders */
+.navbar-nav .dropdown-menu li a {
+    white-space: nowrap;
+    padding: 14px 20px; /* Slightly more padding for better spacing */
+    display: block;
+    font-size: 14px;
+    color: #333;
+    transition: background 0.3s ease;
+    /* Removed border-bottom */
+}
+
+.navbar-nav .dropdown-menu li a:hover {
+    background-color: #f8f9fa; /* Lighter hover color */
+    color: #007bff; /* Blue text on hover */
+}
+
+/* Ensure proper dropdown positioning */
+.navbar-nav .dropdown:hover .dropdown-menu {
+    display: block;
+}
+</style>
+
+
+
+
+    <!--  Header 
+    =============================================  -->
+    <header>
+      <!-- Start Navigation -->
+      <nav class="navbar mobile-sidenav navbar-default validnavs navbar-sticky navbar-style-two">
+        <!-- Start Top Search -->
+        <div class="top-search">
+          <div class="container-xl">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              <input type="text" class="form-control" placeholder="Search" />
+              <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+          </div>
+        </div>
+        <!-- End Top Search -->
+
+        <div class="container-full d-flex justify-content-between align-items-center">
+          <!-- Start Header Navigation -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i class="fa fa-bars"></i></button>
+            <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'assets/img/logo1.png' %}" class="logo logo-display" alt="Logo" /></a>
+          </div>
+          <!-- End Header Navigation -->
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="navbar-menu">
+            <img src="{% static 'assets/img/logo2.png' %}" alt="Logo" />
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i class="fa fa-times"></i></button>
+
+            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+              <li>
+                <a href="{% url 'index' %}">Home</a>
+              </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Countries <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  {% for country in countries %}
+                    <li>
+                      <a href="{% url 'country_detail' country.slug %}">{{ country.name }}</a>
+                    </li>
+                  {% empty %}
+                    <li>
+                      <a href="#">No countries available</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  {% for category in course_categories %}
+                    <li>
+                      <a href="{% url 'course_category_detail' category.slug %}">{{ category.name }}</a>
+                    </li>
+                  {% empty %}
+                    <li>
+                      <a href="#">No course categories available</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+              <!-- Services Dropdown -->
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  {% for service in services %}
+                    <li>
+                      <a href="{% url 'service_detail' service.slug %}">{{ service.title }}</a>
+                    </li>
+                  {% empty %}
+                    <li>
+                      <a href="#">No services available</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Others <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{% url 'about' %}">About</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'index_blog' %}">Blog</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'gallery' %}">Gallery</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'contact_us' %}">Contact</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li></li>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+
+          <div class="attr-right">
+            <!-- Start Atribute Navigation -->
+            <div class="attr-nav">
+              <ul>
+                <li class="contact">
+                  <div class="call">
+                    <div class="icon">
+                      <img src="{% static 'assets/img/icon/phone.png' %}" alt="Image Not Found" />
+                    </div>
+                    <div class="info">
+                      <p>Need to discuss?</p>
+                      <h5><a href="{% url 'apply_form' %}" class="appointment-btn">Schedule Now</a></h5>
+
+                      <style>
+                        .appointment-btn {
+                            display: inline-block;
+                            background-color: #D3202A; /* your theme color */
+                            
+                            padding: 10px 20px;
+                            border-radius: 8px;
+                            font-size: 16px;
+                            font-weight: 600;
+                            text-decoration: none;
+                            transition: background 0.3s ease;
+                            }
+
+                            .appointment-btn:hover {
+                            background-color: #b91c1c; /* darker shade on hover */
+                            
+                            }
+                    </style>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <a href="https://edusetinglobalcareers.com/" target="_blank" rel="noopener noreferrer" class="btn-style-one">Get Your Job Visa <span></span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- End Atribute Navigation -->
+          </div>
+        </div>
+        <!-- Overlay screen for menu -->
+        <div class="overlay-screen"></div>
+        <!-- End Overlay screen for menu -->
+      </nav>
+      <!-- End Navigation -->
+    </header>
+    <!-- End Header -->
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+      <div class="chatbot-box" id="chatbotBox">
+        <div class="chatbot-header">
+          <img src="{% static 'assets/img/logo1.png' %}" alt="Logo" />
+          <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages"></div>
+        <div class="chatbot-input">
+          <input type="text" id="userInput" placeholder="Type your message here" />
+          <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+      <div class="chatbot-button" id="chatbotButton">
+        <i class="fas fa-comment"></i>
+      </div>
+    </div>
+    <!-- End Chatbot Container -->
+
+    <main>
+      {% block content %}
+
+      {% endblock %}
+    </main>
+
+    <!--  Start Footer 
+    =============================================  -->
+    <div class="footer-top-area bg-dark-secondary text-light" style="background-image: url({% static 'assets/img/shape/17.png' %});">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+            <div class="user-card">
+              <div class="thumb">
+                <img src="{% static 'assets/img/team/5.jpg' %}" alt="Image Not Found" />
+                <img src="{% static 'assets/img/team/6.jpg' %}" alt="Image Not Found" />
+                <span>1k</span>
+              </div>
+              <h4>Approved Student Visa Applications.</h4>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <ul class="address-list">
+              <li>
+                <div class="icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info">
+                  <h4>Email:</h4>
+                  <a href="mailto:info@crysta.com">info@edusetin.com</a>
+                </div>
+              </li>
+              <li>
+                <div class="icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+
+                <div class="info">
+                  <h4>Address:</h4>
+                  <p>62XW+686, Pathanapuram, Kizhuparamba, Malappuram, Kerala – 673639</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="bg-dark text-light">
+      <div class="footer-style-one">
+        <div class="container">
+          <div class="f-items">
+            <div class="row">
+              <div class="col-lg-4 col-md-6 footer-item">
+                <div class="f-item about">
+                  <div class="footer-logo">
+                    <img src="{% static 'assets/img/logo1.png' %}" alt="Image Not Found" />
+                  </div>
+                  <div class="f-item">
+                    <p>We provide authentic, customized visa and immigration solutions you can trust. Unlike generic services, our expert guidance ensures accuracy, transparency, and success—without confusing jargon or unreliable advice.</p>
+
+                    <ul class="footer-social-regular mt-30">
+                      <li>
+                  <a href="https://wa.me/+919048452454/?text=Hi" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </li>
+                <li>
+                  <a href="https://www.facebook.com/share/187qTETU3J/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li>
+                  <a href="https://x.com/edusetin_"><img src="{% static 'assets/img/icon/twitter-x.png' %}" alt="Image Not Found" /></a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/edusetinstudyabroad?igsh=MW1jMGMxZ3hsc3F1bw=="><i class="fab fa-instagram"></i></a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/company/109037429/admin/page-posts/published/"><i class="fab fa-linkedin-in"></i></a>
+                </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-6 footer-item">
+                <div class="f-item link">
+                  <h4 class="widget-title">Quick Links</h4>
+                  <ul>
+                    <li>
+                      <a href="{% url 'index' %}">Home</a>
+                    </li>
+
+                    <li>
+                      <a href="{% url 'about' %}">About</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'index_blog' %}">Blogs</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'gallery' %}">Gallery</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 footer-item">
+                <div class="f-item link">
+                  <h4 class="widget-title">Our Services</h4>
+                  <ul>
+                    {% for service in footer_service %}
+                      <li>
+                        <a href="{% url 'service_detail' service.slug %}">{{ service.title }}</a>
+                      </li>
+                    {% empty %}
+                      <li>No services available</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 footer-item">
+                <div class="f-item newsletter">
+                  <h4 class="widget-title">Newsletter</h4>
+                  <p>Join our subscribers list to get the latest news and special offers.</p>
+                  <form class="newsletter-form-style-one" action="{% url 'subscribe_newsletter' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="email" placeholder="Your Email" class="form-control" name="email" required />
+                    <button type="submit">
+                      Subscribe<svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 17L17 1H7.8" stroke="white" stroke-width="2"></path>
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 offset-lg-4">
+                <p>
+                  © Copyright 2025. All rights reserved by <a href="https://www.vynzora.com" target="_blank" rel="noopener noreferrer">Vynzora Pvt.Ltd</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Footer Bottom -->
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!--  jQuery Frameworks
+    =============================================  -->
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.appear.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/progress-bar.min.js' %}"></script>
+    <script src="{% static 'assets/js/circle-progress.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/js/count-to.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/YTPlayer.min.js' %}"></script>
+    <script src="{% static 'assets/js/validnavs.js' %}"></script>
+    <script src="{% static 'assets/js/gsap.js' %}"></script>
+    <script src="{% static 'assets/js/ScrollTrigger.min.js' %}"></script>
+    <script src="{% static 'assets/js/SplitText.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>   
+    <script>
+(function () {
+  var e = document;
+
+  // Disable right-click
+  e.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+  });
+
+  // Disable common DevTools & view-source shortcuts
+  e.addEventListener("keydown", function (event) {
+    if (event.key === "F12") event.preventDefault();
+
+    if (event.ctrlKey && event.shiftKey && ["I", "J", "C"].includes(event.key.toUpperCase())) {
+      event.preventDefault();
+    }
+
+    if (event.ctrlKey && ["U", "S"].includes(event.key.toUpperCase())) {
+      event.preventDefault();
+    }
+  });
+
+  // Detect if DevTools are open (based on window size difference)
+  setInterval(function () {
+    if (
+      window.outerWidth - window.innerWidth > 200 ||
+      window.outerHeight - window.innerHeight > 200
+    ) {
+      document.body.innerHTML = `
+        <h1 style="text-align:center; color:red; margin-top:20%;">
+          Access Denied
+        </h1>
+      `;
+    }
+  }, 1000);
+})();
+</script>
+
+<style>
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+</style> 
+
+
+    {% block extra_js %}
+    {% endblock %}
+  </body>
+</html>

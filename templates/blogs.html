@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+  <style>
+    /* Modern Blog Card Styles */
+    .blog-card-modern {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .blog-card-modern:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .blog-thumb {
+      position: relative;
+      overflow: hidden;
+      height: 250px;
+    }
+    
+    .blog-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .blog-card-modern:hover .blog-image {
+      transform: scale(1.05);
+    }
+    
+    .blog-date {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      line-height: 1.2;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    }
+    
+    .blog-date strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .blog-date span {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .blog-content {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .blog-meta {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .blog-meta span {
+      font-size: 13px;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .blog-meta i {
+      color: #2563eb;
+    }
+    
+    .blog-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+    
+    .blog-title a {
+      color: #1f2937;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .blog-title a:hover {
+      color: #2563eb;
+    }
+    
+    .blog-excerpt {
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    
+    .blog-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #2563eb;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .blog-read-more:hover {
+      color: #1e40af;
+      gap: 12px;
+    }
+    
+    .blog-read-more svg {
+      transition: transform 0.3s ease;
+    }
+    
+    .blog-read-more:hover svg {
+      transform: translateX(3px);
+    }
+    
+    .no-blogs {
+      font-size: 18px;
+      color: #6b7280;
+      text-align: center;
+      padding: 60px 0;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .blog-thumb {
+        height: 200px;
+      }
+    
+      .blog-content {
+        padding: 20px;
+      }
+    
+      .blog-title {
+        font-size: 18px;
+      }
+    
+      .blog-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+    
+      .blog-date {
+        top: 15px;
+        left: 15px;
+        padding: 10px;
+      }
+    
+      .blog-date strong {
+        font-size: 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .blog-card-modern {
+        margin-bottom: 30px;
+      }
+    
+      .blog-thumb {
+        height: 180px;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="breadcrumb-area with-banner bg-cover text-center bg-dark text-light" style="background-image: url('{% static 'assets/img/banner/7.png' %}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>Blogs</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="active">Blogs</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Breadcrumb -->
+
+  <!-- Start Blog Area -->
+  <div class="blog-area home-blog blog-grid bg-gray default-padding">
+    <div class="container">
+      <div class="blog-item-box">
+        <div class="row gutter-lg">
+          {% for blog in page_obj %}
+            <div class="col-lg-6 col-md-6 mb-40">
+              <div class="blog-card-modern wow fadeInUp">
+                <div class="blog-thumb">
+                  <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="blog-image" />
+                  <div class="blog-date">
+                    <strong>{{ blog.created_at|date:'d' }}</strong>
+                    <span>{{ blog.created_at|date:'M' }}</span>
+                  </div>
+                </div>
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    {% comment %} <span><i class="far fa-user-circle"></i></span> {% endcomment %}
+                    <span><i class="far fa-clock"></i> {{ blog.created_at|date:'M d, Y' }}</span>
+                  </div>
+                  <h3 class="blog-title"><a href="{% url 'blog_detail' blog.slug %}">{{ blog.title }}</a></h3>
+                  <p class="blog-excerpt">{{ blog.description|striptags|truncatewords:25 }}</p>
+                  <a href="{% url 'blog_detail' blog.slug %}" class="blog-read-more">
+                    Read More<svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 17L17 1H7.8" stroke="#232323" stroke-width="2"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            <div class="col-12 text-center">
+              <p class="no-blogs">No blogs available at the moment.</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      {% if page_obj.has_other_pages %}
+        <div class="row">
+          <div class="col-md-12 pagi-area text-center">
+            <nav aria-label="navigation">
+              <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-double-left"></i></span>
+                  </li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                  {% if page_obj.number == num %}
+                    <li class="page-item active">
+                      <span class="page-link">{{ num }}</span>
+                    </li>
+                  {% else %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-double-right"></i></a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-double-right"></i></span>
+                  </li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      {% endif %}
+      <!-- End Pagination -->
+    </div>
+  </div>
+{% endblock %}

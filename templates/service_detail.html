@@ -1,0 +1,400 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <style>
+    /* Force bullets and numbers to show in service description */
+    .description-content ul,
+    .description-content ol {
+      list-style-position: outside !important;
+      margin: 15px 0 15px 25px !important;
+      padding-left: 30px !important;
+      display: block !important;
+    }
+    
+    .description-content ul {
+      list-style-type: disc !important;
+    }
+    
+    .description-content ol {
+      list-style-type: decimal !important;
+    }
+    
+    .description-content li {
+      display: list-item !important;
+      margin-bottom: 8px !important;
+      margin-left: 0 !important;
+      line-height: 1.6 !important;
+      color: #555 !important;
+      list-style: inherit !important;
+    }
+    
+    /* Ensure list markers are visible */
+    .description-content ul li::marker,
+    .description-content ol li::marker {
+      display: inline-block !important;
+      unicode-bidi: isolate !important;
+    }
+    
+    /* Nested lists */
+    .description-content ul ul {
+      list-style-type: circle !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .description-content ul ul ul {
+      list-style-type: square !important;
+    }
+    
+    .description-content ol ol {
+      list-style-type: lower-alpha !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .description-content ol ol ol {
+      list-style-type: lower-roman !important;
+    }
+    
+    /* Blockquote styling */
+    .description-content blockquote {
+      display: block !important;
+      margin: 20px 0 20px 25px !important;
+      padding: 15px 20px !important;
+      border-left: 4px solid #0066f5 !important;
+      background-color: #f8f9fa !important;
+      font-style: italic !important;
+      color: #555 !important;
+      border-radius: 4px !important;
+    }
+    
+    .description-content blockquote p {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .description-content blockquote p:not(:last-child) {
+      margin-bottom: 10px !important;
+    }
+    
+    /* Table Styling */
+    .description-content table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin: 20px 0 !important;
+      background-color: #fff !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+      border-radius: 8px !important;
+      overflow: hidden !important;
+      display: table !important;
+    }
+    
+    .description-content thead {
+      background-color: #0066f5 !important;
+      color: white !important;
+    }
+    
+    .description-content thead tr {
+      background-color: #0066f5 !important;
+    }
+    
+    .description-content thead th {
+      padding: 12px 15px !important;
+      text-align: left !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      color: white !important;
+      border: 1px solid #0052cc !important;
+      display: table-cell !important;
+    }
+    
+    .description-content tbody tr {
+      border-bottom: 1px solid #ddd !important;
+      transition: background-color 0.3s ease !important;
+    }
+    
+    .description-content tbody tr:hover {
+      background-color: #f8f9fa !important;
+    }
+    
+    .description-content tbody tr:nth-child(even) {
+      background-color: #f9f9f9 !important;
+    }
+    
+    .description-content tbody tr:last-child {
+      border-bottom: none !important;
+    }
+    
+    .description-content td {
+      padding: 12px 15px !important;
+      text-align: left !important;
+      font-size: 14px !important;
+      color: #555 !important;
+      border: 1px solid #ddd !important;
+      display: table-cell !important;
+    }
+    
+    .description-content th {
+      display: table-cell !important;
+    }
+    
+    .description-content caption {
+      padding: 10px !important;
+      caption-side: top !important;
+      font-weight: 600 !important;
+      font-size: 16px !important;
+      color: #333 !important;
+      text-align: left !important;
+    }
+    
+    /* Strong and emphasis */
+    .description-content li strong,
+    .description-content blockquote strong,
+    .description-content td strong {
+      font-weight: 600 !important;
+      color: #333 !important;
+    }
+    
+    .description-content li em,
+    .description-content blockquote em,
+    .description-content td em {
+      font-style: italic !important;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .description-content ul,
+      .description-content ol {
+        margin-left: 15px !important;
+        padding-left: 20px !important;
+      }
+    
+      .description-content blockquote {
+        margin-left: 10px !important;
+        padding: 10px 15px !important;
+        font-size: 14px !important;
+      }
+    
+      .description-content table {
+        font-size: 12px !important;
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+      }
+    
+      .description-content thead th,
+      .description-content td {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .description-content ul,
+      .description-content ol {
+        margin-left: 10px !important;
+        padding-left: 15px !important;
+      }
+    
+      .description-content blockquote {
+        margin-left: 5px !important;
+        padding: 8px 12px !important;
+        font-size: 13px !important;
+      }
+    
+      .description-content table {
+        font-size: 11px !important;
+      }
+    
+      .description-content thead th,
+      .description-content td {
+        padding: 6px 8px !important;
+        font-size: 11px !important;
+      }
+    }
+  </style>
+  <style>
+    .service-content {
+      max-width: 100%;
+      margin-top: 15px;
+    }
+    
+    .service-content p {
+      line-height: 1.6;
+      text-align: justify;
+      margin: 0 auto;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+    
+    /* Service Banner Styling - Same as Country Detail */
+    .service-banner {
+      margin-bottom: 30px;
+      width: 100%;
+      max-height: 446px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .service-banner img.service-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    
+    /* Content Wrapper for proper text handling */
+    .content-wrapper {
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .description-content {
+      width: 100%;
+      text-align: justify;
+      line-height: 1.6;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    .description-content p {
+      margin-bottom: 15px;
+      hyphens: auto;
+      font-size: 16px;
+      color: #555;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    
+    h2.mb-20 {
+      color: #222;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .pl-50,
+      .pl-md-15,
+      .pl-xs-15 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    
+      .description-content {
+        text-align: left;
+        hyphens: auto;
+        word-break: break-word;
+      }
+    
+      .description-content p {
+        font-size: 15px;
+        line-height: 1.5;
+      }
+    
+      .service-banner {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .service-banner {
+        max-height: 250px;
+      }
+    
+      .description-content p {
+        font-size: 14px;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-area bg-dark text-light text-center bg-cover" style="background-image: url('{{ service.image.url }}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>{{ service.title }}</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="active">{{ service.title }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Details -->
+  <div class="services-details-area default-padding">
+    <div class="container">
+      <div class="row">
+        <!-- Left Content -->
+        <div class="col-xl-8 col-lg-7 order-lg-last pl-50 pl-md-15 pl-xs-15">
+          <!-- Service Banner - Same as Country Detail -->
+          <div class="service-banner mb-30">
+            {% if service.image %}
+              <img src="{{ service.image.url }}" alt="{{ service.title }}" class="service-image" />
+            {% else %}
+              <img src="{% static 'assets/img/banner/default.jpg' %}" alt="{{ service.title }}" class="service-image" />
+            {% endif %}
+          </div>
+
+          <!-- Content Wrapper - Same as Country Detail -->
+          <div class="content-wrapper">
+            <h2 class="mb-20">{{ service.title }}</h2>
+            <div class="description-content">
+              {% if service.description %}
+                <p>{{ service.description|safe }}</p>
+              {% else %}
+                <p>No description available for {{ service.title }}.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-xl-4 col-lg-5 mt-md-120 mt-xs-50 services-sidebar">
+          <!-- Other Services List -->
+          <div class="single-widget services-list-widget">
+            <h4>Other Services</h4>
+            <div class="content" style="max-height: 300px; overflow-y: auto;">
+              <ul>
+                {% for s in other_services %}
+                  <li class="{% if s.pk == service.pk %}current-item{% endif %}">
+                    <a href="{% url 'service_detail' s.slug %}">{{ s.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="single-widget text-light appl-visa-widget" style="background-image: url('{% static 'assets/img/shape/1.jpg' %}');">
+            <h4>Dream Tour</h4>
+            <h2>Explore The World</h2>
+            <a href="{% url 'about' %}" class="btn-style-one btn-light circle">Discover More <span></span></a>
+          </div>
+
+          <!-- Downloads -->
+          {% if service.pdf %}
+            <div class="single-widget widget-brochure">
+              <h4 class="widget-title">Downloads</h4>
+              <ul>
+                <li>
+                  <a href="{{ service.pdf.url }}" download><i class="fas fa-file-pdf"></i> Service Statement</a>
+                </li>
+              </ul>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

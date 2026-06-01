@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <!--  Start Breadcrumb 
+    =============================================  -->
+  <div class="breadcrumb-area with-banner bg-cover text-center bg-dark text-light" style="background-image: url('{% static 'assets/img/banner/7.png' %}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>Apply Form</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="active">Apply Form</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Breadcrumb -->
+
+  <!--  Start Appoinement 
+    =============================================  -->
+  <div class="appoinment-style-one-area default-padding appoinment-page">
+    <div class="container">
+      <div class="row align-center">
+        <div class="col-xl-6 offset-xl-1 order-lg-last">
+          <div class="appoinment-style-one-info">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <!-- Personal Information -->
+              <div class="mb-3">
+                <label class="form-label fw-bold">Full Name</label>
+                <input type="text" name="full_name" class="form-control" placeholder="Enter your full name" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">Phone Number</label>
+                <input type="text" name="phone" class="form-control" placeholder="Enter your phone number" required />
+              </div>
+
+              <!-- Education Info -->
+              <div class="mb-3">
+                <label class="form-label fw-bold">Highest Qualification</label>
+                <input type="text" name="qualification" class="form-control" placeholder="E.g., Bachelor's in Computer Science" required />
+              </div>
+
+              <div class="form-group">
+                <label for="id_marks">Percentages</label>
+                <input type="number" step="0.01" class="form-control" id="id_marks" name="marks" placeholder="Enter your marks (e.g., 75.50)" required />
+              </div>
+
+              <!-- Course & University -->
+              <div class="mb-3">
+                <label class="form-label fw-bold">Select Country</label>
+                <select name="country" id="countrySelect" class="form-select" required>
+                  <option value="">-- Select Country --</option>
+                  {% for country in countries %}
+                    <option value="{{ country.id }}">{{ country.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">Select Course</label>
+                <select name="course" id="courseSelect" class="form-select" required>
+                  <option value="">-- Select Course --</option>
+                </select>
+              </div>
+
+              <!-- Submit -->
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill">Submit Application</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-xl-5">
+          <div class="appoinment-style-two-thumb">
+            <div class="thumb-inner">
+              <img src="{% static 'assets/img/illustration/11.png' %}" alt="Image Not Found" />
+            </div>
+            <div class="fun-fact">
+              <div class="counter">
+                <div class="timer" data-to="50" data-speed="1000">50</div>
+              </div>
+              <h4>Daily Application</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Appoinement -->
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.querySelector('form')
+    
+      const fields = {
+        full_name: form.querySelector('input[name="full_name"]'),
+        email: form.querySelector('input[name="email"]'),
+        phone: form.querySelector('input[name="phone"]'),
+        qualification: form.querySelector('input[name="qualification"]'),
+        marks: form.querySelector('input[name="marks"]'),
+        country: form.querySelector('select[name="country"]'),
+        course: form.querySelector('select[name="course"]')
+      }
+    
+      // Helper functions
+      function showError(input, message) {
+        clearError(input)
+        const errorElem = document.createElement('div')
+        errorElem.className = 'error-message'
+        errorElem.style.color = 'red'
+        errorElem.style.fontSize = '13px'
+        errorElem.style.marginTop = '5px'
+        errorElem.textContent = message
+        input.classList.add('input-error')
+        input.parentNode.appendChild(errorElem)
+      }
+    
+      function clearError(input) {
+        const next = input.parentNode.querySelector('.error-message')
+        if (next) next.remove()
+        input.classList.remove('input-error')
+      }
+    
+      // Validation functions
+      function validateName() {
+        const value = fields.full_name.value.trim()
+        const regex = /^[A-Za-z\s]+$/
+        if (!value) return showError(fields.full_name, 'Name is required'), false
+        if (!regex.test(value)) return showError(fields.full_name, 'Enter a valid name'), false
+        clearError(fields.full_name)
+        return true
+      }
+    
+      function validateEmail() {
+        const value = fields.email.value.trim()
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!value) return showError(fields.email, 'Email is required'), false
+        if (!regex.test(value)) return showError(fields.email, 'Enter a valid email'), false
+        clearError(fields.email)
+        return true
+      }
+    
+      function validatePhone() {
+        const value = fields.phone.value.trim()
+        const regex = /^[0-9]{10,11}$/
+        if (!value) return showError(fields.phone, 'Phone number is required'), false
+        if (!regex.test(value)) return showError(fields.phone, 'Enter a valid phone number.'), false
+        clearError(fields.phone)
+        return true
+      }
+    
+      function validateCountry() {
+        if (!fields.country.value) {
+          showError(fields.country, 'Please select a country')
+          return false
+        }
+        clearError(fields.country)
+        return true
+      }
+    
+      function validateCourse() {
+        if (!fields.course.value) {
+          showError(fields.course, 'Please select a course')
+          return false
+        }
+        clearError(fields.course)
+        return true
+      }
+    
+      // Qualification and Marks can be empty, but we can add minimal checks
+      function validateQualification() {
+        clearError(fields.qualification)
+        return true
+      }
+    
+      function validateMarks() {
+        clearError(fields.marks)
+        return true
+      }
+    
+      // Live validation
+      fields.full_name.addEventListener('input', validateName)
+      fields.email.addEventListener('input', validateEmail)
+      fields.phone.addEventListener('input', validatePhone)
+      fields.country.addEventListener('change', validateCountry)
+      fields.course.addEventListener('change', validateCourse)
+    
+      form.addEventListener('submit', function (e) {
+        let valid = true
+        if (!validateName()) valid = false
+        if (!validateEmail()) valid = false
+        if (!validatePhone()) valid = false
+        if (!validateCountry()) valid = false
+        if (!validateCourse()) valid = false
+        if (!validateQualification()) valid = false
+        if (!validateMarks()) valid = false
+    
+        if (!valid) e.preventDefault()
+      })
+    
+      document.getElementById('countrySelect').addEventListener('change', function () {
+        let countryId = this.value
+        let courseSelect = document.getElementById('courseSelect')
+    
+        // Clear old options
+        courseSelect.innerHTML = '<option value="">-- Select Course --</option>'
+    
+        if (countryId) {
+          fetch(`/get-courses/${countryId}/`)
+            .then((response) => response.json())
+            .then((data) => {
+              data.forEach((course) => {
+                let option = document.createElement('option')
+                option.value = course.id
+                option.textContent = course.title
+                courseSelect.appendChild(option)
+              })
+            })
+        }
+      })
+    })
+  </script>
+{% endblock %}

@@ -1,0 +1,1129 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+ 
+
+  <style>
+    /* Force bullets and numbers to show in country description - Enhanced Version */
+    .description-content ul,
+    .description-content ol {
+      list-style-position: outside !important;
+      margin: 15px 0 15px 25px !important;
+      padding-left: 30px !important;
+      display: block !important;
+    }
+    
+    .description-content ul {
+      list-style-type: disc !important;
+    }
+    
+    .description-content ol {
+      list-style-type: decimal !important;
+    }
+    
+    .description-content li {
+      display: list-item !important;
+      margin-bottom: 8px !important;
+      margin-left: 0 !important;
+      line-height: 1.6 !important;
+      color: #555 !important;
+      list-style: inherit !important;
+    }
+    
+    /* Ensure list markers are visible */
+    .description-content ul li::marker,
+    .description-content ol li::marker {
+      display: inline-block !important;
+      unicode-bidi: isolate !important;
+    }
+    
+    /* Nested lists */
+    .description-content ul ul {
+      list-style-type: circle !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .description-content ul ul ul {
+      list-style-type: square !important;
+    }
+    
+    .description-content ol ol {
+      list-style-type: lower-alpha !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .description-content ol ol ol {
+      list-style-type: lower-roman !important;
+    }
+    
+    /* Blockquote styling */
+    .description-content blockquote {
+      display: block !important;
+      margin: 20px 0 20px 25px !important;
+      padding: 15px 20px !important;
+      border-left: 4px solid #0066f5 !important;
+      background-color: #f8f9fa !important;
+      font-style: italic !important;
+      color: #555 !important;
+      border-radius: 4px !important;
+    }
+    
+    .description-content blockquote p {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .description-content blockquote p:not(:last-child) {
+      margin-bottom: 10px !important;
+    }
+    
+    /* Alternative blockquote styling (if you prefer a different look) */
+    .description-content blockquote::before {
+      content: '"' !important;
+      font-size: 3em !important;
+      color: #0066f5 !important;
+      opacity: 0.3 !important;
+      position: absolute !important;
+      margin-left: -20px !important;
+      margin-top: -10px !important;
+    }
+    
+    /* Strong and emphasis within lists and blockquotes */
+    .description-content li strong,
+    .description-content blockquote strong {
+      font-weight: 600 !important;
+      color: #333 !important;
+    }
+    
+    .description-content li em,
+    .description-content blockquote em {
+      font-style: italic !important;
+    }
+    
+    /* Responsive adjustments for lists and blockquotes */
+    @media (max-width: 768px) {
+      .description-content ul,
+      .description-content ol {
+        margin-left: 15px !important;
+        padding-left: 20px !important;
+      }
+    
+      .description-content blockquote {
+        margin-left: 10px !important;
+        padding: 10px 15px !important;
+        font-size: 14px !important;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .description-content ul,
+      .description-content ol {
+        margin-left: 10px !important;
+        padding-left: 15px !important;
+      }
+    
+      .description-content blockquote {
+        margin-left: 5px !important;
+        padding: 8px 12px !important;
+        font-size: 13px !important;
+      }
+    }
+  </style>
+  <style>
+    /* Minimal Table Styling */
+    .description-content table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin: 20px 0 !important;
+      display: table !important;
+    }
+    
+    .description-content th,
+    .description-content td {
+      border: 1px solid #ddd !important;
+      padding: 10px !important;
+      text-align: left !important;
+      display: table-cell !important;
+    }
+    
+    .description-content th {
+      background-color: #f4f4f4 !important;
+      font-weight: 600 !important;
+    }
+    
+    .description-content tr:hover {
+      background-color: #f9f9f9 !important;
+    }
+  </style>
+  <style>
+    /* Pagination Styles */
+    .pagi-area {
+      margin-top: 30px;
+    }
+    
+    .pagination {
+      margin-bottom: 15px;
+    }
+    
+    .page-item .page-link {
+      color: #0066f5;
+      border: 1px solid #dee2e6;
+      padding: 0.5rem 0.75rem;
+      margin: 0 2px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .page-item.active .page-link {
+      background-color: #0066f5;
+      border-color: #0066f5;
+      color: white;
+    }
+    
+    .page-item .page-link:hover {
+      background-color: #e9ecef;
+      border-color: #dee2e6;
+      color: #0056b3;
+    }
+    
+    .page-item.disabled .page-link {
+      color: #6c757d;
+      pointer-events: none;
+      background-color: #fff;
+      border-color: #dee2e6;
+    }
+    
+    .page-info {
+      font-size: 14px;
+    }
+    
+    /* Responsive pagination */
+    @media (max-width: 576px) {
+      .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    
+      .page-item {
+        margin-bottom: 5px;
+      }
+    }
+  </style>
+  <style>
+    /* Country Detail Page - Content Styling */
+    .content-wrapper {
+      width: 100%;
+    }
+    
+    .description-content {
+      width: 100%;
+      text-align: justify;
+      line-height: 1.6;
+    }
+    
+    .description-content p {
+      margin-bottom: 15px;
+      word-wrap: break-word;
+      hyphens: auto;
+      font-size: 16px;
+      color: #555;
+    }
+    
+    .country-banner {
+      margin-bottom: 30px;
+      width: 100%;
+      max-height: 446px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .country-banner img.country-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    
+    h2.mb-20 {
+      color: #222;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .pl-50,
+      .pl-md-15,
+      .pl-xs-15 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    
+      .description-content {
+        text-align: left;
+      }
+    
+      .country-banner {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .country-banner {
+        max-height: 250px;
+      }
+    }
+  </style>
+
+  <style>
+    /* Universities Section Styling */
+    .universities-section {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+    
+    .section-header {
+      margin-bottom: 50px;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .title-underline {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(135deg, #0066f5, #4faaff);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+    
+    .universities-grid {
+      margin-bottom: 40px;
+    }
+    
+    .university-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .university-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .university-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+    
+    .university-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .university-card:hover .university-image img {
+      transform: scale(1.05);
+    }
+    
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .university-card:hover .image-overlay {
+      opacity: 1;
+    }
+    
+    .view-details-btn {
+      background: #0066f5;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .view-details-btn:hover {
+      background: #0052cc;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    
+    .university-content {
+      padding: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .university-header {
+      margin-bottom: 15px;
+    }
+    
+    .university-name {
+      margin-bottom: 8px;
+    }
+    
+    .university-name a {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .university-name a:hover {
+      color: #0066f5;
+    }
+    
+    .university-location {
+      color: #666;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .university-location i {
+      color: #0066f5;
+    }
+    
+    .university-description {
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    
+    .university-description p {
+      color: #555;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    
+    .university-footer {
+      margin-top: auto;
+    }
+    
+    .no-data-icon {
+      font-size: 4rem;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+    
+    .no-universities-found h4 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .no-universities-found p {
+      color: #666;
+      margin: 0;
+    }
+    
+    .read-more-btn {
+      background: #0066f5;
+      color: #fff !important;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .read-more-btn:hover {
+      background: #0052cc;
+      transform: scale(1.05);
+      color: #fff !important;
+    }
+    
+    .read-more-btn i {
+      transition: transform 0.3s ease;
+    }
+    
+    .read-more-btn:hover i {
+      transform: translateX(3px);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2rem;
+      }
+    
+      .university-image {
+        height: 200px;
+      }
+    
+      .university-content {
+        padding: 20px;
+      }
+    
+      .pagination-wrapper {
+        padding: 20px 15px;
+      }
+    
+      .pagination-info {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    
+      .pagination .page-link {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .universities-section {
+        padding: 40px 0;
+      }
+    
+      .section-header {
+        margin-bottom: 30px;
+      }
+    
+      .university-card {
+        margin-bottom: 20px;
+      }
+    
+      .university-image {
+        height: 180px;
+      }
+    
+      .pagination .page-link {
+        padding: 6px 10px;
+        margin: 0 1px;
+      }
+    }
+  </style>
+
+  <style>
+    /* Country Detail Page - Content Styling */
+    .content-wrapper {
+      width: 100%;
+      overflow: hidden; /* Prevent content from overflowing */
+    }
+    
+    .description-content {
+      width: 100%;
+      text-align: justify;
+      line-height: 1.6;
+      word-wrap: break-word; /* Ensure long words break */
+      overflow-wrap: break-word; /* Modern version of word-wrap */
+    }
+    
+    .description-content p {
+      margin-bottom: 15px;
+      hyphens: auto;
+      font-size: 16px;
+      color: #555;
+      /* Add these properties to prevent overflow */
+      max-width: 100%;
+      overflow: hidden;
+    }
+    
+    .country-banner {
+      margin-bottom: 30px;
+      width: 100%;
+      max-height: 446px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .country-banner img.country-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    
+    h2.mb-20 {
+      color: #222;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .pl-50,
+      .pl-md-15,
+      .pl-xs-15 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    
+      .description-content {
+        text-align: left;
+        /* Mobile-specific fixes */
+        hyphens: auto;
+        word-break: break-word;
+      }
+    
+      .description-content p {
+        font-size: 15px; /* Slightly smaller font on mobile */
+        line-height: 1.5;
+      }
+    
+      .country-banner {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .country-banner {
+        max-height: 250px;
+      }
+    
+      .description-content p {
+        font-size: 14px; /* Even smaller font on very small screens */
+      }
+    }
+  </style>
+
+  <style>
+/* ============================================
+   NUCLEAR FIX - Completely Override heree
+   ============================================ */
+
+.universities-section {
+  padding: 60px 0 !important;
+  background: #f8f9fa !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.universities-grid {
+  width: 100% !important;
+  margin-bottom: 40px !important;
+}
+
+/* Reset Bootstrap Grid Completely */
+.universities-grid .row {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.universities-grid .row > * {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.universities-grid .col-lg-6,
+.universities-grid .col-md-12,
+.universities-grid [class*='col-'] {
+  flex: unset !important;
+  max-width: unset !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.university-card {
+  background: #fff !important;
+  border-radius: 15px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease !important;
+  overflow: hidden !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+/* Mobile - 1 Column */
+@media (max-width: 767px) {
+  .universities-grid .row {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* Tablet - 2 Columns */
+@media (min-width: 768px) and (max-width: 991px) {
+  .universities-grid .row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Desktop - 2 Columns */
+@media (min-width: 992px) {
+  .universities-grid .row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+</style> 
+{% endblock %}
+
+{% block content %}
+  <!--  Start Breadcrumb 
+    =============================================  -->
+  <div class="breadcrumb-area with-banner bg-cover text-center bg-dark text-light" style="background-image: url('{{ country.image.url }}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>{{ country.name }}</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="active">{{ country.name }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Breadcrumb -->
+
+  <!--  Star Services Details Area
+    =============================================  -->
+  <div class="services-details-area overflow-hidden default-padding">
+    <div class="container">
+      <div class="services-details-items">
+        <div class="row">
+          <div class="col-xl-8 col-lg-7 order-lg-last pl-50 pl-md-15 pl-xs-15">
+            <div class="country-banner mb-30">
+              {% if country.image %}
+                <img src="{{ country.image.url }}" alt="{{ country.name }}" class="country-image" />
+              {% else %}
+                <img src="{% static 'assets/img/banner/default.jpg' %}" alt="{{ country.name }}" class="country-image" />
+              {% endif %}
+            </div>
+            <div class="content-wrapper">
+              <h2 class="mb-20">Student Life in {{ country.name }}</h2>
+              <div class="description-content">
+                {% if country.description %}
+                  <p>{{ country.description|safe }}</p>
+                {% else %}
+                  <p>No description available for {{ country.name }}.</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-5 mt-md-120 mt-xs-50 services-sidebar">
+            <div class="single-widget country-list-widget">
+              <div class="content">
+                <ul style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                  <!-- Selected country first -->
+                  <li class="current-item">
+                    <a href="{% url 'country_detail' country.slug %}">
+                      <div class="icon">
+                        <img src="{{ country.flag.url }}" alt="{{ country.name }} Flag" />
+                      </div>
+                      {{ country.name }}
+                    </a>
+                  </li>
+
+                  <!-- Other countries -->
+                  {% for c in other_countries %}
+                    {% if c.id != country.id %}
+                      <!-- Exclude current country from the list -->
+                      <li>
+                        <a href="{% url 'country_detail' c.slug %}">
+                          <div class="icon">
+                            <img src="{{ c.flag.url }}" alt="{{ c.name }} Flag" />
+                          </div>
+                          {{ c.name }}
+                        </a>
+                      </li>
+                    {% endif %}
+                  {% empty %}
+                    <li>
+                      <a href="#">No other countries available</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+            <!-- End Single Widget -->
+            <div class="single-widget text-light appl-visa-widget" style="background-image: url('{% static 'assets/img/shape/1.jpg' %}');">
+              <h4>Dream Tour</h4>
+              <h2>Explore The World</h2>
+              <a href="{% url 'about' %}" class="btn-style-one btn-light circle">Discover More <span></span></a>
+            </div>
+            <!-- Single Widget -->
+            {% if country.pdf %}
+              <div class="single-widget widget-brochure">
+                <h4 class="widget-title">Downloads</h4>
+                <ul>
+                  <li>
+                    <a href="{{ country.pdf.url }}" download><i class="fas fa-file-pdf"></i> Country Brochure</a>
+                  </li>
+                </ul>
+              </div>
+            {% endif %}
+
+            <!-- End Single Widget -->
+          </div>
+        </div>
+
+        
+
+          <div class="universities-section mt-50">
+  <div class="container">
+    {% if universities %}
+      <!-- Show Header only if universities exist -->
+      <div class="section-header text-center mb-40">
+        <h2 class="section-title">Top Universities in {{ country.name }}</h2>
+        <div class="title-underline"></div>
+      </div>
+
+      <!-- Universities Container -->
+      <div id="universities-container">
+        <div class="universities-grid">
+          <div class="row" id="universities-row">
+            {% for uni in universities %}
+              <div class="col-lg-6 col-md-12 mb-30">
+                <div class="university-card">
+                  <div class="university-image">
+                    <img src="{{ uni.image.url }}" alt="{{ uni.name }}" />
+                    <div class="image-overlay">
+                      <div class="overlay-content">
+                        <a href="{% url 'uni_detail' uni.slug %}" class="view-details-btn">
+                          <i class="fas fa-eye"></i>
+                          View Details
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="university-content">
+                    <div class="university-header">
+                      <h4 class="university-name"><a href="{% url 'uni_detail' uni.slug %}">{{ uni.name }}</a></h4>
+                      <div class="university-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        {{ uni.country.name }}
+                      </div>
+                    </div>
+
+                    <div class="university-description">
+                      <p>{{ uni.description|truncatewords:20|safe }}</p>
+                    </div>
+
+                    <div class="university-footer">
+                      <a href="{% url 'uni_detail' uni.slug %}" class="read-more-btn">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        {% if universities.paginator.num_pages > 1 %}
+          <div class="pagination-wrapper mt-50 text-center" id="pagination-container">
+            <!-- Pagination Info -->
+            <div class="pagination-info mb-3">
+              <p class="results-text mb-0">
+                Showing <span class="font-weight-bold" id="start-index">{{ universities.start_index }}</span> -
+                <span class="font-weight-bold" id="end-index">{{ universities.end_index }}</span> of
+                <span class="font-weight-bold" id="total-count">{{ universities.paginator.count }}</span> universities
+              </p>
+            </div>
+
+            <!-- Pagination Controls -->
+            <nav aria-label="Universities pagination" class="pagination-nav">
+              <ul class="pagination justify-content-center mb-0" id="pagination-links">
+                {% if universities.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link pagination-link" href="?page=1" data-page="1" aria-label="First"><i class="fas fa-angle-double-left"></i></a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link pagination-link" href="?page={{ universities.previous_page_number }}" data-page="{{ universities.previous_page_number }}" aria-label="Previous"><i class="fas fa-angle-left"></i></a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-double-left"></i></span>
+                  </li>
+                  <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-left"></i></span>
+                  </li>
+                {% endif %}
+
+                {% for num in universities.paginator.page_range %}
+                  {% if universities.number == num %}
+                    <li class="page-item active">
+                      <span class="page-link">{{ num }}</span>
+                    </li>
+                  {% elif num > universities.number|add:'-3' and num < universities.number|add:'3' %}
+                    <li class="page-item">
+                      <a class="page-link pagination-link" href="?page={{ num }}" data-page="{{ num }}">{{ num }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+
+                {% if universities.has_next %}
+                  <li class="page-item">
+                    <a class="page-link pagination-link" href="?page={{ universities.next_page_number }}" data-page="{{ universities.next_page_number }}" aria-label="Next"><i class="fas fa-angle-right"></i></a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link pagination-link" href="?page={{ universities.paginator.num_pages }}" data-page="{{ universities.paginator.num_pages }}" aria-label="Last"><i class="fas fa-angle-double-right"></i></a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-right"></i></span>
+                  </li>
+                  <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-double-right"></i></span>
+                  </li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+        {% endif %}
+      </div>
+    {% else %}
+      <!-- No Universities Found -->
+      <div class="no-universities-found text-center">
+        <div class="no-data-icon">
+          <i class="fas fa-university"></i>
+        </div>
+        <h4>No Universities Found.</h4>
+        <p>Currently, there are no universities listed for {{ country.name }}.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const paginationLinks = document.querySelectorAll('.pagination-link');
+    const universitiesRow = document.getElementById('universities-row');
+    const paginationContainer = document.getElementById('pagination-container');
+    const universitiesContainer = document.getElementById('universities-container');
+    
+    paginationLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const page = this.getAttribute('data-page');
+            loadUniversities(page);
+        });
+    });
+    
+    function loadUniversities(page) {
+        const url = window.location.pathname + '?page=' + page;
+        
+        // Show loading state
+        universitiesRow.style.opacity = '0.5';
+        universitiesRow.style.pointerEvents = 'none';
+        
+        fetch(url, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update universities
+            updateUniversities(data.universities);
+            
+            // Update pagination
+            updatePagination(data);
+            
+            // Update info
+            document.getElementById('start-index').textContent = data.start_index;
+            document.getElementById('end-index').textContent = data.end_index;
+            document.getElementById('total-count').textContent = data.total_count;
+            
+            // Restore state
+            universitiesRow.style.opacity = '1';
+            universitiesRow.style.pointerEvents = 'auto';
+            
+            // Smooth scroll to universities section
+            universitiesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Update URL without reload
+            window.history.pushState({}, '', url);
+        })
+        .catch(error => {
+            console.error('Error loading universities:', error);
+            universitiesRow.style.opacity = '1';
+            universitiesRow.style.pointerEvents = 'auto';
+        });
+    }
+    
+    function updateUniversities(universities) {
+        // Clear existing content
+        universitiesRow.innerHTML = '';
+        
+        // Add each university
+        universities.forEach(uni => {
+            const col = document.createElement('div');
+            col.className = 'col-lg-6 col-md-12 mb-30';
+            
+            col.innerHTML = `
+                <div class="university-card">
+                    <div class="university-image">
+                        <img src="${uni.image_url}" alt="${uni.name}" />
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <a href="/university-detail/${uni.slug}/" class="view-details-btn">
+                                    <i class="fas fa-eye"></i>
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="university-content">
+                        <div class="university-header">
+                            <h4 class="university-name">
+                                <a href="/university-detail/${uni.slug}/">${uni.name}</a>
+                            </h4>
+                            <div class="university-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${uni.country_name}
+                            </div>
+                        </div>
+                        <div class="university-description">
+                            <p>${uni.description}</p>
+                        </div>
+                        <div class="university-footer">
+                            <a href="/university-detail/${uni.slug}/" class="read-more-btn">
+                                Learn More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            universitiesRow.appendChild(col);
+        });
+    }
+    
+    function updatePagination(data) {
+        const paginationLinks = document.getElementById('pagination-links');
+        let html = '';
+        
+        // First and Previous buttons
+        if (data.has_previous) {
+            html += `
+                <li class="page-item">
+                    <a class="page-link pagination-link" href="?page=1" data-page="1" aria-label="First">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link pagination-link" href="?page=${data.previous_page}" data-page="${data.previous_page}" aria-label="Previous">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+            `;
+        } else {
+            html += `
+                <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-double-left"></i></span>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-left"></i></span>
+                </li>
+            `;
+        }
+        
+        // Page numbers
+        for (let i = 1; i <= data.total_pages; i++) {
+            if (i === data.current_page) {
+                html += `<li class="page-item active"><span class="page-link">${i}</span></li>`;
+            } else if (i > data.current_page - 3 && i < data.current_page + 3) {
+                html += `
+                    <li class="page-item">
+                        <a class="page-link pagination-link" href="?page=${i}" data-page="${i}">${i}</a>
+                    </li>
+                `;
+            }
+        }
+        
+        // Next and Last buttons
+        if (data.has_next) {
+            html += `
+                <li class="page-item">
+                    <a class="page-link pagination-link" href="?page=${data.next_page}" data-page="${data.next_page}" aria-label="Next">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link pagination-link" href="?page=${data.total_pages}" data-page="${data.total_pages}" aria-label="Last">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            `;
+        } else {
+            html += `
+                <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-right"></i></span>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-angle-double-right"></i></span>
+                </li>
+            `;
+        }
+        
+        paginationLinks.innerHTML = html;
+        
+        // Re-attach event listeners to new pagination links
+        const newLinks = paginationLinks.querySelectorAll('.pagination-link');
+        newLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                loadUniversities(page);
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

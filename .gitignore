@@ -1,0 +1,35 @@
+# Django #
+*.log
+*.pot
+*.pyc
+**/__pycache__
+db.sqlite3
+media
+mediafiles
+staticfiles
+
+# Python # 
+*.py[cod] 
+*$py.class  
+
+# pyenv 
+.python-version 
+
+# Environments 
+.env 
+.venv 
+env/ 
+venv/
+
+# mkdocs documentation 
+/site 
+
+# Visual Studio Code
+.vscode/* 
+.history
+
+# PyCharm
+.idea/
+
+#Others
+certbot/

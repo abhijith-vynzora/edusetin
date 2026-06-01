@@ -1,0 +1,1630 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+  <style>
+    /* Force bullets and numbers to show in university description */
+    .description-content ul,
+    .description-content ol {
+      list-style-position: outside !important;
+      margin: 15px 0 15px 25px !important;
+      padding-left: 30px !important;
+      display: block !important;
+    }
+    
+    .description-content ul {
+      list-style-type: disc !important;
+    }
+    
+    .description-content ol {
+      list-style-type: decimal !important;
+    }
+    
+    .description-content li {
+      display: list-item !important;
+      margin-bottom: 8px !important;
+      margin-left: 0 !important;
+      line-height: 1.6 !important;
+      color: #555 !important;
+      list-style: inherit !important;
+    }
+    
+    /* Ensure list markers are visible */
+    .description-content ul li::marker,
+    .description-content ol li::marker {
+      display: inline-block !important;
+      unicode-bidi: isolate !important;
+    }
+    
+    /* Nested lists */
+    .description-content ul ul {
+      list-style-type: circle !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .description-content ul ul ul {
+      list-style-type: square !important;
+    }
+    
+    .description-content ol ol {
+      list-style-type: lower-alpha !important;
+      margin-top: 8px !important;
+      padding-left: 25px !important;
+    }
+    
+    .description-content ol ol ol {
+      list-style-type: lower-roman !important;
+    }
+    
+    /* Blockquote styling */
+    .description-content blockquote {
+      display: block !important;
+      margin: 20px 0 20px 25px !important;
+      padding: 15px 20px !important;
+      border-left: 4px solid #0066f5 !important;
+      background-color: #f8f9fa !important;
+      font-style: italic !important;
+      color: #555 !important;
+      border-radius: 4px !important;
+    }
+    
+    .description-content blockquote p {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .description-content blockquote p:not(:last-child) {
+      margin-bottom: 10px !important;
+    }
+    
+    /* Table Styling */
+    .description-content table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin: 20px 0 !important;
+      background-color: #fff !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+      border-radius: 8px !important;
+      overflow: hidden !important;
+      display: table !important;
+    }
+    
+    .description-content thead {
+      background-color: #0066f5 !important;
+      color: white !important;
+    }
+    
+    .description-content thead tr {
+      background-color: #0066f5 !important;
+    }
+    
+    .description-content thead th {
+      padding: 12px 15px !important;
+      text-align: left !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      color: white !important;
+      border: 1px solid #0052cc !important;
+      display: table-cell !important;
+    }
+    
+    .description-content tbody tr {
+      border-bottom: 1px solid #ddd !important;
+      transition: background-color 0.3s ease !important;
+    }
+    
+    .description-content tbody tr:hover {
+      background-color: #f8f9fa !important;
+    }
+    
+    .description-content tbody tr:nth-child(even) {
+      background-color: #f9f9f9 !important;
+    }
+    
+    .description-content tbody tr:last-child {
+      border-bottom: none !important;
+    }
+    
+    .description-content td {
+      padding: 12px 15px !important;
+      text-align: left !important;
+      font-size: 14px !important;
+      color: #555 !important;
+      border: 1px solid #ddd !important;
+      display: table-cell !important;
+    }
+    
+    .description-content th {
+      display: table-cell !important;
+    }
+    
+    .description-content caption {
+      padding: 10px !important;
+      caption-side: top !important;
+      font-weight: 600 !important;
+      font-size: 16px !important;
+      color: #333 !important;
+      text-align: left !important;
+    }
+    
+    /* Strong and emphasis */
+    .description-content li strong,
+    .description-content blockquote strong,
+    .description-content td strong {
+      font-weight: 600 !important;
+      color: #333 !important;
+    }
+    
+    .description-content li em,
+    .description-content blockquote em,
+    .description-content td em {
+      font-style: italic !important;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .description-content ul,
+      .description-content ol {
+        margin-left: 15px !important;
+        padding-left: 20px !important;
+      }
+    
+      .description-content blockquote {
+        margin-left: 10px !important;
+        padding: 10px 15px !important;
+        font-size: 14px !important;
+      }
+    
+      .description-content table {
+        font-size: 12px !important;
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+      }
+    
+      .description-content thead th,
+      .description-content td {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .description-content ul,
+      .description-content ol {
+        margin-left: 10px !important;
+        padding-left: 15px !important;
+      }
+    
+      .description-content blockquote {
+        margin-left: 5px !important;
+        padding: 8px 12px !important;
+        font-size: 13px !important;
+      }
+    
+      .description-content table {
+        font-size: 11px !important;
+      }
+    
+      .description-content thead th,
+      .description-content td {
+        padding: 6px 8px !important;
+        font-size: 11px !important;
+      }
+    }
+  </style>
+  <style>
+    /* Mobile responsiveness for proper content ordering */
+    @media (max-width: 767px) {
+      /* Remove the conflicting order rules */
+      .services-sidebar {
+        margin-top: 30px !important;
+        order: 2 !important; /* Sidebar comes AFTER main content */
+      }
+    
+      /* Main content comes first */
+      .col-xl-8.col-lg-7.order-lg-last {
+        order: 1 !important; /* Main content comes FIRST */
+        margin-top: 0 !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    
+      /* Ensure the row uses flexbox properly */
+      .services-details-area .container .row {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+    
+      .other-universities-list {
+        max-height: 200px;
+        padding-right: 5px;
+      }
+    
+      /* Ensure proper spacing between sidebar widgets and main content */
+      .services-sidebar .single-widget {
+        margin-bottom: 25px;
+      }
+    }
+    
+    /* Tablet responsiveness */
+    @media (min-width: 768px) and (max-width: 991px) {
+      .pl-50,
+      .pl-md-15,
+      .pl-xs-15 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    
+      .other-universities-list {
+        max-height: 300px;
+      }
+    }
+  </style>
+  <style>
+    /* Other Universities List Styles */
+    .other-universities-list {
+      max-height: 350px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+    
+    /* Mobile responsiveness for the scrollbar widget */
+    @media (max-width: 767px) {
+      .services-sidebar {
+        margin-top: 30px !important;
+      }
+    
+      .other-universities-list {
+        max-height: 200px; /* Reduced height for mobile */
+        padding-right: 5px;
+      }
+    
+      /* Ensure proper spacing between sidebar widgets and main content */
+      .services-sidebar .single-widget {
+        margin-bottom: 25px;
+      }
+    
+      /* Fix for the specific layout on mobile */
+      .col-xl-4.col-lg-5.mt-md-120.mt-xs-50.services-sidebar {
+        margin-top: 40px !important;
+        order: 1; /* Ensure sidebar comes before main content on mobile  for that -1*/
+      }
+    
+      .col-xl-8.col-lg-7.order-lg-last.pl-50.pl-md-15.pl-xs-15 {
+        order: 2; /* Ensure main content comes after sidebar on mobile */
+      }
+    }
+    
+    /* Tablet responsiveness */
+    @media (min-width: 768px) and (max-width: 991px) {
+      .other-universities-list {
+        max-height: 300px;
+      }
+    }
+    
+    /* Scrollbar styling */
+    .other-universities-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .other-universities-list::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    
+    .other-universities-list::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 10px;
+    }
+    
+    .other-universities-list::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+  </style>
+
+  <!-- CSS -->
+
+  <style>
+    /* Top Courses Section Styles */
+    .top-courses-section {
+      padding: 80px 0;
+      /* background: #f9f9f9; */
+    }
+    
+    .site-heading h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #222;
+    }
+    
+    .site-heading p {
+      color: #666;
+      margin-bottom: 40px;
+    }
+    
+    /* Course Slider Container */
+    .course-slider-container {
+      position: relative;
+      overflow: hidden;
+      margin: 0 -15px;
+      padding: 20px 0;
+    }
+    
+    .course-slider-track {
+      display: flex;
+      transition: transform 0.5s ease;
+      padding-bottom: 20px;
+    }
+    
+    .course-card {
+      flex: 0 0 calc(33.333% - 30px);
+      margin: 0 15px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background: #fff;
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    
+    .course-card.animate {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .course-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+    
+    .course-card .thumb {
+      position: relative;
+      overflow: hidden;
+      height: 250px;
+    }
+    
+    .course-card .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    
+    .course-card:hover .thumb img {
+      transform: scale(1.1);
+    }
+    
+    .course-card .thumb::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1;
+    }
+    
+    .course-card:hover .thumb::before {
+      opacity: 1;
+    }
+    
+    .course-card .meta {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+      z-index: 2;
+      transform: translateY(100%);
+      transition: transform 0.5s ease;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    }
+    
+    .course-card:hover .meta {
+      transform: translateY(0);
+    }
+    
+    .course-card .meta ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+    
+    .course-card .meta li {
+      color: #fff;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .course-card .meta i {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+    
+    .course-card .info {
+      padding: 25px;
+    }
+    
+    .course-card .content h4 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: #222;
+      transition: color 0.3s ease;
+    }
+    
+    .course-card:hover .content h4 {
+      color: #3f51b5;
+    }
+    
+    .course-card .content p {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      text-align: left;
+      height: 80px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+    
+    .circle-icon-btn {
+      display: inline-flex;
+      align-items: center;
+      color: #3f51b5;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .circle-icon-btn .button-icon {
+      width: 40px;
+      height: 40px;
+      background: #3f51b5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .circle-icon-btn .button-icon img {
+      width: 20px;
+      height: 20px;
+      filter: brightness(0) invert(1);
+    }
+    
+    .circle-icon-btn:hover {
+      color: #ff4081;
+    }
+    
+    .circle-icon-btn:hover .button-icon {
+      background: #ff4081;
+      transform: rotate(45deg);
+    }
+    
+    /* Animation for cards */
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Auto-slider controls */
+    .course-slider-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .course-slider-dots {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .course-slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ddd;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .course-slider-dot.active {
+      background: #3f51b5;
+      transform: scale(1.2);
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 991px) {
+      .course-card {
+        flex: 0 0 calc(50% - 30px);
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .course-card {
+        flex: 0 0 calc(100% - 30px);
+      }
+    
+      .course-card .info {
+        padding: 20px;
+      }
+    
+      .course-card .content h4 {
+        font-size: 18px;
+      }
+    
+      .course-card .content p {
+        height: auto;
+        -webkit-line-clamp: unset;
+      }
+    }
+  </style>
+
+  <style>
+    /* University Description Content Styling - Fixed Version */
+    .content-wrapper {
+      width: 100%;
+      overflow: hidden;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    .description-content {
+      width: 100%;
+      text-align: justify;
+      line-height: 1.7;
+      font-size: 16px;
+      color: #444;
+      margin: 0;
+      padding: 0;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    .description-content p {
+      margin-bottom: 18px;
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: justify;
+      max-width: 100%;
+      overflow: hidden;
+      word-break: break-word;
+      -webkit-hyphens: auto;
+      -moz-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+    }
+    
+    .description-content h1,
+    .description-content h2,
+    .description-content h3,
+    .description-content h4,
+    .description-content h5,
+    .description-content h6 {
+      color: #222;
+      margin-bottom: 15px;
+      margin-top: 25px;
+      line-height: 1.3;
+    }
+    
+    .description-content ul,
+    .description-content ol {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .description-content li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    
+    .description-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin: 15px 0;
+      display: block;
+    }
+    
+    .description-content blockquote {
+      border-left: 4px solid #0066f5;
+      padding-left: 20px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #666;
+    }
+    
+    /* University Banner */
+    .university-banner {
+      margin-bottom: 30px;
+      width: 100%;
+      max-height: 446px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .university-banner img.university-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    
+    /* Main heading */
+    h2.mb-20 {
+      font-size: 28px;
+      line-height: 1.3;
+      margin-bottom: 25px;
+      color: #222;
+      font-weight: 700;
+      word-wrap: break-word;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 991px) {
+      .pl-50,
+      .pl-md-15,
+      .pl-xs-15 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .description-content {
+        font-size: 15px;
+        line-height: 1.6;
+        text-align: left;
+      }
+    
+      .description-content p {
+        font-size: 15px;
+        margin-bottom: 16px;
+        text-align: left;
+      }
+    
+      h2.mb-20 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: left;
+      }
+    
+      .university-banner {
+        max-height: 250px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+      }
+    
+      .university-banner img.university-image {
+        min-height: 200px;
+      }
+    
+      .content-wrapper {
+        padding: 0 10px;
+      }
+    
+      /* Better mobile spacing */
+      .col-xl-8.col-lg-7.order-lg-last {
+        order: 1;
+        margin-top: 0 !important;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .description-content {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+    
+      .description-content p {
+        font-size: 14px;
+        margin-bottom: 14px;
+      }
+    
+      h2.mb-20 {
+        font-size: 22px;
+        margin-bottom: 18px;
+      }
+    
+      .university-banner {
+        max-height: 200px;
+        border-radius: 6px;
+      }
+    
+      .university-banner img.university-image {
+        min-height: 180px;
+      }
+    
+      .content-wrapper {
+        padding: 0 5px;
+      }
+    
+      /* Ensure proper mobile layout */
+      .services-details-area .container .row {
+        margin: 0 -10px;
+      }
+    
+      .services-details-area .container .row > div {
+        padding: 0 10px;
+      }
+    }
+    
+    /* Fix for very long words */
+    @media (max-width: 480px) {
+      .description-content {
+        word-break: break-all;
+        overflow-wrap: anywhere;
+      }
+    
+      .description-content p {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+    }
+    
+    /* Print styles */
+    @media print {
+      .description-content {
+        color: #000;
+        text-align: left;
+      }
+    
+      .university-banner {
+        box-shadow: none;
+      }
+    }
+  </style>
+
+  <style>
+    .contact-popup {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .contact-popup-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      max-width: 90%;
+      position: relative;
+    }
+    .contact-close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 25px;
+      cursor: pointer;
+    }
+    .contact-popup .form-group {
+      margin-bottom: 15px;
+    }
+    .contact-popup .form-control {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+  </style>
+
+  <!-- Add this CSS to your style section -->
+
+  <style>
+    .country-banner {
+      width: 100%; /* fills container width */
+      height: 100%; /* fills container height */
+      max-height: 446px; /* optional max height */
+      overflow: hidden;
+      border-radius: 8px; /* match screenshot rounded corners */
+      margin-bottom: 30px; /* add some space below the banner */
+    }
+    
+    .country-banner img.country-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* ensures the image fills the container */
+      display: block;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .country-banner {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .country-banner {
+        max-height: 250px;
+      }
+    }
+  </style>
+
+  <style>
+    /* Modern Course Card Styles */
+    .modern-course-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .modern-course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Image Section */
+    .course-image-wrapper {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .course-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    
+    .modern-course-card:hover .course-image {
+      transform: scale(1.1);
+    }
+    
+    .course-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modern-course-card:hover .course-overlay {
+      opacity: 1;
+    }
+    
+    .course-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(238, 90, 36, 0.3);
+    }
+    
+    /* Content Section */
+    .course-content {
+      padding: 30px 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    {% comment %} .course-header {
+      margin-bottom: 20px;
+    } {% endcomment %}
+    
+    .course-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .course-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .course-meta span {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #7f8c8d;
+      gap: 6px;
+    }
+    
+    .course-meta i {
+      font-size: 12px;
+      color: #3498db;
+    }
+    
+    /* Description */
+    .course-description {
+      flex: 1;
+      margin-bottom: 25px;
+    }
+    
+    .course-description p {
+      color: #5a6c7d;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    /* Footer */
+    .course-footer {
+      display: flex;
+      justify-content: flex-start;  /* my own adjustment */
+      align-items: center;
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    
+    .course-features {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #27ae60;
+      font-weight: 500;
+      gap: 5px;
+    }
+    
+    .feature i {
+      font-size: 12px;
+    }
+    
+    /* Modern Button */
+    .modern-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: #0066f5;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .modern-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .modern-btn:hover::before {
+      left: 100%;
+    }
+    
+    .modern-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .modern-btn i {
+      transition: transform 0.3s ease;
+    }
+    
+    .modern-btn:hover i {
+      transform: translateX(3px);
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: #7f8c8d;
+    }
+    
+    .empty-icon {
+      font-size: 80px;
+      margin-bottom: 30px;
+      color: #bdc3c7;
+    }
+    
+    .empty-state h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+    
+    .empty-state p {
+      font-size: 16px;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .course-content {
+        padding: 25px 20px;
+      }
+    
+      .course-title {
+        font-size: 20px;
+      }
+    
+      .course-image-wrapper {
+        height: 240px;
+      }
+    
+      .course-footer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;  /* my own adjustment */
+      }
+    
+      .modern-btn {
+        align-self: stretch;
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .course-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+    
+      .course-features {
+        flex-direction: column;
+        gap: 8px;
+      }
+    
+      .course-image-wrapper {
+        height: 200px;
+      }
+    }
+    
+    /* Animation for loading */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .wow.fadeInUp {
+      animation: fadeInUp 0.8s ease-out;
+    }
+  </style>
+
+  <style>
+    .country-banner {
+      width: 100%; /* fills container width */
+      height: 100%; /* fills container height */
+      max-height: 446px; /* optional max height */
+      overflow: hidden;
+      border-radius: 8px; /* match screenshot rounded corners */
+    }
+    
+    .country-banner img.country-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* ensures the image fills the container */
+      display: block;
+    }
+  </style>
+
+  <style>
+    .home-blog-style-one {
+      border-radius: 12px; /* curve the whole card */
+      overflow: hidden; /* ensures image respects radius */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* optional for better look */
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    .home-blog-style-one:hover {
+      transform: translateY(-4px);
+    }
+    
+    .home-blog-style-one .thumb img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0; /* only top edges rounded */
+    }
+  </style>
+
+  <style></style>
+{% endblock %}
+
+{% block content %}
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-area bg-dark text-light text-center bg-cover" style="background-image: url('{{ university.image.url }}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>{{ university.name }}</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="active">{{ university.name }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course Details -->
+  <div class="services-details-area default-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 col-lg-7 order-lg-last pl-50 pl-md-15 pl-xs-15">
+          <div class="university-banner mb-30">
+            <img src="{{ university.image.url }}" alt="{{ university.name }}" class="university-image" />
+          </div>
+          <div class="content-wrapper">
+            <h2 class="mb-20">{{ university.name }}</h2>
+            <div class="description-content">{{ university.description|safe }}</div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-xl-4 col-lg-5 mt-md-120 mt-xs-50 services-sidebar">
+          <div class="single-widget services-list-widget">
+            <h4>Other Universities</h4>
+            {% comment %} <div class="content">
+              <ul class="other-universities-list">
+                {% for u in universities %}
+                  {% if u.pk != university.pk %}
+                    <!-- Exclude current university -->
+                    <li>
+                      <a href="{% url 'uni_detail' u.pk %}">{{ u.name }}</a>
+                    </li>
+                  {% endif %}
+                {% empty %}
+                  <li>No other universities available</li>
+                {% endfor %}
+              </ul>
+            </div> {% endcomment %}
+            <div class="content">
+              <ul style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                <!-- Current University First -->
+                <li class="current-item">
+                  <a href="{% url 'uni_detail' university.slug %}">
+                    {% if university.logo %}
+                      <div class="icon">
+                        <img src="{{ university.logo.url }}" alt="{{ university.name }} Logo" />
+                      </div>
+                    {% endif %}
+                    {{ university.name }}
+                  </a>
+                </li>
+
+                <!-- Other Universities -->
+                {% for u in universities %}
+                  {% if u.id != university.id %}
+                    <li>
+                      <a href="{% url 'uni_detail' u.slug %}">
+
+                        {% if u.logo %}
+                          <div class="icon">
+                            <img src="{{ u.logo.url }}" alt="{{ u.name }} Logo" />
+                          </div>
+                        {% endif %}
+                        {{ u.name }}
+                      </a>
+                    </li>
+                  {% endif %}
+                {% empty %}
+                  <li>
+                    <a href="#">No other universities available</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <!-- Single Widget -->
+          {% if university.pdf %}
+            <div class="single-widget widget-brochure">
+              <h4 class="widget-title">Downloads</h4>
+              <ul>
+                <li>
+                  <a href="{{ university.pdf.url }}" download><i class="fas fa-file-pdf"></i> University Prospectus</a>
+                </li>
+              </ul>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Business & Management Courses Section -->
+
+  <!-- Top Courses in This University Section -->
+  <div class="top-courses-section" style="padding-top: 0%;">
+    <div class="container">
+      <!-- Add the headline here -->
+      {% if page_obj and page_obj.paginator.count > 0 %}
+        <div class="row">
+          <div class="col-12">
+            <div class="section-heading text-center mb-50">
+              <h2 class="mb-20">Top Courses at {{ university.name }}</h2>
+              <p>Explore the wide range of courses offered by this prestigious institution</p>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="blog-item-box">
+        <div class="row gutter-lg">
+          {% for course in page_obj %}
+            <div class="col-lg-6 col-md-6 mb-4">
+              <div class="modern-course-card wow fadeInUp">
+                <div class="course-image-wrapper">
+                  <img src="{{ course.image.url }}" alt="{{ course.title }}" class="course-image" />
+                  <div class="course-overlay">
+                    {% comment %} <div class="course-badge">Popular</div> {% endcomment %}
+                  </div>
+                </div>
+                <div class="course-content">
+                  <div class="course-header">
+                    <h3 class="course-title">{{ course.title }}</h3>
+                    <div class="course-meta">
+                      <span class="duration"><i class="far fa-clock"></i> {{ course.duration }}</span>
+                      {% comment %} <span class="level"><i class="fas fa-signal"></i> All levels</span> {% endcomment %}
+                    </div>
+                  </div>
+                  <div class="course-description">
+                    <p>{{ course.description|truncatechars:150|safe }}</p>
+                  </div>
+                  <div class="course-footer">
+                    <a class="modern-btn know-more-btn" href="#" data-course="{{ course.title }}">
+                      <span>Know More</span>
+                      <i class="fas fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            <div class="col-12">
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <i class="fas fa-university"></i>
+                </div>
+                <h3>No courses found</h3>
+                <p>No courses are currently available in {{ university.name }}. Please check back later.</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Pagination - Only show if there are multiple pages -->
+      {% if page_obj and page_obj.paginator.count > 0 and page_obj.paginator.num_pages > 1 %}
+        <div class="pagi-area text-center mt-4" style="margin-bottom: 0;">
+          <nav aria-label="Course pagination">
+            <ul class="pagination justify-content-center">
+              {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page=1" aria-label="First"><i class="fas fa-angle-double-left"></i></a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><i class="fas fa-angle-left"></i></a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link"><i class="fas fa-angle-double-left"></i></span>
+                </li>
+                <li class="page-item disabled">
+                  <span class="page-link"><i class="fas fa-angle-left"></i></span>
+                </li>
+              {% endif %}
+
+              {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                  <li class="page-item active">
+                    <span class="page-link">{{ num }}</span>
+                  </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next"><i class="fas fa-angle-right"></i></a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last"><i class="fas fa-angle-double-right"></i></a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link"><i class="fas fa-angle-right"></i></span>
+                </li>
+                <li class="page-item disabled">
+                  <span class="page-link"><i class="fas fa-angle-double-right"></i></span>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+
+          <!-- Page info -->
+          <div class="page-info mt-2">
+            <p class="text-muted">Showing courses {{ page_obj.start_index }} - {{ page_obj.end_index }} of {{ page_obj.paginator.count }}</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div id="contactPopup" class="contact-popup">
+    <div class="contact-popup-content">
+      <span class="contact-close">&times;</span>
+      <h3>Contact Us</h3>
+      <form method="post" action="{% url 'contact_submit' %}">
+        {% csrf_token %}
+
+        <!-- Hidden field (for saving to DB) -->
+        <input type="hidden" name="course_subject" id="courseSubject" value="" />
+
+        <!-- Visible readonly course field -->
+        <div class="form-group">
+          <input type="text" id="courseDisplay" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required class="form-control" />
+        </div>
+        <div class="form-group">
+          <input type="text" name="phone" placeholder="Contact Number" required class="form-control" />
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Email ID" required class="form-control" />
+        </div>
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" required class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+<!-- Popup CSS -->
+<!-- Popup CSS -->
+{% block extra_js %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.know-more-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault()
+          var courseName = btn.getAttribute('data-course')
+    
+          // Set hidden field for backend
+          document.getElementById('courseSubject').value = courseName + ' Inquiry'
+    
+          // Set visible field (readonly for user)
+          document.getElementById('courseDisplay').value = courseName
+    
+          // Show popup
+          document.getElementById('contactPopup').style.display = 'flex'
+        })
+      })
+    
+      document.querySelector('.contact-close').addEventListener('click', function () {
+        document.getElementById('contactPopup').style.display = 'none'
+      })
+    
+      window.addEventListener('click', function (event) {
+        if (event.target == document.getElementById('contactPopup')) {
+          document.getElementById('contactPopup').style.display = 'none'
+        }
+      })
+    })
+  </script>
+
+  <!-- Popup JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get all "Know More" buttons
+      document.querySelectorAll('.know-more-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault()
+          var courseName = btn.getAttribute('data-course')
+          document.getElementById('courseSubject').value = courseName + ' Inquiry'
+          document.getElementById('contactPopup').style.display = 'flex'
+        })
+      })
+    
+      // Close popup when clicking on close button
+      document.querySelector('.contact-close').addEventListener('click', function () {
+        document.getElementById('contactPopup').style.display = 'none'
+      })
+    
+      // Close popup when clicking outside of it
+      window.addEventListener('click', function (event) {
+        if (event.target == document.getElementById('contactPopup')) {
+          document.getElementById('contactPopup').style.display = 'none'
+        }
+      })
+    })
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const contactForm = document.querySelector('#contactPopup form')
+      const nameInput = contactForm.querySelector('input[name="name"]')
+      const phoneInput = contactForm.querySelector('input[name="phone"]')
+      const emailInput = contactForm.querySelector('input[name="email"]')
+      const messageInput = contactForm.querySelector('textarea[name="message"]')
+    
+      function showError(input, message) {
+        let errorElem = input.nextElementSibling
+        if (!errorElem || !errorElem.classList.contains('error-message')) {
+          errorElem = document.createElement('div')
+          errorElem.className = 'error-message'
+          errorElem.style.color = 'red'
+          errorElem.style.fontSize = '13px'
+          errorElem.style.marginTop = '5px'
+          input.parentNode.appendChild(errorElem)
+        }
+        errorElem.textContent = message
+        input.classList.add('input-error')
+      }
+    
+      function clearError(input) {
+        let errorElem = input.nextElementSibling
+        if (errorElem && errorElem.classList.contains('error-message')) {
+          errorElem.textContent = ''
+        }
+        input.classList.remove('input-error')
+      }
+    
+      function validateName() {
+        const value = nameInput.value.trim()
+        const nameRegex = /^[A-Za-z\s]+$/
+        if (value === '') {
+          showError(nameInput, 'Name is required')
+          return false
+        } else if (!nameRegex.test(value)) {
+          showError(nameInput, 'Enter a valid name')
+          return false
+        }
+        clearError(nameInput)
+        return true
+      }
+    
+      function validatePhone() {
+        const value = phoneInput.value.trim()
+        const phoneRegex = /^[0-9]{10,11}$/
+        if (value === '') {
+          showError(phoneInput, 'Phone number is required')
+          return false
+        } else if (!phoneRegex.test(value)) {
+          showError(phoneInput, 'Enter a valid phone number')
+          return false
+        }
+        clearError(phoneInput)
+        return true
+      }
+    
+      function validateEmail() {
+        const value = emailInput.value.trim()
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (value === '') {
+          showError(emailInput, 'Email is required')
+          return false
+        } else if (!emailRegex.test(value)) {
+          showError(emailInput, 'Enter a valid email address')
+          return false
+        }
+        clearError(emailInput)
+        return true
+      }
+    
+      function validateMessage() {
+        const value = messageInput.value.trim()
+        if (value === '') {
+          showError(messageInput, 'Message is required')
+          return false
+        } else if (value.length <= 0) {
+          showError(messageInput, 'Message is required')
+          return false
+        }
+        clearError(messageInput)
+        return true
+      }
+    
+      // Live validation
+      nameInput.addEventListener('input', validateName)
+      phoneInput.addEventListener('input', validatePhone)
+      emailInput.addEventListener('input', validateEmail)
+      messageInput.addEventListener('input', validateMessage)
+    
+      // On submit
+      contactForm.addEventListener('submit', function (e) {
+        let valid = true
+        if (!validateName()) valid = false
+        if (!validatePhone()) valid = false
+        if (!validateEmail()) valid = false
+        if (!validateMessage()) valid = false
+    
+        if (!valid) e.preventDefault()
+      })
+    })
+  </script>
+
+  <style>
+    .input-error {
+      border-color: red !important;
+    }
+  </style>
+{% endblock %}

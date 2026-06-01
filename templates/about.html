@@ -1,0 +1,879 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <!--   Start Breadcrumb 
+    =============================================   -->
+  <div class="breadcrumb-area with-banner bg-cover text-center bg-dark text-light" style="background-image: url('{% static 'assets/img/banner/7.png' %}');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1>About Us</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li>
+                <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="active">About</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Breadcrumb -->
+  <!--   Start About 
+    =============================================   -->
+  <div id="about" class="about-style-three-area default-padding">
+    <div class="container">
+      <div class="about-style-three-items">
+        <div class="row">
+          <div class="col-xl-6 col-lg-6">
+            <div class="about-style-three-info">
+              <div class="experience-style-one mb-50">
+                <h2 style="background-image: url('{% static 'assets/img/about/5.png' %}');">10</h2>
+                <h4>Years of Trusted Study Abroad & Visa Support Services</h4>
+              </div>
+              <h4 class="sub-title">About Edusetin Study Abroad</h4>
+              <h2 class="title split-text">Trusted Experts in Student Visa & Overseas Education</h2>
+
+              <p class="wow fadeInUp">Edusetin offers expert guidance for students planning to study abroad. From university selection to visa processing, we ensure a smooth journey to top destinations like Germany, Italy, Singapore, and Kyrgyzstan.</p>
+              <ul class="list-card wow fadeInUp" data-wow-delay="100ms">
+                <li>
+                  <div class="top">
+                    <img src="{% static 'assets/img/icon/16.png' %}" alt="Best Consultancy for Study Abroad" />
+                    <h4>Top-Rated Study Abroad Consultancy</h4>
+                  </div>
+                  <p>Edusetin is trusted by students across Kerala for expert guidance on overseas education, including MBBS, bachelor's, and master's programs in top countries.</p>
+                </li>
+                <li>
+                  <div class="top">
+                    <img src="{% static 'assets/img/icon/17.png' %}" alt="Visa Assistance Services" />
+                    <h4>Comprehensive Visa Support</h4>
+                  </div>
+                  <p>We assist students with return visa applications, interview preparation, and complete documentation support to ensure smooth international travel.</p>
+                </li>
+              </ul>
+              <!-- <a href="{% url 'about' %}" class="btn-style-one circle mt-30 wow fadeInUp" data-wow-delay="200ms">Discover More <span></span></a> -->
+            </div>
+          </div>
+          <div class="col-xl-5 offset-xl-1 col-lg-6">
+            <div class="about-three-thumb">
+              <img class="wow fadeInUp" src="{% static 'assets/img/thumb/6.jpg' %}" alt="Image Not Found" />
+              <div class="success-rate wow fadeInDown" data-wow-delay="100ms">
+                <div class="circle-progress">
+                  <div class="progressbar">
+                    <h4>Success Rate</h4>
+                    <div class="circle" data-percent="88">
+                      <strong></strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End About -->
+
+  <!--   Start Why Choose Us 
+    =============================================   -->
+  <div class="choose-us-style-three-area default-padding">
+    <div class="choose-us-three-thumb">
+      <img class="wow fadeInLeft" src="{% static 'assets/img/thumb/3.png' %}" alt="Image Not Found" />
+      <div class="video-card">
+        <a href="https://www.youtube.com/watch?v=ZRqEtpeQX8g" class="popup-youtube"><i class="fas fa-play"></i></a>
+        <span>Watch Us</span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 offset-xl-4">
+          <div class="choose-us-style-three-info">
+            <h4 class="sub-title">Why choose us</h4>
+            <h2 class="title split-text">Reliable Study Abroad & Immigration Services in Kerala</h2>
+            <p class="wow fadeInUp">At Edusetin, we specialize in providing personalized guidance for students aiming to study abroad. With over a decade of experience, we’ve helped hundreds of students secure admissions and visas for top universities in Germany, Italy, Singapore, and Kyrgyzstan. Our expert team ensures transparent, end-to-end support — from university selection to final visa approval — making us a trusted name in overseas education consulting in Kerala.</p>
+            <div class="card-style-three wow fadeInUp" data-wow-delay="100ms">
+              <div class="item">
+                <div class="number">01</div>
+                <div class="info">
+                  <h4>Expert Visa Guidance</h4>
+                  <p>Our team provides step-by-step support for student visas, ensuring accurate documentation and faster approvals for countries like Germany, Italy, and Kyrgyzstan.</p>
+                </div>
+              </div>
+              <div class="item">
+                <div class="number">02</div>
+                <div class="info">
+                  <h4>Global University Network</h4>
+                  <p>We work closely with reputed universities across Europe and Asia, helping students access top-ranked programs in MBBS, engineering, and business.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-style-three wow fadeInUp" data-wow-delay="100ms">
+              <div class="item">
+                <div class="number">03</div>
+                <div class="info">
+                  <h4>Personalized Admission Support</h4>
+                  <p>From course selection to application submission, Edusetin offers tailored guidance to match your career goals with the right international programs.</p>
+                </div>
+              </div>
+              <div class="item">
+                <div class="number">04</div>
+                <div class="info">
+                  <h4>Trusted by Students Across Kerala</h4>
+                  <p>With years of experience and hundreds of success stories, Edusetin has become a go-to consultancy for students pursuing higher education abroad.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Why Choose Us -->
+
+  <!--   Start Fun fact 
+    =============================================   -->
+  <div class="fun-fact-style-one-area default-padding bg-gray bg-cover overflow-hidden" style="background-image: url(assets/img/shape/banner-3.jpg);">
+    <div class="container">
+      <div class="fun-fact-style-one-items">
+        <div class="row">
+          <!-- Single item -->
+          <div class="col-lg-4 col-md-6 funfact-style-one-item">
+            <div class="fun-fact">
+              <div class="counter">
+                <div class="timer" data-to="56" data-speed="2000">56</div>
+                <div class="operator">K</div>
+              </div>
+              <span class="medium">Students Guided for <br /> Overseas Education</span>
+            </div>
+          </div>
+          <!-- End Single item -->
+
+          <!-- Single item -->
+          <div class="col-lg-4 col-md-6 funfact-style-one-item">
+            <div class="fun-fact">
+              <div class="counter">
+                <div class="timer" data-to="100" data-speed="2000">100</div>
+                <div class="operator">%</div>
+              </div>
+              <span class="medium">Visa Success Rate for <br /> Study Abroad Applicants</span>
+            </div>
+          </div>
+          <!-- End Single item -->
+
+          <!-- Single item -->
+          <div class="col-lg-4 col-md-6 funfact-style-one-item">
+            <div class="fun-fact">
+              <div class="counter">
+                <div class="timer" data-to="2" data-speed="2000">2</div>
+                <div class="operator">Days</div>
+              </div>
+              <span class="medium">Quickest Visa Approval <br /> Turnaround Time</span>
+            </div>
+          </div>
+          <!-- End Single item -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Fun Fact -->
+
+  <!--   Start Team 
+    =============================================   -->
+  <div id="team" class="team-style-one-area default-padding bottom-less">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+          <div class="site-heading text-center">
+            <h4 class="sub-title">Our Team</h4>
+            <h2 class="title split-text">Meet Our Experts</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      {% comment %} <div class="row">
+        {% endcomment %}
+
+        <!-- Single Item -->
+        <div class="row">
+          <!-- Django template loop starts here -->
+          {% for member in team_members %}
+            <!-- Single Item -->
+            <div class="col-lg-4 col-md-6 mb-30">
+              <div class="team-style-one-item wow fadeInUp" data-wow-delay="{{ forloop.counter0|add:1 }}00ms">
+                <div class="thumb">
+                  {% if member.image %}
+                    <img src="{{ member.image.url }}" alt="{{ member.name }}" style="height: 500px; object-fit: cover;" />
+                  {% else %}
+                    <img src="{% static 'assets/img/team/placeholder.jpg' %}" alt="{{ member.name }}" style="height: 500px; object-fit: cover;" />
+                  {% endif %}
+                  <img src="{% static 'assets/img/shape/31.png' %}" alt="Image Not Found" />
+                  <div class="social-info">
+                    <div class="social-overlay">
+                      <ul>
+                        {% if member.linkedin %}
+                          <li>
+                            <a href="{{ member.linkedin }}"><i class="fab fa-linkedin-in"></i></a>
+                          </li>
+                        {% endif %}
+                        {% if member.github %}
+                          <li>
+                            <a href="{{ member.github }}"><i class="fab fa-github"></i></a>
+                          </li>
+                        {% endif %}
+                        {% if member.twitter %}
+                          <li>
+                            <a href="{{ member.twitter }}"><i class="fab fa-twitter"></i></a>
+                          </li>
+                        {% endif %}
+                      </ul>
+                      <div class="icon">
+                        <i class="fas fa-plus"></i>
+                      </div>
+                    </div>
+                    <a href="#"><i class="fas fa-comments-alt"></i></a>
+                  </div>
+                </div>
+                <div class="info">
+                  <h4><a href="#">{{ member.name }}</a></h4>
+                  <span>{{ member.profession }}</span>
+                </div>
+              </div>
+            </div>
+            <!-- End Single Item -->
+          {% endfor %}
+          <!-- Django template loop ends here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Team -->
+
+  <!--   Start Process 
+=============================================   -->
+  <div class="process-style-one-area text-center default-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+          <div class="site-heading text-center">
+            <h4 class="sub-title">Visa Process Made Easy</h4>
+            <h2 class="title split-text">Your Visa in Just Three Simple Steps</h2>
+            <p class="mt-3">Navigating your visa application has never been easier. Follow our streamlined process to get started on your journey abroad—quickly, confidently, and without hassle.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="process-style-one-items wow fadeInUp" data-wow-delay="100ms">
+            <!-- Step 1 -->
+            <div class="process-style-one-item hover-active-item">
+              <div class="icon">
+                <img src="{% static 'assets/img/icon/9.png' %}" alt="Visa Application Form Icon" />
+              </div>
+              <div class="info">
+                <div class="shape">
+                  <img src="{% static 'assets/img/shape/41.png' %}" alt="Shape" />
+                </div>
+                <span>01</span>
+                <h4>Fill Out the Online Form</h4>
+                <p>Start your journey by completing our simple and secure online visa application form. It only takes a few minutes and helps us understand your needs better.</p>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="process-style-one-item hover-active-item active">
+              <div class="icon">
+                <img src="{% static 'assets/img/icon/10.png' %}" alt="Documents and Payment Icon" />
+              </div>
+              <div class="info">
+                <div class="shape">
+                  <img src="{% static 'assets/img/shape/41.png' %}" alt="Shape" />
+                </div>
+                <span>02</span>
+                <h4>Submit Documents & Make Payment</h4>
+                <p>Upload your required documents and make a secure payment. Our expert team will review everything and provide feedback if needed.</p>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="process-style-one-item hover-active-item">
+              <div class="icon">
+                <img src="{% static 'assets/img/icon/11.png' %}" alt="Visa Approval Icon" />
+              </div>
+              <div class="info">
+                <div class="shape">
+                  <img src="{% static 'assets/img/shape/41.png' %}" alt="Shape" />
+                </div>
+                <span>03</span>
+                <h4>Receive Your Visa</h4>
+                <p>Once approved, your visa will be delivered to you via email or courier—fast, efficient, and worry-free. You're now ready to explore new opportunities abroad!</p>
+              </div>
+            </div>
+            <!-- End Steps -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Process -->
+  <!--  Start Testimonial 
+============================================= -->
+ 
+<div class="testimonial-style-three-area default-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <!-- Section Header - FIRST ON MOBILE, HIDDEN ON DESKTOP -->
+            <div class="col-12 d-lg-none mb-4">
+                <div class="section-header text-center">
+                    <h4 class="sub-title fw-bold">Student Success Stories</h4>
+                    <h2 class="title fw-bold">What Our Students Say About Edusetin</h2>
+                    <p class="section-description"> Don't just take our word for it – hear from students who’ve achieved their dreams 
+            with the help of Edusetin’s expert guidance and support.</p>
+                </div>
+            </div>
+
+            <!-- Left Image Section - SECOND ON MOBILE, FIRST ON DESKTOP -->
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <div class="testimonial-image-section text-center">
+                    <div class="main-testimonial-image-container">
+                        <div class="image-wrapper">
+                            {% if testimonials and testimonials.0.image %}
+                                <img src="{{ testimonials.0.image.url }}" 
+                                     alt="{{ testimonials.0.name }}" 
+                                     class="testimonial-portrait active-testimonial-image">
+                            {% else %}
+                                <img src="{% static 'assets/img/testimonial-default.jpg' %}" 
+                                     alt="Our Happy Students" 
+                                     class="testimonial-portrait active-testimonial-image">
+                            {% endif %}
+                        </div>
+                        <!-- Decorative Elements -->
+                        <div class="floating-shape shape-1">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="floating-shape shape-2">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="floating-shape shape-3">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                    </div>
+                    <div class="image-caption mt-4">
+                        <h5 class="fw-bold">Real Students, Real Stories</h5>
+                        <p class="text-muted">Hear from our successful Edusetin applicants</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Testimonial Slider - THIRD ON MOBILE, SECOND ON DESKTOP -->
+            <div class="col-lg-7">
+                <!-- Section Header - FOR DESKTOP ONLY -->
+                <div class="section-header mb-5 d-none d-lg-block">
+                    <h4 class="sub-title fw-bold">Student Success Stories</h4>
+                    <h2 class="title fw-bold">What Our Students Say About Edusetin</h2>
+                    <p class="section-description"> Don't just take our word for it – hear from students who’ve achieved their dreams 
+            with the help of Edusetin’s expert guidance and support.</p>
+                </div>
+
+                <!-- Testimonial Slider -->
+                <div class="testimonial-slider-container position-relative">
+                    <div class="swiper testimonialSwiper">
+                        <div class="swiper-wrapper">
+                            {% for testimonial in testimonials %}
+                            <div class="swiper-slide" 
+                                 data-image="{% if testimonial.image %}{{ testimonial.image.url }}{% else %}{% static 'assets/img/team/default.jpg' %}{% endif %}"
+                                 data-name="{{ testimonial.name }}">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-content">
+                                        <!-- Rating Stars -->
+                                        <div class="rating-stars mb-3">
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= testimonial.rating %}
+                                                    <i class="fas fa-star text-warning"></i>
+                                                {% else %}
+                                                    <i class="far fa-star text-warning"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <span class="rating-text ms-2">Rated {{ testimonial.rating }}/5</span>
+                                        </div>
+                                        
+                                        <!-- Testimonial Text - FIXED SPACING -->
+                                        <div class="testimonial-text">
+                                            <p>"{{ testimonial.review|safe }}"</p>
+                                        </div>
+                                        
+                                        <!-- Student Info -->
+                                        <div class="student-info d-flex align-items-center">
+                                            <div class="student-avatar me-3">
+                                                {% if testimonial.image %}
+                                                    <img src="{{ testimonial.image.url }}" 
+                                                         alt="{{ testimonial.name }}" 
+                                                         class="student-thumbnail">
+                                                {% else %}
+                                                    <div class="avatar-placeholder">
+                                                        <i class="fas fa-user-graduate"></i>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="student-details">
+                                                <h6 class="student-name mb-1 fw-bold">{{ testimonial.name }}</h6>
+                                                <p class="student-course mb-0 text-muted small">
+                                                    {% if testimonial.course %}
+                                                        {{ testimonial.course }}
+                                                    {% else %}
+                                                        Edusetin Student
+                                                    {% endif %}
+                                                </p>
+                                                {% if testimonial.country %}
+                                                    <p class="student-country mb-0 text-muted small">
+                                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                                        {{ testimonial.country }}
+                                                    </p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="swiper-slide">
+                                <div class="testimonial-card text-center">
+                                    <div class="testimonial-content">
+                                        <div class="no-testimonials py-5">
+                                            <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                                            <h5 class="text-muted">No Testimonials Yet</h5>
+                                            <p class="text-muted">Be the first to share your study abroad experience!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Pagination -->
+                        {% comment %} <div class="swiper-pagination mt-4"></div> {% endcomment %}
+                    </div>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="trust-indicators mt-5 pt-3 border-top">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="trust-item">
+                                <h4 class="fw-bold mb-1">92%</h4>
+                                <p class="small mb-0">Success Rate</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="trust-item">
+                                <h4 class="fw-bold mb-1">500+</h4>
+                                <p class="small mb-0">Students Helped</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="trust-item">
+                                <h4 class="fw-bold mb-1">4.8/5</h4>
+                                <p class="small mb-0">Average Rating</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.testimonial-style-three-area {
+    background-color: #f9fafb!important;
+}
+
+/* Also target any child containers that might have white background */
+.testimonial-style-three-area .container,
+.testimonial-style-three-area .row {
+    background-color: transparent !important;
+}
+
+/* IMPROVED IMAGE CONTAINER */
+.main-testimonial-image-container {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border: 5px solid white;
+}
+
+/* PERFECT PORTRAIT CROPPING */
+.testimonial-portrait {
+    width: 320px;
+    height: 400px;
+    object-fit: cover;
+    object-position: top center; /* Ensures head is always visible */
+    transition: all 0.5s ease-in-out;
+    display: block;
+}
+
+.student-thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+}
+
+/* Floating decorative elements */
+.floating-shape {
+    position: absolute;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-shape.shape-1 {
+    width: 60px;
+    height: 60px;
+    top: -20px;
+    left: -20px;
+    font-size: 1.5rem;
+    animation-delay: 0s;
+}
+
+.floating-shape.shape-2 {
+    width: 45px;
+    height: 45px;
+    bottom: 30px;
+    right: -15px;
+    font-size: 1.2rem;
+    animation-delay: 1s;
+}
+
+.floating-shape.shape-3 {
+    width: 35px;
+    height: 35px;
+    top: 50%;
+    left: -15px;
+    font-size: 1rem;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Avatar placeholder for missing images */
+.avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    border: 3px solid #007bff;
+}
+
+
+.testimonial-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: auto;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.testimonial-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+}
+
+/* FIXED SPACING - REMOVED UNNECESSARY MARGINS */
+.testimonial-text {
+    flex: 1;
+    margin-bottom: 0; /* Remove bottom margin */
+}
+
+.testimonial-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 0; /* Remove bottom margin from paragraph */
+}
+
+.rating-stars {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.student-info {
+    margin-top: 20px; /* Consistent spacing above student info */
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0; /* Visual separation */
+}
+
+.rating-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.trust-item {
+    padding: 10px;
+}
+
+.trust-item h4 {
+    font-weight: 700;
+}
+
+.section-description {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+/* Smart Image Transition */
+.image-transition-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.image-transition-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* MOBILE RESPONSIVE DESIGN - FIXED ORDER */
+@media (max-width: 768px) {
+    /* Mobile layout: heading first, then image, then cards */
+    .row.align-items-center {
+        flex-direction: column;
+    }
+    
+    /* Ensure proper order on mobile */
+    .col-12.d-lg-none {
+        order: 1; /* Heading first */
+    }
+    
+    .col-lg-5.mb-4.mb-lg-0 {
+        order: 2; /* Image second */
+        margin-top: 0;
+        margin-bottom: 2rem !important;
+    }
+    
+    .col-lg-7 {
+        order: 3; /* Cards third */
+    }
+    
+    .testimonial-card {
+        padding: 20px;
+        min-height: 250px;
+    }
+    
+    .testimonial-text p {
+        font-size: 1rem;
+    }
+    
+    .testimonial-portrait {
+        width: 280px;
+        height: 350px;
+        margin: 0 auto;
+    }
+    
+    .floating-shape {
+        display: none; /* Hide on mobile for better performance */
+    }
+    
+    .main-testimonial-image-container {
+        margin-bottom: 1rem;
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .section-header .title {
+        font-size: 1.8rem;
+    }
+    
+    .trust-indicators {
+        margin-top: 2rem;
+    }
+    
+    .student-info {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .testimonial-portrait {
+        width: 250px;
+        height: 300px;
+    }
+    
+    .image-wrapper {
+        border-width: 3px;
+    }
+    
+    .section-header .title {
+        font-size: 1.6rem;
+    }
+    
+    .trust-item h4 {
+        font-size: 1.2rem;
+    }
+    
+    .testimonial-card {
+        min-height: 220px;
+    }
+}
+
+/* Animation for smooth transitions */
+@keyframes smoothFade {
+    from { 
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.smooth-fade {
+    animation: smoothFade 0.6s ease-out;
+}
+
+/* Ensure consistent card heights in slider */
+.swiper-slide {
+    height: auto;
+}
+
+.testimonialSwiper .swiper-wrapper {
+    align-items: stretch;
+}
+
+.testimonialSwiper .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+.testimonialSwiper .testimonial-card {
+    width: 100%;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mainImage = document.querySelector('.active-testimonial-image');
+    const imageWrapper = document.querySelector('.image-wrapper');
+    
+    const testimonialSwiper = new Swiper('.testimonialSwiper', {
+        loop: true,
+        spaceBetween: 30,
+        autoplay: {
+            delay: 7000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
+        effect: 'slide',
+        speed: 800,
+        on: {
+            slideChangeTransitionStart: function () {
+                const activeSlide = this.slides[this.activeIndex];
+                const newImage = activeSlide.getAttribute('data-image');
+                const studentName = activeSlide.getAttribute('data-name');
+                
+                if (newImage && mainImage) {
+                    // Add smooth transition effect
+                    imageWrapper.classList.add('image-transition-enter');
+                    
+                    setTimeout(() => {
+                        // Preload image to avoid flickering
+                        const img = new Image();
+                        img.src = newImage;
+                        img.onload = function() {
+                            mainImage.src = newImage;
+                            mainImage.alt = studentName + ' - Edusetin Student';
+                            imageWrapper.classList.remove('image-transition-enter');
+                            imageWrapper.classList.add('image-transition-enter-active');
+                            
+                            setTimeout(() => {
+                                imageWrapper.classList.remove('image-transition-enter-active');
+                            }, 500);
+                        };
+                    }, 300);
+                }
+            },
+        },
+    });
+
+    // Pause autoplay on hover for better UX
+    const swiperContainer = document.querySelector('.testimonialSwiper');
+    if (swiperContainer) {
+        swiperContainer.addEventListener('mouseenter', function() {
+            testimonialSwiper.autoplay.stop();
+        });
+        
+        swiperContainer.addEventListener('mouseleave', function() {
+            testimonialSwiper.autoplay.start();
+        });
+    }
+
+    // Add loading state for images
+    if (mainImage) {
+        mainImage.addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
+        
+        mainImage.addEventListener('error', function() {
+            // If image fails to load, use default
+            this.src = "{% static 'assets/img/testimonial-default.jpg' %}";
+        });
+    }
+});
+</script>
+
+
+  <!-- End Testimonial -->
+{% endblock %}
