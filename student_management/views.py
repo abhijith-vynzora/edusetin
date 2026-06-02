@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import FileResponse, Http404
+from django.conf import settings
+import os
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from student_portal.models import Student
@@ -422,3 +425,33 @@ def question_delete(request, id):
         messages.success(request, "Question deleted successfully.")
         return redirect('student_management:question_list')
     return redirect('student_management:question_detail', id=question.id)
+
+
+@login_required(login_url='admin_login')
+def question_import(request):
+    if request.method == 'POST':
+        messages.info(request, "Question import functionality will be implemented soon.")
+        return redirect('student_management:question_import')
+        
+    return render(request, 'student_management/question_import.html')
+
+
+@login_required(login_url='admin_login')
+def download_question_template(request):
+    file_path = os.path.join(
+        settings.BASE_DIR, 
+        'student_management', 'static', 'student_management', 'downloads', 'sample_question_import.xlsx'
+    )
+    
+    if os.path.exists(file_path):
+        response = FileResponse(
+            open(file_path, 'rb'), 
+            as_attachment=True, 
+            filename="sample_question_import.xlsx"
+        )
+        response['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        return response
+    else:
+        messages.error(request, "Sample template file not found.")
+        return redirect('student_management:question_import')
+

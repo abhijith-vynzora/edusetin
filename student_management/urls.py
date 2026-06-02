@@ -25,6 +25,8 @@ urlpatterns = [
     # Questions
     path('questions/', views.question_list, name='question_list'),
     path('questions/create/', views.question_create, name='question_create'),
+    path('questions/import/', views.question_import, name='question_import'),
+    path('questions/import/download-template/', views.download_question_template, name='download_question_template'),
     path('questions/<int:id>/', views.question_detail, name='question_detail'),
     path('questions/<int:id>/edit/', views.question_edit, name='question_edit'),
     path('questions/<int:id>/activate/', views.question_activate, name='question_activate'),

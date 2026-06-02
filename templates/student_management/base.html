@@ -1051,8 +1051,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'student_management:question_list' %}" class="{% if '/student-management/questions/' in request.path %}active{% endif %}">
+                                <a href="{% url 'student_management:question_list' %}" class="{% if '/student-management/questions/' in request.path and 'import' not in request.path %}active{% endif %}">
                                     <i class="icofont-question-circle"></i> Questions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'student_management:question_import' %}" class="{% if '/student-management/questions/import/' in request.path %}active{% endif %}">
+                                    <i class="icofont-upload"></i> Import Questions
                                 </a>
                             </li>
                         </ul>

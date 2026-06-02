@@ -1,0 +1,77 @@
+{% extends "student_management/base.html" %}
+
+{% block title %}Import Questions | Student Management{% endblock %}
+
+{% block content %}
+<div class="dashboard__form__wraper">
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'student_management:dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'student_management:question_list' %}">Question Bank</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Import Questions</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Left Column: Info and Instructions -->
+        <div class="col-12 col-lg-7">
+            <!-- Info Card -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body p-4">
+                    <h5 class="card-title mb-3 fw-bold">Import Questions</h5>
+                    <p class="card-text text-muted mb-4">
+                        Bulk import questions into the Question Bank using an Excel file.
+                        Download the sample template below and use the exact format before importing.
+                    </p>
+                    <a href="{% url 'student_management:download_question_template' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-download me-2"></i> Download Sample Template
+                    </a>
+                </div>
+            </div>
+
+            <!-- Instructions Card -->
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom pt-3 pb-2">
+                    <h6 class="mb-0 fw-semibold">Important Guidelines</h6>
+                </div>
+                <div class="card-body p-4">
+                    <ul class="list-group list-group-flush text-muted">
+                        <li class="list-group-item px-0 border-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> Subject must already exist in the system.</li>
+                        <li class="list-group-item px-0 border-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> Correct Answer must be: <strong>A, B, C, D, or E</strong></li>
+                        <li class="list-group-item px-0 border-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> Allowed Source values: <strong>PYQ, EDUSETIN, IMPORTED</strong></li>
+                        <li class="list-group-item px-0 border-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> Year is required only when Source = PYQ.</li>
+                        <li class="list-group-item px-0 border-0 py-2"><i class="fas fa-check-circle text-success me-2"></i> One question per row.</li>
+                        <li class="list-group-item px-0 border-0 py-2"><i class="fas fa-exclamation-circle text-warning me-2"></i> Do not modify column names.</li>
+                        <li class="list-group-item px-0 border-0 py-2"><i class="fas fa-exclamation-circle text-warning me-2"></i> Use the provided sample template.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Upload Form -->
+        <div class="col-12 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom pt-3 pb-2">
+                    <h6 class="mb-0 fw-semibold">Upload Excel File</h6>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post" action="{% url 'student_management:question_import' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="excel_file" class="form-label fw-semibold">Excel File <span class="text-danger">*</span></label>
+                            <input type="file" id="excel_file" name="excel_file" class="form-control" accept=".xlsx,.xls" required>
+                            <div class="form-text mt-2">Accepted formats: .xlsx, .xls</div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary py-2">
+                                <i class="fas fa-cloud-upload-alt me-2"></i> Import Questions
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
