@@ -1063,6 +1063,26 @@
                         </ul>
                     </li>
 
+                    <!-- Media Management Dropdown -->
+                    <li class="has-dropdown {% if '/student-management/media/' in request.path %}open{% endif %}">
+                        <a href="#">
+                            <i class="icofont-image"></i>
+                            Media
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="{% url 'student_management:media_pending' %}" class="{% if '/student-management/media/pending/' in request.path or '/student-management/media/question/' in request.path %}active{% endif %}">
+                                    <i class="icofont-clock-time"></i> Pending Media
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'student_management:media_library' %}" class="{% if '/student-management/media/library/' in request.path %}active{% endif %}">
+                                    <i class="icofont-library"></i> Media Library
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li>
                         <a href="#">
                             <i class="icofont-paper"></i>

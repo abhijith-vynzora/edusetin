@@ -1,0 +1,211 @@
+{% extends "student_management/base.html" %}
+
+{% block title %}Upload Media — Question #{{ question.id }} | Student Management{% endblock %}
+
+{% block extra_css %}
+<style>
+.media-slot {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+.media-slot:hover {
+    border-color: #2563eb;
+}
+.media-slot-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+.slot-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #374151;
+}
+.slot-status-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+.img-preview {
+    max-height: 180px;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    display: block;
+    margin-bottom: 10px;
+}
+.placeholder-box {
+    height: 100px;
+    border: 2px dashed #d1d5db;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+.required-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard__form__wraper">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'student_management:dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'student_management:media_pending' %}">Pending Media</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Question #{{ question.id }}</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+        <div>
+            <h4 class="mb-1">Upload Media — Question #{{ question.id }}</h4>
+            <p class="text-muted mb-0">{{ question.subject.name }}</p>
+        </div>
+        {% if required_count > 0 %}
+        <div class="text-end">
+            <div class="fw-semibold">
+                {% if uploaded_count == required_count %}
+                    <span class="text-success">✓ All media uploaded</span>
+                {% else %}
+                    <span class="text-warning">{{ uploaded_count }} / {{ required_count }} uploaded</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="row g-4">
+        <!-- Left: Question preview -->
+        <div class="col-12 col-lg-4">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-white border-bottom pt-3 pb-2">
+                    <h6 class="mb-0 fw-semibold">Question Text</h6>
+                </div>
+                <div class="card-body p-4">
+                    <p style="line-height:1.7;font-size:14px;">{{ question.question_text }}</p>
+                    <hr class="my-3">
+                    <ul class="list-unstyled mb-0 small">
+                        <li class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Subject</span>
+                            <span class="fw-medium">{{ question.subject.name }}</span>
+                        </li>
+                        <li class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Answer</span>
+                            <span class="badge bg-success">{{ question.correct_answer }}</span>
+                        </li>
+                        {% if question.source %}
+                        <li class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Source</span>
+                            <span class="fw-medium">{{ question.source }}</span>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-3">
+                    <a href="{% url 'student_management:media_pending' %}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                        <i class="fas fa-list me-1"></i> Back to Pending List
+                    </a>
+                    <a href="{% url 'student_management:question_detail' question.id %}" class="btn btn-outline-secondary btn-sm w-100">
+                        <i class="fas fa-eye me-1"></i> View Question
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Media slots -->
+        <div class="col-12 col-lg-8">
+            <form method="post" action="{% url 'student_management:media_upload' question.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row g-3 mb-4">
+                    {% for slot in slots %}
+                    <div class="col-12 col-md-6">
+                        <div class="media-slot">
+                            <div class="media-slot-header">
+                                <div class="required-dot"
+                                     style="background:{% if slot.required %}{% if slot.uploaded %}#10b981{% else %}#f59e0b{% endif %}{% else %}#d1d5db{% endif %};"></div>
+                                <span class="slot-label">{{ slot.label }}</span>
+                                {% if slot.required %}
+                                    {% if slot.uploaded %}
+                                        <span class="slot-status-badge ms-auto" style="background:#d1fae5;color:#065f46;">Uploaded</span>
+                                    {% else %}
+                                        <span class="slot-status-badge ms-auto" style="background:#fef9c3;color:#92400e;">Pending</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="slot-status-badge ms-auto" style="background:#f3f4f6;color:#6b7280;">Optional</span>
+                                {% endif %}
+                            </div>
+
+                            {% if slot.media %}
+                            <!-- Existing image -->
+                            <img src="{{ slot.media.image.url }}" alt="{{ slot.label }}" class="img-preview">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox"
+                                       id="clear_{{ slot.media_type|lower }}"
+                                       name="clear_{{ slot.media_type|lower }}">
+                                <label class="form-check-label text-danger small" for="clear_{{ slot.media_type|lower }}">
+                                    Remove this image
+                                </label>
+                            </div>
+                            {% else %}
+                            <div class="placeholder-box">
+                                <span><i class="fas fa-image me-1"></i> No image uploaded</span>
+                            </div>
+                            {% endif %}
+
+                            <!-- File input -->
+                            {% if slot.media_type == 'QUESTION' %}
+                            <input type="file" name="question_image" class="form-control form-control-sm" accept="image/*">
+                            {% elif slot.media_type == 'OPTION_A' %}
+                            <input type="file" name="option_a_image" class="form-control form-control-sm" accept="image/*">
+                            {% elif slot.media_type == 'OPTION_B' %}
+                            <input type="file" name="option_b_image" class="form-control form-control-sm" accept="image/*">
+                            {% elif slot.media_type == 'OPTION_C' %}
+                            <input type="file" name="option_c_image" class="form-control form-control-sm" accept="image/*">
+                            {% elif slot.media_type == 'OPTION_D' %}
+                            <input type="file" name="option_d_image" class="form-control form-control-sm" accept="image/*">
+                            {% elif slot.media_type == 'OPTION_E' %}
+                            <input type="file" name="option_e_image" class="form-control form-control-sm" accept="image/*">
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Action buttons -->
+                <div class="d-flex gap-3 justify-content-end">
+                    <button type="submit" name="action" value="save" class="btn btn-outline-primary px-4">
+                        <i class="fas fa-save me-1"></i> Save
+                    </button>
+                    <button type="submit" name="action" value="save_next" class="btn btn-primary px-4">
+                        <i class="fas fa-forward me-1"></i>
+                        {% if next_question %}
+                            Save &amp; Next
+                        {% else %}
+                            Save &amp; Finish
+                        {% endif %}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <!-- Question Text -->
+                <!-- Question Text + Image -->
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-header bg-white border-bottom pt-3 pb-2">
                         <h6 class="mb-0 fw-semibold">Question</h6>
@@ -54,17 +54,20 @@
                             <textarea id="id_question_text" name="question_text" class="form-control" rows="4" required>{{ question.question_text }}</textarea>
                         </div>
 
+                        <!-- Question Image slot -->
                         <div class="mb-0">
-                            <label class="form-label fw-semibold">Question Image</label>
-                            {% if question.question_image %}
+                            <label class="form-label fw-semibold">
+                                Question Image <span class="text-muted small">(optional)</span>
+                            </label>
+                            {% if media_map.QUESTION %}
                             <div class="mb-2 p-2 border rounded bg-light d-flex align-items-center gap-3">
-                                <img src="{{ question.question_image.url }}" alt="Current image"
+                                <img src="{{ media_map.QUESTION.image.url }}" alt="Current question image"
                                      style="max-height:80px;max-width:120px;object-fit:cover;border-radius:4px;">
                                 <div>
                                     <p class="mb-1 small text-muted">Current image</p>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="id_clear_image" name="clear_image">
-                                        <label class="form-check-label text-danger small" for="id_clear_image">Remove image</label>
+                                        <input class="form-check-input" type="checkbox" id="id_clear_question" name="clear_question_image">
+                                        <label class="form-check-label text-danger small" for="id_clear_question">Remove image</label>
                                     </div>
                                 </div>
                             </div>
@@ -75,32 +78,103 @@
                     </div>
                 </div>
 
-                <!-- Options -->
+                <!-- Options with per-option image management -->
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-header bg-white border-bottom pt-3 pb-2">
                         <h6 class="mb-0 fw-semibold">Answer Options</h6>
                     </div>
                     <div class="card-body p-4">
-                        <div class="mb-3">
+
+                        <!-- Option A -->
+                        <div class="mb-4 pb-4 border-bottom">
                             <label for="id_option_a" class="form-label fw-semibold">Option A <span class="text-danger">*</span></label>
-                            <input type="text" id="id_option_a" name="option_a" class="form-control" value="{{ question.option_a }}" required>
+                            <input type="text" id="id_option_a" name="option_a" class="form-control mb-2" value="{{ question.option_a }}" required>
+                            <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option A Image</label>
+                            {% if media_map.OPTION_A %}
+                            <div class="mb-2 p-2 border rounded bg-light d-flex align-items-center gap-3">
+                                <img src="{{ media_map.OPTION_A.image.url }}" alt="Option A image"
+                                     style="max-height:60px;max-width:100px;object-fit:cover;border-radius:4px;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="id_clear_option_a" name="clear_option_a_image">
+                                    <label class="form-check-label text-danger small" for="id_clear_option_a">Remove</label>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <input type="file" name="option_a_image" class="form-control form-control-sm" accept="image/*">
                         </div>
-                        <div class="mb-3">
+
+                        <!-- Option B -->
+                        <div class="mb-4 pb-4 border-bottom">
                             <label for="id_option_b" class="form-label fw-semibold">Option B <span class="text-danger">*</span></label>
-                            <input type="text" id="id_option_b" name="option_b" class="form-control" value="{{ question.option_b }}" required>
+                            <input type="text" id="id_option_b" name="option_b" class="form-control mb-2" value="{{ question.option_b }}" required>
+                            <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option B Image</label>
+                            {% if media_map.OPTION_B %}
+                            <div class="mb-2 p-2 border rounded bg-light d-flex align-items-center gap-3">
+                                <img src="{{ media_map.OPTION_B.image.url }}" alt="Option B image"
+                                     style="max-height:60px;max-width:100px;object-fit:cover;border-radius:4px;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="id_clear_option_b" name="clear_option_b_image">
+                                    <label class="form-check-label text-danger small" for="id_clear_option_b">Remove</label>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <input type="file" name="option_b_image" class="form-control form-control-sm" accept="image/*">
                         </div>
-                        <div class="mb-3">
+
+                        <!-- Option C -->
+                        <div class="mb-4 pb-4 border-bottom">
                             <label for="id_option_c" class="form-label fw-semibold">Option C <span class="text-danger">*</span></label>
-                            <input type="text" id="id_option_c" name="option_c" class="form-control" value="{{ question.option_c }}" required>
+                            <input type="text" id="id_option_c" name="option_c" class="form-control mb-2" value="{{ question.option_c }}" required>
+                            <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option C Image</label>
+                            {% if media_map.OPTION_C %}
+                            <div class="mb-2 p-2 border rounded bg-light d-flex align-items-center gap-3">
+                                <img src="{{ media_map.OPTION_C.image.url }}" alt="Option C image"
+                                     style="max-height:60px;max-width:100px;object-fit:cover;border-radius:4px;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="id_clear_option_c" name="clear_option_c_image">
+                                    <label class="form-check-label text-danger small" for="id_clear_option_c">Remove</label>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <input type="file" name="option_c_image" class="form-control form-control-sm" accept="image/*">
                         </div>
-                        <div class="mb-3">
+
+                        <!-- Option D -->
+                        <div class="mb-4 pb-4 border-bottom">
                             <label for="id_option_d" class="form-label fw-semibold">Option D <span class="text-danger">*</span></label>
-                            <input type="text" id="id_option_d" name="option_d" class="form-control" value="{{ question.option_d }}" required>
+                            <input type="text" id="id_option_d" name="option_d" class="form-control mb-2" value="{{ question.option_d }}" required>
+                            <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option D Image</label>
+                            {% if media_map.OPTION_D %}
+                            <div class="mb-2 p-2 border rounded bg-light d-flex align-items-center gap-3">
+                                <img src="{{ media_map.OPTION_D.image.url }}" alt="Option D image"
+                                     style="max-height:60px;max-width:100px;object-fit:cover;border-radius:4px;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="id_clear_option_d" name="clear_option_d_image">
+                                    <label class="form-check-label text-danger small" for="id_clear_option_d">Remove</label>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <input type="file" name="option_d_image" class="form-control form-control-sm" accept="image/*">
                         </div>
+
+                        <!-- Option E -->
                         <div class="mb-0">
                             <label for="id_option_e" class="form-label fw-semibold">Option E <span class="text-muted small">(optional)</span></label>
-                            <input type="text" id="id_option_e" name="option_e" class="form-control" value="{{ question.option_e|default:'' }}">
+                            <input type="text" id="id_option_e" name="option_e" class="form-control mb-2" value="{{ question.option_e|default:'' }}">
+                            <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option E Image</label>
+                            {% if media_map.OPTION_E %}
+                            <div class="mb-2 p-2 border rounded bg-light d-flex align-items-center gap-3">
+                                <img src="{{ media_map.OPTION_E.image.url }}" alt="Option E image"
+                                     style="max-height:60px;max-width:100px;object-fit:cover;border-radius:4px;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="id_clear_option_e" name="clear_option_e_image">
+                                    <label class="form-check-label text-danger small" for="id_clear_option_e">Remove</label>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <input type="file" name="option_e_image" class="form-control form-control-sm" accept="image/*">
                         </div>
+
                     </div>
                 </div>
 
@@ -120,7 +194,7 @@
             <div class="col-12 col-lg-4">
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-header bg-white border-bottom pt-3 pb-2">
-                        <h6 class="mb-0 fw-semibold">Answer & Settings</h6>
+                        <h6 class="mb-0 fw-semibold">Answer &amp; Settings</h6>
                     </div>
                     <div class="card-body p-4">
                         <div class="mb-3">
@@ -161,6 +235,25 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Media status summary -->
+                {% if question.has_media %}
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-white border-bottom pt-3 pb-2">
+                        <h6 class="mb-0 fw-semibold">Media Status</h6>
+                    </div>
+                    <div class="card-body p-3">
+                        {% if question.media_uploaded %}
+                            <span class="badge bg-success">All media uploaded</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Media pending</span>
+                            <a href="{% url 'student_management:media_upload' question.id %}" class="btn btn-sm btn-outline-warning mt-2 w-100">
+                                <i class="fas fa-upload me-1"></i> Manage Media
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
 
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">
