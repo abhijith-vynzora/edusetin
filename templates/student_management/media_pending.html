@@ -14,18 +14,21 @@
     font-weight: 500;
     margin: 2px;
 }
-.slot-badge.uploaded {
-    background: #d1fae5;
-    color: #065f46;
-}
-.slot-badge.missing {
-    background: #fee2e2;
-    color: #991b1b;
-}
-.progress-fraction {
-    font-size: 13px;
+.slot-badge.uploaded { background: #d1fae5; color: #065f46; }
+.slot-badge.missing  { background: #fee2e2; color: #991b1b; }
+.progress-fraction { font-size: 13px; font-weight: 600; color: #374151; }
+.expected-name-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: #fef3c7;
+    color: #92400e;
     font-weight: 600;
-    color: #374151;
+    margin-left: 4px;
+    border: 1px solid #fde68a;
 }
 </style>
 {% endblock %}
@@ -78,7 +81,7 @@
                         <th style="width:80px;">ID</th>
                         <th style="width:140px;">Subject</th>
                         <th>Question Preview</th>
-                        <th style="width:220px;">Required Slots</th>
+                        <th style="width:260px;">Required Slots</th>
                         <th style="width:100px;">Progress</th>
                         <th style="width:110px;">Action</th>
                     </tr>
@@ -97,10 +100,18 @@
                         </td>
                         <td>
                             {% for slot in item.slots %}
-                            <span class="slot-badge {% if slot.uploaded %}uploaded{% else %}missing{% endif %}">
-                                {% if slot.uploaded %}✓{% else %}✗{% endif %}
-                                {{ slot.label }}
-                            </span>
+                            <div class="mb-1">
+                                <span class="slot-badge {% if slot.uploaded %}uploaded{% else %}missing{% endif %}">
+                                    {% if slot.uploaded %}✓{% else %}✗{% endif %}
+                                    {{ slot.label }}
+                                </span>
+                                {% if not slot.uploaded and slot.pending_ref %}
+                                <span class="expected-name-pill" title="Expected media asset name from import">
+                                    <i class="fas fa-tag" style="font-size:9px;"></i>
+                                    {{ slot.pending_ref.expected_media_name }}
+                                </span>
+                                {% endif %}
+                            </div>
                             {% endfor %}
                         </td>
                         <td class="text-center">

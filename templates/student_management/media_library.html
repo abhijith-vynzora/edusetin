@@ -4,6 +4,69 @@
 
 {% block extra_css %}
 <style>
+/* ─── Tab Nav ─── */
+.lib-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid #e5e7eb;
+    border-bottom: none;
+    background: #f9fafb;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+}
+.lib-tab-btn.active {
+    background: #fff;
+    color: #1d4ed8;
+    border-bottom-color: #fff;
+    margin-bottom: -1px;
+    z-index: 2;
+    position: relative;
+}
+/* ─── Asset Card ─── */
+.asset-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow .18s, transform .15s;
+    background: #fff;
+}
+.asset-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    transform: translateY(-2px);
+}
+.asset-card .card-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    background: #f3f4f6;
+}
+.asset-card .card-img-placeholder {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    color: #9ca3af;
+    font-size: 32px;
+}
+.asset-badge-active   { background: #d1fae5; color: #065f46; }
+.asset-badge-inactive { background: #fee2e2; color: #991b1b; }
+.asset-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+/* ─── Usage Table ─── */
 .media-thumb {
     width: 80px;
     height: 60px;
@@ -13,21 +76,26 @@
     cursor: pointer;
     transition: transform 0.15s;
 }
-.media-thumb:hover {
-    transform: scale(1.05);
-}
-.type-badge {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 600;
-}
+.media-thumb:hover { transform: scale(1.05); }
+.type-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
 .type-QUESTION { background:#dbeafe; color:#1e40af; }
 .type-OPTION_A { background:#dcfce7; color:#166534; }
 .type-OPTION_B { background:#fef9c3; color:#854d0e; }
 .type-OPTION_C { background:#fce7f3; color:#9d174d; }
 .type-OPTION_D { background:#ede9fe; color:#5b21b6; }
 .type-OPTION_E { background:#ffedd5; color:#9a3412; }
+/* ─── Lib badge on usage ─── */
+.lib-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 12px;
+    background: #ede9fe;
+    color: #5b21b6;
+    font-weight: 600;
+}
 </style>
 {% endblock %}
 
@@ -40,148 +108,349 @@
         </ol>
     </nav>
 
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
         <div>
             <h4 class="mb-1">Media Library</h4>
-            <p class="text-muted mb-0">All uploaded question media files.</p>
+            <p class="text-muted mb-0 small">Manage reusable media assets and view question media usage.</p>
         </div>
-        <a href="{% url 'student_management:media_pending' %}" class="btn btn-outline-warning btn-sm">
-            <i class="fas fa-clock me-1"></i> Pending Media
+        <div class="d-flex gap-2">
+            <a href="{% url 'student_management:media_assets_upload' %}" class="btn btn-primary btn-sm">
+                <i class="fas fa-cloud-upload-alt me-1"></i> Upload Asset
+            </a>
+            <a href="{% url 'student_management:media_pending' %}" class="btn btn-outline-warning btn-sm">
+                <i class="fas fa-clock me-1"></i> Pending Media
+            </a>
+        </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div style="border-bottom:1px solid #e5e7eb; margin-bottom:0;">
+        <a href="?tab=assets{% if asset_search %}&asset_search={{ asset_search }}{% endif %}{% if active_filter %}&active_filter={{ active_filter }}{% endif %}"
+           class="lib-tab-btn {% if active_tab != 'usage' %}active{% endif %}">
+            <i class="fas fa-folder-open"></i> Media Assets Repository
+            <span class="badge bg-primary ms-1" style="font-size:10px;">{{ assets_count }}</span>
+        </a>
+        <a href="?tab=usage{% if search %}&search={{ search }}{% endif %}{% if selected_subject %}&subject={{ selected_subject }}{% endif %}{% if selected_media_type %}&media_type={{ selected_media_type }}{% endif %}"
+           class="lib-tab-btn {% if active_tab == 'usage' %}active{% endif %}">
+            <i class="fas fa-images"></i> Question Media Usage
+            <span class="badge bg-secondary ms-1" style="font-size:10px;">{{ total_count }}</span>
         </a>
     </div>
 
-    <!-- Filters -->
-    <div class="card shadow-sm border-0 mb-4">
-        <div class="card-body p-3">
-            <form method="get" class="row g-2 align-items-end">
-                <div class="col-12 col-md-4">
-                    <label class="form-label small fw-semibold mb-1">Subject</label>
-                    <select name="subject" class="form-select form-select-sm">
-                        <option value="">All Subjects</option>
-                        {% for subject in subjects %}
-                        <option value="{{ subject.id }}" {% if selected_subject == subject.id|stringformat:"s" %}selected{% endif %}>
-                            {{ subject.name }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-12 col-md-3">
-                    <label class="form-label small fw-semibold mb-1">Media Type</label>
-                    <select name="media_type" class="form-select form-select-sm">
-                        <option value="">All Types</option>
-                        {% for value, label in media_type_choices %}
-                        <option value="{{ value }}" {% if selected_media_type == value %}selected{% endif %}>
-                            {{ label }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-12 col-md-3">
-                    <label class="form-label small fw-semibold mb-1">Search Question</label>
-                    <input type="text" name="search" class="form-control form-control-sm"
-                           placeholder="Search question text..." value="{{ search }}">
-                </div>
-                <div class="col-12 col-md-2 d-flex gap-2">
-                    <button type="submit" class="btn btn-primary btn-sm flex-grow-1">
-                        <i class="fas fa-search me-1"></i> Filter
-                    </button>
-                    <a href="{% url 'student_management:media_library' %}" class="btn btn-outline-secondary btn-sm">
-                        <i class="fas fa-times"></i>
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
+    <!-- ══════════════════════════════════════════ -->
+    <!-- TAB 1: Assets Repository                  -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="tab-assets" {% if active_tab == 'usage' %}style="display:none;"{% endif %}>
 
-    <!-- Results -->
-    <div class="card shadow-sm border-0">
-        <div class="card-header bg-white border-bottom pt-3 pb-2 d-flex justify-content-between align-items-center">
-            <h6 class="mb-0 fw-semibold">
-                <i class="fas fa-images text-primary me-2"></i>
-                {{ total_count }} record{{ total_count|pluralize }}
-            </h6>
-        </div>
+        <!-- Asset Filters -->
+        <div class="card shadow-sm border-0 border-top-0" style="border-radius:0 8px 8px 8px;">
+            <div class="card-body p-3 border-bottom">
+                <form method="get" class="row g-2 align-items-end">
+                    <input type="hidden" name="tab" value="assets">
+                    <div class="col-12 col-md-5">
+                        <label class="form-label small fw-semibold mb-1">Search (name or description)</label>
+                        <input type="text" name="asset_search" class="form-control form-control-sm"
+                               placeholder="e.g. heart, diagram..." value="{{ asset_search }}">
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label small fw-semibold mb-1">Status</label>
+                        <select name="active_filter" class="form-select form-select-sm">
+                            <option value="" {% if not active_filter %}selected{% endif %}>All</option>
+                            <option value="1" {% if active_filter == '1' %}selected{% endif %}>Active Only</option>
+                            <option value="0" {% if active_filter == '0' %}selected{% endif %}>Inactive Only</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm flex-grow-1">
+                            <i class="fas fa-search me-1"></i> Filter
+                        </button>
+                        <a href="?tab=assets" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
 
-        {% if not media_list %}
-        <div class="card-body text-center py-5 text-muted">
-            <i class="fas fa-images fa-3x mb-3 opacity-25"></i>
-            <p class="mb-0">No media records found.</p>
-        </div>
-        {% else %}
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th style="width:80px;">Q ID</th>
-                        <th>Question Preview</th>
-                        <th style="width:130px;">Subject</th>
-                        <th style="width:130px;">Media Type</th>
-                        <th style="width:110px;">Preview</th>
-                        <th style="width:120px;">Uploaded</th>
-                        <th style="width:90px;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for media in media_list %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'student_management:question_detail' media.question.id %}"
-                               class="badge bg-light text-dark border text-decoration-none">
-                               #{{ media.question.id }}
-                            </a>
-                        </td>
-                        <td>
-                            <span class="small text-muted">{{ media.question.question_text|truncatechars:70 }}</span>
-                        </td>
-                        <td>
-                            <span class="small fw-medium">{{ media.question.subject.name }}</span>
-                        </td>
-                        <td>
-                            <span class="type-badge type-{{ media.media_type }}">{{ media.get_media_type_display }}</span>
-                        </td>
-                        <td>
-                            <img src="{{ media.image.url }}" alt="{{ media.get_media_type_display }}"
-                                 class="media-thumb"
-                                 data-bs-toggle="modal" data-bs-target="#previewModal{{ media.id }}"
-                                 title="Click to enlarge">
-                        </td>
-                        <td>
-                            <span class="small text-muted">{{ media.created_at|date:"M d, Y" }}</span>
-                        </td>
-                        <td>
-                            <form method="post" action="{% url 'student_management:media_delete' media.question.id media.media_type %}"
-                                  onsubmit="return confirm('Delete this image?');">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-sm btn-outline-danger">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-
-                    <!-- Preview Modal -->
-                    <div class="modal fade" id="previewModal{{ media.id }}" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header py-2">
-                                    <h6 class="modal-title">
-                                        Q#{{ media.question.id }} — {{ media.get_media_type_display }}
-                                    </h6>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <!-- Asset Grid -->
+            {% if not assets_list %}
+            <div class="card-body text-center py-5 text-muted">
+                <i class="fas fa-folder-open fa-3x mb-3 opacity-25"></i>
+                <p class="mb-3">No media assets found.</p>
+                <a href="{% url 'student_management:media_assets_upload' %}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-cloud-upload-alt me-1"></i> Upload First Asset
+                </a>
+            </div>
+            {% else %}
+            <div class="card-body p-3">
+                <div class="row g-3">
+                    {% for asset in assets_list %}
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="asset-card h-100">
+                            {% if asset.image %}
+                            <img src="{{ asset.image.url }}" alt="{{ asset.name }}" class="card-img">
+                            {% else %}
+                            <div class="card-img-placeholder"><i class="fas fa-image"></i></div>
+                            {% endif %}
+                            <div class="p-2">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="asset-badge {% if asset.is_active %}asset-badge-active{% else %}asset-badge-inactive{% endif %}">
+                                        {% if asset.is_active %}Active{% else %}Inactive{% endif %}
+                                    </span>
                                 </div>
-                                <div class="modal-body text-center p-3">
-                                    <img src="{{ media.image.url }}" alt="{{ media.get_media_type_display }}"
-                                         class="img-fluid rounded" style="max-height:500px;">
+                                
+                                <!-- Name and URL details -->
+                                <div class="mb-2" style="font-size:11px;">
+                                    <div class="text-muted fw-semibold">Image Name:</div>
+                                    <div class="text-truncate font-monospace" title="{{ asset.name }}">{{ asset.name }}</div>
+                                    
+                                    <div class="text-muted fw-semibold mt-1">URL:</div>
+                                    <div class="text-truncate font-monospace" title="{{ asset.image.url|default:'' }}">{{ asset.image.url|default:'' }}</div>
+                                </div>
+                                
+                                <!-- Usage details -->
+                                <div class="mb-2">
+                                    {% if asset.usage_count > 0 %}
+                                    <span class="badge bg-light text-dark border w-100 text-start py-1" style="font-size:10px; font-weight:normal;">
+                                        <i class="fas fa-link text-muted me-1"></i> Used by {{ asset.usage_count }} Question{{ asset.usage_count|pluralize }}
+                                    </span>
+                                    {% else %}
+                                    <span class="badge bg-light text-muted border w-100 text-start py-1" style="font-size:10px; font-weight:normal;">
+                                        Unused
+                                    </span>
+                                    {% endif %}
+                                </div>
+
+                                {% if asset.description %}
+                                <p class="mb-2 text-muted" style="font-size:11px; line-height:1.3;">
+                                    {{ asset.description|truncatechars:50 }}
+                                </p>
+                                {% endif %}
+
+                                <!-- Copy Actions -->
+                                <div class="d-flex gap-1 flex-wrap mb-2">
+                                    <button type="button" class="btn btn-sm btn-light border flex-grow-1" style="font-size:10px; padding:3px 6px;" onclick="copyMediaLibraryText('{{ asset.name|escapejs }}', 'name')">
+                                        <i class="fas fa-copy"></i> Copy Name
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-light border flex-grow-1" style="font-size:10px; padding:3px 6px;" onclick="copyMediaLibraryText('{{ asset.image.url|escapejs }}', 'url')">
+                                        <i class="fas fa-link"></i> Copy URL
+                                    </button>
+                                </div>
+
+                                <!-- CRUD Actions -->
+                                <div class="d-flex gap-1 flex-wrap">
+                                    <a href="{% url 'student_management:media_assets_edit' asset.id %}"
+                                       class="btn btn-outline-primary btn-sm flex-grow-1" style="font-size:11px; padding:3px 6px;">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <form method="post" action="{% url 'student_management:media_assets_toggle' asset.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm" style="font-size:11px; padding:3px 6px;"
+                                                title="{% if asset.is_active %}Deactivate{% else %}Activate{% endif %}">
+                                            {% if asset.is_active %}<i class="fas fa-eye-slash"></i>{% else %}<i class="fas fa-eye"></i>{% endif %}
+                                        </button>
+                                    </form>
+                                    <form method="post" action="{% url 'student_management:media_assets_delete' asset.id %}"
+                                          onsubmit="return confirm('Delete \'{{ asset.name }}\'? This cannot be undone.');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" style="font-size:11px; padding:3px 6px;"
+                                                {% if asset.is_in_use %}title="In use — deletion blocked" {% endif %}>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     {% endfor %}
-                </tbody>
-            </table>
+                </div>
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- TAB 2: Question Media Usage               -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="tab-usage" {% if active_tab != 'usage' %}style="display:none;"{% endif %}>
+        <div class="card shadow-sm border-0 border-top-0" style="border-radius:0 8px 8px 8px;">
+
+            <!-- Usage Filters -->
+            <div class="card-body p-3 border-bottom">
+                <form method="get" class="row g-2 align-items-end">
+                    <input type="hidden" name="tab" value="usage">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label small fw-semibold mb-1">Subject</label>
+                        <select name="subject" class="form-select form-select-sm">
+                            <option value="">All Subjects</option>
+                            {% for subject in subjects %}
+                            <option value="{{ subject.id }}" {% if selected_subject == subject.id|stringformat:"s" %}selected{% endif %}>
+                                {{ subject.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <label class="form-label small fw-semibold mb-1">Media Type</label>
+                        <select name="media_type" class="form-select form-select-sm">
+                            <option value="">All Types</option>
+                            {% for value, label in media_type_choices %}
+                            <option value="{{ value }}" {% if selected_media_type == value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label small fw-semibold mb-1">Search Question</label>
+                        <input type="text" name="search" class="form-control form-control-sm"
+                               placeholder="Search question text..." value="{{ search }}">
+                    </div>
+                    <div class="col-12 col-md-3 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm flex-grow-1">
+                            <i class="fas fa-search me-1"></i> Filter
+                        </button>
+                        <a href="?tab=usage" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Usage Table -->
+            {% if not media_list %}
+            <div class="card-body text-center py-5 text-muted">
+                <i class="fas fa-images fa-3x mb-3 opacity-25"></i>
+                <p class="mb-0">No question media records found.</p>
+            </div>
+            {% else %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:80px;">Q ID</th>
+                            <th>Question Preview</th>
+                            <th style="width:130px;">Subject</th>
+                            <th style="width:130px;">Media Type</th>
+                            <th style="width:110px;">Preview</th>
+                            <th style="width:130px;">Source</th>
+                            <th style="width:120px;">Uploaded</th>
+                            <th style="width:90px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for media in media_list %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'student_management:question_detail' media.question.id %}"
+                                   class="badge bg-light text-dark border text-decoration-none">
+                                   #{{ media.question.id }}
+                                </a>
+                            </td>
+                            <td>
+                                <span class="small text-muted">{{ media.question.question_text|truncatechars:70 }}</span>
+                            </td>
+                            <td>
+                                <span class="small fw-medium">{{ media.question.subject.name }}</span>
+                            </td>
+                            <td>
+                                <span class="type-badge type-{{ media.media_type }}">{{ media.get_media_type_display }}</span>
+                            </td>
+                            <td>
+                                <img src="{{ media.effective_image.url }}" alt="{{ media.get_media_type_display }}"
+                                     class="media-thumb"
+                                     data-bs-toggle="modal" data-bs-target="#previewModal{{ media.id }}"
+                                     title="Click to enlarge">
+                            </td>
+                            <td>
+                                {% if media.media_library %}
+                                <span class="lib-pill">
+                                    <i class="fas fa-folder-open" style="font-size:9px;"></i>
+                                    Library
+                                </span>
+                                <div class="small text-muted mt-1" style="font-size:11px;" title="{{ media.media_library.name }}">
+                                    {{ media.media_library.name|truncatechars:20 }}
+                                </div>
+                                {% else %}
+                                <span class="badge bg-light text-secondary border" style="font-size:10px;">Manual Upload</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="small text-muted">{{ media.created_at|date:"M d, Y" }}</span>
+                            </td>
+                            <td>
+                                <form method="post" action="{% url 'student_management:media_delete' media.question.id media.media_type %}"
+                                      onsubmit="return confirm('Delete this image?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <!-- Preview Modal -->
+                        <div class="modal fade" id="previewModal{{ media.id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header py-2">
+                                        <h6 class="modal-title">
+                                            Q#{{ media.question.id }} — {{ media.get_media_type_display }}
+                                            {% if media.media_library %}
+                                            <span class="lib-pill ms-2"><i class="fas fa-folder-open" style="font-size:9px;"></i> {{ media.media_library.name }}</span>
+                                            {% endif %}
+                                        </h6>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body text-center p-3">
+                                        <img src="{{ media.effective_image.url }}" alt="{{ media.get_media_type_display }}"
+                                             class="img-fluid rounded" style="max-height:500px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function copyMediaLibraryText(text, type) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            if (type === 'name') {
+                showGlobalToast('Media name copied successfully.', 'success');
+            } else {
+                showGlobalToast('Media URL copied successfully.', 'success');
+            }
+        });
+    } else {
+        // Fallback for older browsers
+        let textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            if (type === 'name') {
+                showGlobalToast('Media name copied successfully.', 'success');
+            } else {
+                showGlobalToast('Media URL copied successfully.', 'success');
+            }
+        } catch (err) {
+            showGlobalToast('Failed to copy text.', 'error');
+        }
+        document.body.removeChild(textArea);
+    }
+}
+</script>
 {% endblock %}

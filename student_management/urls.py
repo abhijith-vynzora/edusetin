@@ -33,9 +33,18 @@ urlpatterns = [
     path('questions/<int:id>/deactivate/', views.question_deactivate, name='question_deactivate'),
     path('questions/<int:id>/delete/', views.question_delete, name='question_delete'),
 
-    # Media Management
+    # Media Management – Question-level
     path('media/pending/', views.media_pending, name='media_pending'),
     path('media/question/<int:id>/', views.media_upload, name='media_upload'),
     path('media/question/<int:id>/delete/<str:media_type>/', views.media_delete, name='media_delete'),
+
+    # Media Library (two-section page)
     path('media/library/', views.media_library, name='media_library'),
+
+    # Media Assets CRUD (MediaLibrary model)
+    path('media/assets/upload/', views.media_assets_upload, name='media_assets_upload'),
+    path('media/assets/<int:id>/edit/', views.media_assets_edit, name='media_assets_edit'),
+    path('media/assets/<int:id>/delete/', views.media_assets_delete, name='media_assets_delete'),
+    path('media/assets/<int:id>/toggle/', views.media_assets_toggle, name='media_assets_toggle'),
+    path('media/assets/api/', views.media_assets_api, name='media_assets_api'),
 ]

@@ -72,6 +72,37 @@ class Question(models.Model):
         ])
 
 
+# ─────────────────────────────────────────────
+# MEDIA LIBRARY
+# ─────────────────────────────────────────────
+
+class MediaLibrary(models.Model):
+    """
+    Reusable media asset repository.
+    Images uploaded here can be referenced by multiple QuestionMedia records
+    without duplicating the physical file.
+    """
+    name = models.CharField(max_length=255, unique=True)
+    image = models.ImageField(upload_to='media_library/')
+    description = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def usage_count(self):
+        return self.usages.count()
+
+    @property
+    def is_in_use(self):
+        return self.usages.exists()
+
+
 class QuestionMedia(models.Model):
     MEDIA_TYPES = [
         ('QUESTION', 'Question'),
@@ -88,7 +119,17 @@ class QuestionMedia(models.Model):
         related_name='media_files'
     )
     media_type = models.CharField(max_length=20, choices=MEDIA_TYPES)
-    image = models.ImageField(upload_to='question_media/')
+    image = models.ImageField(upload_to='question_media/', blank=True, default='')
+
+    # Optional reference to the MediaLibrary asset this image came from.
+    # NULL = manually uploaded file. Non-NULL = sourced from library.
+    media_library = models.ForeignKey(
+        MediaLibrary,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='usages'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -97,3 +138,48 @@ class QuestionMedia(models.Model):
 
     def __str__(self):
         return f"Q#{self.question_id} — {self.media_type}"
+
+    @property
+    def effective_image(self):
+        """
+        Returns the authoritative image for this media record.
+
+        - If sourced from Media Library (media_library FK set): returns the
+          library asset's current image so any replacement to the library
+          asset is automatically reflected here without touching this record.
+        - If manually uploaded: returns the locally stored image.
+        """
+        if self.media_library_id and self.media_library:
+            return self.media_library.image
+        return self.image
+
+
+# ─────────────────────────────────────────────
+# PENDING MEDIA REFERENCES
+# ─────────────────────────────────────────────
+
+class PendingMediaReference(models.Model):
+    """
+    Stores a record when an Excel import references a MediaLibrary asset
+    by name but the asset does not exist at import time.
+
+    This allows the admin to see which images are still needed for a question
+    even after the import report is dismissed.
+    """
+    MEDIA_TYPES = QuestionMedia.MEDIA_TYPES
+
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+        related_name='pending_media_refs'
+    )
+    media_type = models.CharField(max_length=20, choices=MEDIA_TYPES)
+    expected_media_name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = [('question', 'media_type')]
+        ordering = ['media_type']
+
+    def __str__(self):
+        return f"Q#{self.question_id} — {self.media_type} — {self.expected_media_name}"

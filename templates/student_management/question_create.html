@@ -2,6 +2,28 @@
 
 {% block title %}Create Question | Student Management{% endblock %}
 
+{% block extra_css %}
+<style>
+.media-method-tabs .nav-link {
+    font-size: 12px; padding: 4px 12px; border-radius: 6px;
+    color: #6b7280; border: 1px solid #e5e7eb; margin-right: 4px;
+}
+.media-method-tabs .nav-link.active { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+.lib-picker-selected {
+    display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+    border-radius: 8px; background: #ede9fe; border: 1px solid #c4b5fd; margin-top: 6px;
+}
+.lib-picker-selected img { height: 36px; width: 50px; object-fit: cover; border-radius: 4px; }
+.lib-picker-selected .name { font-size: 12px; font-weight: 600; color: #4c1d95; }
+.lib-picker-selected .clear-btn { margin-left: auto; font-size: 11px; color: #6b7280; cursor: pointer; background: none; border: none; padding: 0; }
+.picker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; max-height: 400px; overflow-y: auto; }
+.picker-item { border: 2px solid #e5e7eb; border-radius: 8px; overflow: hidden; cursor: pointer; transition: border-color .15s, transform .12s; background: #fff; }
+.picker-item:hover { border-color: #1d4ed8; transform: scale(1.03); }
+.picker-item img { width: 100%; height: 75px; object-fit: cover; background: #f3f4f6; }
+.picker-item .picker-name { font-size: 10px; padding: 4px 5px; text-align: center; color: #374151; font-weight: 500; line-height: 1.2; word-break: break-word; }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="dashboard__form__wraper">
     <nav aria-label="breadcrumb" class="mb-4">
@@ -20,10 +42,10 @@
         {% csrf_token %}
 
         <div class="row g-4">
-            <!-- Left column: main question data -->
+            <!-- Left column -->
             <div class="col-12 col-lg-8">
 
-                <!-- Subject Selection -->
+                <!-- Subject -->
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-header bg-white border-bottom pt-3 pb-2">
                         <h6 class="mb-0 fw-semibold">Subject</h6>
@@ -56,17 +78,29 @@
                             <textarea id="id_question_text" name="question_text" class="form-control" rows="4"
                                       placeholder="Enter the question..." required>{{ post_data.question_text|default:'' }}</textarea>
                         </div>
-                        <div class="mb-0">
-                            <label for="id_question_image" class="form-label fw-semibold">
-                                Question Image <span class="text-muted small">(optional)</span>
-                            </label>
-                            <input type="file" id="id_question_image" name="question_image" class="form-control" accept="image/*">
-                            <div class="text-muted small mt-1">Upload if the question includes a diagram or visual.</div>
+                        <!-- Question Image slot -->
+                        <div class="mt-2">
+                            <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Question Image <span class="text-muted">(optional)</span></label>
+                            <div class="d-flex mb-2 media-method-tabs">
+                                <button type="button" class="nav-link active" id="tab-upload-QUESTION" onclick="switchMediaTab('QUESTION','upload')"><i class="fas fa-upload" style="font-size:11px;"></i> Upload File</button>
+                                <button type="button" class="nav-link" id="tab-library-QUESTION" onclick="switchMediaTab('QUESTION','library')"><i class="fas fa-folder-open" style="font-size:11px;"></i> From Library</button>
+                            </div>
+                            <div id="pane-upload-QUESTION">
+                                <input type="file" id="file_QUESTION" name="question_image" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.webp">
+                            </div>
+                            <div id="pane-library-QUESTION" style="display:none;">
+                                <input type="hidden" id="input_QUESTION_library_id" name="question_library_id" value="">
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="openLibraryPicker('QUESTION')"><i class="fas fa-search me-1"></i> Browse Media Library</button>
+                                <div id="lib_selected_QUESTION" class="lib-picker-selected" style="display:none;">
+                                    <img src="" alt="" class="lib-img"><span class="name lib-name"></span>
+                                    <button type="button" class="clear-btn" onclick="clearLibrarySelection('QUESTION')"><i class="fas fa-times-circle"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Options with per-option image uploads -->
+                <!-- Options -->
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-header bg-white border-bottom pt-3 pb-2">
                         <h6 class="mb-0 fw-semibold">Answer Options</h6>
@@ -78,10 +112,24 @@
                             <label for="id_option_a" class="form-label fw-semibold">Option A <span class="text-danger">*</span></label>
                             <input type="text" id="id_option_a" name="option_a" class="form-control mb-2"
                                    placeholder="Option A..." value="{{ post_data.option_a|default:'' }}" required>
-                            <label for="id_option_a_image" class="form-label text-muted small mb-1">
-                                <i class="fas fa-image me-1"></i> Option A Image <span class="text-muted">(optional)</span>
-                            </label>
-                            <input type="file" id="id_option_a_image" name="option_a_image" class="form-control form-control-sm" accept="image/*">
+                            <div class="mt-2">
+                                <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option A Image <span class="text-muted">(optional)</span></label>
+                                <div class="d-flex mb-2 media-method-tabs">
+                                    <button type="button" class="nav-link active" id="tab-upload-OPTION_A" onclick="switchMediaTab('OPTION_A','upload')"><i class="fas fa-upload" style="font-size:11px;"></i> Upload File</button>
+                                    <button type="button" class="nav-link" id="tab-library-OPTION_A" onclick="switchMediaTab('OPTION_A','library')"><i class="fas fa-folder-open" style="font-size:11px;"></i> From Library</button>
+                                </div>
+                                <div id="pane-upload-OPTION_A">
+                                    <input type="file" id="file_OPTION_A" name="option_a_image" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.webp">
+                                </div>
+                                <div id="pane-library-OPTION_A" style="display:none;">
+                                    <input type="hidden" id="input_OPTION_A_library_id" name="option_a_library_id" value="">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="openLibraryPicker('OPTION_A')"><i class="fas fa-search me-1"></i> Browse Media Library</button>
+                                    <div id="lib_selected_OPTION_A" class="lib-picker-selected" style="display:none;">
+                                        <img src="" alt="" class="lib-img"><span class="name lib-name"></span>
+                                        <button type="button" class="clear-btn" onclick="clearLibrarySelection('OPTION_A')"><i class="fas fa-times-circle"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Option B -->
@@ -89,10 +137,24 @@
                             <label for="id_option_b" class="form-label fw-semibold">Option B <span class="text-danger">*</span></label>
                             <input type="text" id="id_option_b" name="option_b" class="form-control mb-2"
                                    placeholder="Option B..." value="{{ post_data.option_b|default:'' }}" required>
-                            <label for="id_option_b_image" class="form-label text-muted small mb-1">
-                                <i class="fas fa-image me-1"></i> Option B Image <span class="text-muted">(optional)</span>
-                            </label>
-                            <input type="file" id="id_option_b_image" name="option_b_image" class="form-control form-control-sm" accept="image/*">
+                            <div class="mt-2">
+                                <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option B Image <span class="text-muted">(optional)</span></label>
+                                <div class="d-flex mb-2 media-method-tabs">
+                                    <button type="button" class="nav-link active" id="tab-upload-OPTION_B" onclick="switchMediaTab('OPTION_B','upload')"><i class="fas fa-upload" style="font-size:11px;"></i> Upload File</button>
+                                    <button type="button" class="nav-link" id="tab-library-OPTION_B" onclick="switchMediaTab('OPTION_B','library')"><i class="fas fa-folder-open" style="font-size:11px;"></i> From Library</button>
+                                </div>
+                                <div id="pane-upload-OPTION_B">
+                                    <input type="file" id="file_OPTION_B" name="option_b_image" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.webp">
+                                </div>
+                                <div id="pane-library-OPTION_B" style="display:none;">
+                                    <input type="hidden" id="input_OPTION_B_library_id" name="option_b_library_id" value="">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="openLibraryPicker('OPTION_B')"><i class="fas fa-search me-1"></i> Browse Media Library</button>
+                                    <div id="lib_selected_OPTION_B" class="lib-picker-selected" style="display:none;">
+                                        <img src="" alt="" class="lib-img"><span class="name lib-name"></span>
+                                        <button type="button" class="clear-btn" onclick="clearLibrarySelection('OPTION_B')"><i class="fas fa-times-circle"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Option C -->
@@ -100,10 +162,24 @@
                             <label for="id_option_c" class="form-label fw-semibold">Option C <span class="text-danger">*</span></label>
                             <input type="text" id="id_option_c" name="option_c" class="form-control mb-2"
                                    placeholder="Option C..." value="{{ post_data.option_c|default:'' }}" required>
-                            <label for="id_option_c_image" class="form-label text-muted small mb-1">
-                                <i class="fas fa-image me-1"></i> Option C Image <span class="text-muted">(optional)</span>
-                            </label>
-                            <input type="file" id="id_option_c_image" name="option_c_image" class="form-control form-control-sm" accept="image/*">
+                            <div class="mt-2">
+                                <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option C Image <span class="text-muted">(optional)</span></label>
+                                <div class="d-flex mb-2 media-method-tabs">
+                                    <button type="button" class="nav-link active" id="tab-upload-OPTION_C" onclick="switchMediaTab('OPTION_C','upload')"><i class="fas fa-upload" style="font-size:11px;"></i> Upload File</button>
+                                    <button type="button" class="nav-link" id="tab-library-OPTION_C" onclick="switchMediaTab('OPTION_C','library')"><i class="fas fa-folder-open" style="font-size:11px;"></i> From Library</button>
+                                </div>
+                                <div id="pane-upload-OPTION_C">
+                                    <input type="file" id="file_OPTION_C" name="option_c_image" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.webp">
+                                </div>
+                                <div id="pane-library-OPTION_C" style="display:none;">
+                                    <input type="hidden" id="input_OPTION_C_library_id" name="option_c_library_id" value="">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="openLibraryPicker('OPTION_C')"><i class="fas fa-search me-1"></i> Browse Media Library</button>
+                                    <div id="lib_selected_OPTION_C" class="lib-picker-selected" style="display:none;">
+                                        <img src="" alt="" class="lib-img"><span class="name lib-name"></span>
+                                        <button type="button" class="clear-btn" onclick="clearLibrarySelection('OPTION_C')"><i class="fas fa-times-circle"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Option D -->
@@ -111,10 +187,24 @@
                             <label for="id_option_d" class="form-label fw-semibold">Option D <span class="text-danger">*</span></label>
                             <input type="text" id="id_option_d" name="option_d" class="form-control mb-2"
                                    placeholder="Option D..." value="{{ post_data.option_d|default:'' }}" required>
-                            <label for="id_option_d_image" class="form-label text-muted small mb-1">
-                                <i class="fas fa-image me-1"></i> Option D Image <span class="text-muted">(optional)</span>
-                            </label>
-                            <input type="file" id="id_option_d_image" name="option_d_image" class="form-control form-control-sm" accept="image/*">
+                            <div class="mt-2">
+                                <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option D Image <span class="text-muted">(optional)</span></label>
+                                <div class="d-flex mb-2 media-method-tabs">
+                                    <button type="button" class="nav-link active" id="tab-upload-OPTION_D" onclick="switchMediaTab('OPTION_D','upload')"><i class="fas fa-upload" style="font-size:11px;"></i> Upload File</button>
+                                    <button type="button" class="nav-link" id="tab-library-OPTION_D" onclick="switchMediaTab('OPTION_D','library')"><i class="fas fa-folder-open" style="font-size:11px;"></i> From Library</button>
+                                </div>
+                                <div id="pane-upload-OPTION_D">
+                                    <input type="file" id="file_OPTION_D" name="option_d_image" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.webp">
+                                </div>
+                                <div id="pane-library-OPTION_D" style="display:none;">
+                                    <input type="hidden" id="input_OPTION_D_library_id" name="option_d_library_id" value="">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="openLibraryPicker('OPTION_D')"><i class="fas fa-search me-1"></i> Browse Media Library</button>
+                                    <div id="lib_selected_OPTION_D" class="lib-picker-selected" style="display:none;">
+                                        <img src="" alt="" class="lib-img"><span class="name lib-name"></span>
+                                        <button type="button" class="clear-btn" onclick="clearLibrarySelection('OPTION_D')"><i class="fas fa-times-circle"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Option E -->
@@ -122,10 +212,24 @@
                             <label for="id_option_e" class="form-label fw-semibold">Option E <span class="text-muted small">(optional)</span></label>
                             <input type="text" id="id_option_e" name="option_e" class="form-control mb-2"
                                    placeholder="Option E (leave blank if not needed)..." value="{{ post_data.option_e|default:'' }}">
-                            <label for="id_option_e_image" class="form-label text-muted small mb-1">
-                                <i class="fas fa-image me-1"></i> Option E Image <span class="text-muted">(optional)</span>
-                            </label>
-                            <input type="file" id="id_option_e_image" name="option_e_image" class="form-control form-control-sm" accept="image/*">
+                            <div class="mt-2">
+                                <label class="form-label text-muted small mb-1"><i class="fas fa-image me-1"></i> Option E Image <span class="text-muted">(optional)</span></label>
+                                <div class="d-flex mb-2 media-method-tabs">
+                                    <button type="button" class="nav-link active" id="tab-upload-OPTION_E" onclick="switchMediaTab('OPTION_E','upload')"><i class="fas fa-upload" style="font-size:11px;"></i> Upload File</button>
+                                    <button type="button" class="nav-link" id="tab-library-OPTION_E" onclick="switchMediaTab('OPTION_E','library')"><i class="fas fa-folder-open" style="font-size:11px;"></i> From Library</button>
+                                </div>
+                                <div id="pane-upload-OPTION_E">
+                                    <input type="file" id="file_OPTION_E" name="option_e_image" class="form-control form-control-sm" accept=".jpg,.jpeg,.png,.webp">
+                                </div>
+                                <div id="pane-library-OPTION_E" style="display:none;">
+                                    <input type="hidden" id="input_OPTION_E_library_id" name="option_e_library_id" value="">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="openLibraryPicker('OPTION_E')"><i class="fas fa-search me-1"></i> Browse Media Library</button>
+                                    <div id="lib_selected_OPTION_E" class="lib-picker-selected" style="display:none;">
+                                        <img src="" alt="" class="lib-img"><span class="name lib-name"></span>
+                                        <button type="button" class="clear-btn" onclick="clearLibrarySelection('OPTION_E')"><i class="fas fa-times-circle"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -162,7 +266,6 @@
                                 <option value="E" {% if post_data.correct_answer == 'E' %}selected{% endif %}>E</option>
                             </select>
                         </div>
-
                         <div class="mb-3">
                             <label for="id_source" class="form-label fw-semibold">Source <span class="text-muted small">(optional)</span></label>
                             <select id="id_source" name="source" class="form-select">
@@ -172,14 +275,12 @@
                                 <option value="OTHER" {% if post_data.source == 'OTHER' %}selected{% endif %}>OTHER</option>
                             </select>
                         </div>
-
                         <div class="mb-3">
                             <label for="id_year" class="form-label fw-semibold">Year <span class="text-muted small">(optional)</span></label>
                             <input type="number" id="id_year" name="year" class="form-control"
                                    placeholder="e.g. 2023" min="1900" max="2100"
                                    value="{{ post_data.year|default:'' }}">
                         </div>
-
                         <div class="mb-3">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="id_is_active" name="is_active"
@@ -200,4 +301,83 @@
         </div>
     </form>
 </div>
+
+<!-- Library Picker Modal -->
+{% include "student_management/_library_picker_modal.html" %}
+
+<script>
+(function () {
+    const API_URL = "{% url 'student_management:media_assets_api' %}";
+    let currentSlot = null;
+
+    window.openLibraryPicker = function (slot) {
+        currentSlot = slot;
+        document.getElementById('pickerSearchInput').value = '';
+        loadPickerAssets('');
+        new bootstrap.Modal(document.getElementById('libraryPickerModal')).show();
+    };
+
+    document.getElementById('pickerSearchInput').addEventListener('input', function () {
+        loadPickerAssets(this.value.trim());
+    });
+
+    function loadPickerAssets(q) {
+        const grid = document.getElementById('pickerGrid');
+        grid.innerHTML = '<div class="text-center text-muted py-4" style="grid-column:1/-1;"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+        fetch(API_URL + '?q=' + encodeURIComponent(q))
+            .then(r => r.json())
+            .then(data => {
+                if (!data.results.length) {
+                    grid.innerHTML = '<div class="text-center text-muted py-4" style="grid-column:1/-1;">No assets found.</div>';
+                    return;
+                }
+                grid.innerHTML = '';
+                data.results.forEach(asset => {
+                    const div = document.createElement('div');
+                    div.className = 'picker-item';
+                    div.innerHTML = `<img src="${asset.image_url}" alt="${asset.name}" onerror="this.style.background='#f3f4f6'"><div class="picker-name">${asset.name}</div>`;
+                    div.addEventListener('click', function () { selectAsset(asset.id, asset.name, asset.image_url); });
+                    grid.appendChild(div);
+                });
+            })
+            .catch(() => {
+                grid.innerHTML = '<div class="text-center text-danger py-4" style="grid-column:1/-1;">Failed to load assets.</div>';
+            });
+    }
+
+    function selectAsset(id, name, imageUrl) {
+        if (!currentSlot) return;
+        document.getElementById('input_' + currentSlot + '_library_id').value = id;
+        const display = document.getElementById('lib_selected_' + currentSlot);
+        display.querySelector('.lib-name').textContent = name;
+        display.querySelector('.lib-img').src = imageUrl;
+        display.style.display = 'flex';
+        const fileInput = document.getElementById('file_' + currentSlot);
+        if (fileInput) fileInput.value = '';
+        bootstrap.Modal.getInstance(document.getElementById('libraryPickerModal')).hide();
+    }
+
+    window.clearLibrarySelection = function (slot) {
+        document.getElementById('input_' + slot + '_library_id').value = '';
+        document.getElementById('lib_selected_' + slot).style.display = 'none';
+    };
+
+    window.switchMediaTab = function (slot, mode) {
+        const up = document.getElementById('pane-upload-' + slot);
+        const lib = document.getElementById('pane-library-' + slot);
+        const tabUp = document.getElementById('tab-upload-' + slot);
+        const tabLib = document.getElementById('tab-library-' + slot);
+        if (mode === 'upload') {
+            up.style.display = ''; lib.style.display = 'none';
+            tabUp.classList.add('active'); tabLib.classList.remove('active');
+            document.getElementById('input_' + slot + '_library_id').value = '';
+            document.getElementById('lib_selected_' + slot).style.display = 'none';
+        } else {
+            up.style.display = 'none'; lib.style.display = '';
+            tabUp.classList.remove('active'); tabLib.classList.add('active');
+            const fi = document.getElementById('file_' + slot); if (fi) fi.value = '';
+        }
+    };
+})();
+</script>
 {% endblock %}
